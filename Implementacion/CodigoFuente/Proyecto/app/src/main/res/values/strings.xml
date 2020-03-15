@@ -1,8 +1,11 @@
 <resources>
     <string name="app_name">ComputacionMovil</string>
     <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
+    <string name="prompt_email">Correo</string>
+    <string name="prompt_password">Clave</string>
+    <string name="prompt_username">Usuario</string>
+    <string name="confirm_password">Confirmar clave</string>
+    <string name="action_create_account">Crear cuenta</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="welcome">"Welcome !"</string>
