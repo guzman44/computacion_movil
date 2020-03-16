@@ -9,4 +9,18 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+
+
+    <string name="profile_user">"Usuario"</string>
+    <string name="profile_name">"Nombres"</string>
+    <string name="profile_lastname">"Apellidos"</string>
+    <string name="profile_email">"Correo electónico"</string>
+    <string name="profile_image">"imagen"</string>
+    <string name="profile_save">"Guardar"</string>
+
+    <string name="menu_home">"Inicio"</string>
+    <string name="menu_search">"Busqueda"</string>
+    <string name="menu_addEvent">"Adicionar evento"</string>
+    <string name="menu_profile">"Perfil"</string>
+    <string name="title_activity_n">n</string>
 </resources>
