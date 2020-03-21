@@ -25,8 +25,6 @@ import android.widget.Toast;
 
 import co.movil.computacion.R;
 import co.movil.computacion.ui.NewUser;
-import co.movil.computacion.ui.login.LoginViewModel;
-import co.movil.computacion.ui.login.LoginViewModelFactory;
 
 public class LoginActivity extends AppCompatActivity {
 

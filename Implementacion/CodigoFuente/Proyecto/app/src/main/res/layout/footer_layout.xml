@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center">
+
+    <include
+        android:id="@+id/comentarios_item"
+        layout="@layout/footer_item" />
+
+    <include
+        android:id="@+id/perfil_item"
+        layout="@layout/footer_item"/>
+    <include
+        android:id="@+id/eventos_item"
+        layout="@layout/footer_item"/>
+    <include
+        android:id="@+id/principal_item"
+        layout="@layout/footer_item"/>
+    <include
+        android:id="@+id/busqueda_item"
+        layout="@layout/footer_item"/>
+    <include
+        android:id="@+id/contenidos_item"
+        layout="@layout/footer_item"/>
+
+</LinearLayout>
