@@ -6,7 +6,6 @@
     android:layout_height="match_parent">
 
 
-
     <ImageView
         android:id="@+id/ivHome"
         android:layout_width="wrap_content"
@@ -14,6 +13,9 @@
         android:layout_weight="0.25"
         android:contentDescription="@string/menu_home"
 
+        android:scaleType="centerInside"
+        android:scaleX="0.75"
+        android:scaleY="0.75"
         app:srcCompat="@drawable/home" />
 
     <ImageView
@@ -22,6 +24,9 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.25"
         android:contentDescription="@string/menu_search"
+        android:scaleType="centerInside"
+        android:scaleX="0.75"
+        android:scaleY="0.75"
         app:srcCompat="@drawable/search" />
 
 
@@ -31,16 +36,20 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.25"
         android:contentDescription="@string/menu_addEvent"
+        android:scaleType="centerInside"
+        android:scaleX="0.75"
+        android:scaleY="0.75"
         app:srcCompat="@drawable/calendar" />
 
-
     <ImageView
-        android:id="@+id/ivProfile"
+        android:id="@+id/ivMultimedia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="0.25"
-        android:contentDescription="@string/menu_profile"
-        app:srcCompat="@drawable/user" />
+        android:scaleType="centerInside"
+        android:scaleX="0.75"
+        android:scaleY="0.75"
+        app:srcCompat="@drawable/camera" />
 
 
 </LinearLayout>

@@ -8,6 +8,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <fragment
+        android:id="@+id/menuUpFromHome"
+        android:name="co.movil.computacion.MenuUpFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp">
+    </fragment>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -42,6 +49,6 @@ android:layout_weight="0.9"
         android:name="co.movil.computacion.MenuFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"></fragment>
+        android:layout_marginBottom="0dp"></fragment>
 
 </LinearLayout>

@@ -1,12 +1,11 @@
 package co.movil.computacion;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
+import android.view.Menu;
+import android.view.MenuInflater;
 
 public class Profile extends AppCompatActivity {
 
@@ -20,22 +19,8 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        Intent intent = getIntent();
-        String optionMenu = intent.getStringExtra("event");
-
-        if(optionMenu != null){
-            MenuFragment fragmentDemo = (MenuFragment)
-                    getSupportFragmentManager().findFragmentById(R.id.menuFromProfile);
-            fragmentDemo.doSomething(optionMenu);
-        }
-
-
 
     }
-
-
-
-
 
 
 

@@ -20,11 +20,10 @@ public class MenuFragment extends Fragment {
     ImageView ivHome = null;
     ImageView ivSearch = null;
     ImageView ivAddEvent = null;
-    ImageView ivProfile = null;
+    ImageView ivMultimedia = null;
     String someTitle = "";
 
-    public void doSomething(String param) {
-        // do something in fragment
+    public void activity(String param) {
         Context c = getActivity().getApplicationContext();
         int id = c.getResources().getIdentifier("drawable/"+ param.toLowerCase() + "_select", null, c.getPackageName());
         switch (param.toLowerCase()){
@@ -37,8 +36,8 @@ public class MenuFragment extends Fragment {
             case "calendar":
                 ivAddEvent.setImageResource(id);
                 break;
-            case "user":
-                ivProfile.setImageResource(id);
+            case "camera":
+                ivMultimedia.setImageResource(id);
                 break;
 
         }
@@ -52,12 +51,8 @@ public class MenuFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-      //  return super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.activity_menu, container, false);
         SetControls(view);
-
-
-
         AddEvents();
         return view;
     }
@@ -90,10 +85,10 @@ public class MenuFragment extends Fragment {
             }
         });
 
-        ivProfile.setOnClickListener(new View.OnClickListener(){
+        ivMultimedia.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                Intent intent = new Intent(v.getContext(), Profile.class );
-                intent.putExtra("event", "User");
+                Intent intent = new Intent(v.getContext(),Multimedia.class );
+                intent.putExtra("event", "Camera");
                 startActivity(intent);
 
             }
@@ -105,41 +100,7 @@ public class MenuFragment extends Fragment {
         ivHome = view.findViewById(R.id.ivHome);
         ivSearch= view.findViewById(R.id.ivSearch);
         ivAddEvent= view.findViewById(R.id.ivAddEvent);
-        ivProfile= view.findViewById(R.id.ivProfile);
+        ivMultimedia= view.findViewById(R.id.ivMultimedia);
     }
 
-/*
-   public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        TextView tvTitle = findViewById(R.id.textView2);
-
-        tvTitle.setText("hhhhh");
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
-
-
-
-    private String optionMenu = "Home";
-    //ImageView ivHome = null;
-    TextView tvTitle = null;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu);
-        tvTitle = findViewById(R.id.textView2);
-       // ivHome = findViewById(R.id.ivHome);
-        tvTitle.setText("hhhhh");
-
-
-        Context c = getApplicationContext();
-        int id = c.getResources().getIdentifier("drawable/"+ optionMenu.toLowerCase() + "_select", null, c.getPackageName());
-        ivHome.setImageResource(id);
-
-
-    }
-    */
 }

@@ -5,19 +5,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
-public class Search extends AppCompatActivity {
+public class Multimedia extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
+        setContentView(R.layout.activity_multimedia);
 
         Intent intent = getIntent();
         String optionMenu = intent.getStringExtra("event");
 
         if(optionMenu != null){
             MenuFragment fragmentDemo = (MenuFragment)
-                    getSupportFragmentManager().findFragmentById(R.id.menuFromSearch);
+                    getSupportFragmentManager().findFragmentById(R.id.menuFromMultimedia);
             fragmentDemo.activity(optionMenu);
         }
     }

@@ -18,7 +18,7 @@ public class Event extends AppCompatActivity {
         if(optionMenu != null){
             MenuFragment fragmentDemo = (MenuFragment)
                     getSupportFragmentManager().findFragmentById(R.id.menuFromEvent);
-            fragmentDemo.doSomething(optionMenu);
+            fragmentDemo.activity(optionMenu);
         }
 
     }
