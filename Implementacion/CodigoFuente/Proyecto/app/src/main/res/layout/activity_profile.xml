@@ -41,7 +41,7 @@
                 app:srcCompat="@drawable/user_profile" />
 
             <TextView
-                android:id="@+id/tvUser"
+                android:id="@+id/tvEvento"
                 android:layout_width="0dp"
                 android:layout_height="29dp"
                 android:layout_marginStart="20dp"
@@ -88,9 +88,9 @@
                 android:layout_height="40dp"
                 android:ems="10"
                 android:inputType="textPersonName"
-                app:layout_constraintEnd_toEndOf="@+id/tvUser"
-                app:layout_constraintStart_toStartOf="@+id/tvUser"
-                app:layout_constraintTop_toBottomOf="@+id/tvUser" />
+                app:layout_constraintEnd_toEndOf="@+id/tvEvento"
+                app:layout_constraintStart_toStartOf="@+id/tvEvento"
+                app:layout_constraintTop_toBottomOf="@+id/tvEvento" />
 
             <EditText
                 android:id="@+id/etName"

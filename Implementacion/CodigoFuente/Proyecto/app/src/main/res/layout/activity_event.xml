@@ -29,6 +29,7 @@
             android:layout_height="wrap_content"
             tools:context=".Event">
 
+            <!-- Evento-->
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
@@ -39,6 +40,97 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+
+            <TextView
+                android:id="@+id/tvEvento"
+                android:layout_width="0dp"
+                android:layout_height="29dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:text="@string/profile_user"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/profile_name"
+                app:layout_constraintEnd_toEndOf="@+id/etUser"
+                app:layout_constraintStart_toStartOf="@+id/etUser"
+                app:layout_constraintTop_toBottomOf="@+id/etUser" />
+
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="@+id/tvEmail"
+                app:layout_constraintStart_toStartOf="@+id/tvEmail"
+                app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
+
+            <TextView
+                android:id="@+id/tvEmail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/profile_email"
+                app:layout_constraintEnd_toEndOf="@+id/etLastName"
+                app:layout_constraintStart_toStartOf="@+id/etLastName"
+                app:layout_constraintTop_toBottomOf="@+id/etLastName" />
+
+            <EditText
+                android:id="@+id/etUser"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="@+id/tvEvento"
+                app:layout_constraintStart_toStartOf="@+id/tvEvento"
+                app:layout_constraintTop_toBottomOf="@+id/tvEvento" />
+
+            <EditText
+                android:id="@+id/etName"
+                android:layout_width="0dp"
+                android:layout_height="41dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="@+id/tvName"
+                app:layout_constraintStart_toStartOf="@+id/tvName"
+                app:layout_constraintTop_toBottomOf="@+id/tvName" />
+
+            <EditText
+                android:id="@+id/etLastName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="@+id/tvLastName"
+                app:layout_constraintStart_toStartOf="@+id/tvLastName"
+                app:layout_constraintTop_toBottomOf="@+id/tvLastName" />
+
+            <TextView
+                android:id="@+id/tvLastName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/profile_lastname"
+                app:layout_constraintEnd_toEndOf="@+id/etName"
+                app:layout_constraintStart_toStartOf="@+id/etName"
+                app:layout_constraintTop_toBottomOf="@+id/etName" />
+
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="@string/profile_save"
+                app:layout_constraintEnd_toEndOf="@+id/etEmail"
+                app:layout_constraintTop_toBottomOf="@+id/etEmail" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
