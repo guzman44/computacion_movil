@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -14,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -31,6 +33,11 @@ public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
 
+    private final String SHARED_PREFS = "sharedPreferences";
+    private final String USERNAME = "username";
+    EditText usernameEditText;
+    EditText passwordEditText;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,8 +45,8 @@ public class LoginActivity extends AppCompatActivity {
         loginViewModel = ViewModelProviders.of(this, new LoginViewModelFactory())
                 .get(LoginViewModel.class);
 
-        final EditText usernameEditText = findViewById(R.id.username);
-        final EditText passwordEditText = findViewById(R.id.password);
+        usernameEditText = findViewById(R.id.username);
+        passwordEditText = findViewById(R.id.password);
         final TextView register = findViewById(R.id.registrar);
         final Button loginButton = findViewById(R.id.login);
         final ProgressBar loadingProgressBar = findViewById(R.id.loading);
@@ -119,6 +126,8 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                saveData();
+                Log.i("username: ", usernameEditText.getText().toString() );
                 loadingProgressBar.setVisibility(View.VISIBLE);
                 loginViewModel.login(usernameEditText.getText().toString(),
                         passwordEditText.getText().toString());
@@ -142,5 +151,14 @@ public class LoginActivity extends AppCompatActivity {
 
     private void showLoginFailed(@StringRes Integer errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
+    }
+
+    private void saveData()
+    {
+        SharedPreferences sharedPreferences = this.getSharedPreferences( SHARED_PREFS, MODE_PRIVATE );
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString( "username", usernameEditText.getText().toString() );
+        editor.commit();
     }
 }

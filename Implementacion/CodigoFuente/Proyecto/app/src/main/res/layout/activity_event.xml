@@ -47,43 +47,23 @@
                 android:layout_height="29dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:text="@string/profile_user"
+                android:text="@string/event_name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
             <TextView
-                android:id="@+id/tvName"
+                android:id="@+id/tvDescription"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="@string/profile_name"
-                app:layout_constraintEnd_toEndOf="@+id/etUser"
-                app:layout_constraintStart_toStartOf="@+id/etUser"
-                app:layout_constraintTop_toBottomOf="@+id/etUser" />
+                android:text="@string/event_description"
+                app:layout_constraintEnd_toEndOf="@+id/etTitulo"
+                app:layout_constraintStart_toStartOf="@+id/etTitulo"
+                app:layout_constraintTop_toBottomOf="@+id/etTitulo" />
 
             <EditText
-                android:id="@+id/etEmail"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                app:layout_constraintEnd_toEndOf="@+id/tvEmail"
-                app:layout_constraintStart_toStartOf="@+id/tvEmail"
-                app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
-
-            <TextView
-                android:id="@+id/tvEmail"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="@string/profile_email"
-                app:layout_constraintEnd_toEndOf="@+id/etLastName"
-                app:layout_constraintStart_toStartOf="@+id/etLastName"
-                app:layout_constraintTop_toBottomOf="@+id/etLastName" />
-
-            <EditText
-                android:id="@+id/etUser"
+                android:id="@+id/etTitulo"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:ems="10"
@@ -93,54 +73,83 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvEvento" />
 
             <EditText
-                android:id="@+id/etName"
+                android:id="@+id/etDescription"
                 android:layout_width="0dp"
                 android:layout_height="41dp"
                 android:ems="10"
                 android:inputType="textPersonName"
-                app:layout_constraintEnd_toEndOf="@+id/tvName"
-                app:layout_constraintStart_toStartOf="@+id/tvName"
-                app:layout_constraintTop_toBottomOf="@+id/tvName" />
+                app:layout_constraintEnd_toEndOf="@+id/tvDescription"
+                app:layout_constraintStart_toStartOf="@+id/tvDescription"
+                app:layout_constraintTop_toBottomOf="@+id/tvDescription" />
 
             <EditText
-                android:id="@+id/etLastName"
+                android:id="@+id/etCategory"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPersonName"
-                app:layout_constraintEnd_toEndOf="@+id/tvLastName"
-                app:layout_constraintStart_toStartOf="@+id/tvLastName"
-                app:layout_constraintTop_toBottomOf="@+id/tvLastName" />
+                app:layout_constraintEnd_toEndOf="@+id/tvCategory"
+                app:layout_constraintStart_toStartOf="@+id/tvCategory"
+                app:layout_constraintTop_toBottomOf="@+id/tvCategory" />
 
             <TextView
-                android:id="@+id/tvLastName"
+                android:id="@+id/tvCategory"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="@string/profile_lastname"
-                app:layout_constraintEnd_toEndOf="@+id/etName"
-                app:layout_constraintStart_toStartOf="@+id/etName"
-                app:layout_constraintTop_toBottomOf="@+id/etName" />
+                android:text="@string/event_category"
+                app:layout_constraintEnd_toEndOf="@+id/etDescription"
+                app:layout_constraintStart_toStartOf="@+id/etDescription"
+                app:layout_constraintTop_toBottomOf="@+id/etDescription" />
 
+            <TextView
+                android:id="@+id/tvMiniatura"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/event_thumbnail"
+                app:layout_constraintEnd_toEndOf="@+id/etCategory"
+                app:layout_constraintStart_toStartOf="@+id/etCategory"
+                app:layout_constraintTop_toBottomOf="@+id/etCategory" />
+
+            <ImageView
+                android:id="@+id/miniatura"
+                android:layout_width="180dp"
+                android:layout_height="180dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:maxWidth="10dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:paddingRight="10dp"
+                android:src="@drawable/img_base"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvMiniatura" />
 
             <Button
                 android:id="@+id/btnSave"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:text="@string/profile_save"
-                app:layout_constraintEnd_toEndOf="@+id/etEmail"
-                app:layout_constraintTop_toBottomOf="@+id/etEmail" />
+                android:layout_marginStart="141dp"
+                android:layout_marginTop="36dp"
+                android:layout_marginEnd="145dp"
+                android:text="@string/event_save"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnLoadImage" />
 
             <Button
                 android:id="@+id/btnLoadImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
-                android:layout_marginEnd="40dp"
-                android:text="@string/profile_save"
-                app:layout_constraintEnd_toStartOf="@+id/btnSave"
-                app:layout_constraintTop_toBottomOf="@+id/etEmail" />
+                android:layout_marginTop="10dp"
+                android:text="Cargar imagen"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/miniatura" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

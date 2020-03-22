@@ -1,6 +1,8 @@
 package co.movil.computacion.model;
 
-public class ModelEvent {
+import java.io.Serializable;
+
+public class ModelEvent implements  Serializable {
 
     private String Title;
     private String Category;

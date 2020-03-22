@@ -2,6 +2,7 @@ package co.movil.computacion.controller;
 
 import androidx.appcompat.app.AppCompatActivity;
 import co.movil.computacion.R;
+import co.movil.computacion.model.ModelEvent;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -17,19 +18,22 @@ import java.io.FileNotFoundException;
 
 public class Event extends AppCompatActivity {
 
+    ModelEvent eventObject;
     ImageView targetImage;
     Button buttonLoadImage;
     Button buttonSave;
-    String etUser;
-    String etName;
-    String etLastName;
-    String etEmail;
+    EditText etTitle;
+    EditText etDescription;
+    EditText etCategory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event);
 
+        etTitle = (EditText)findViewById(R.id.etTitulo);
+        etDescription = (EditText)findViewById(R.id.etDescription);
+        etCategory = (EditText)findViewById(R.id.etCategory);
         Intent intent = getIntent();
         String optionMenu = intent.getStringExtra("event");
 
@@ -41,11 +45,7 @@ public class Event extends AppCompatActivity {
 
         buttonSave = (Button)findViewById(R.id.btnSave);
         buttonLoadImage = (Button)findViewById(R.id.btnLoadImage);
-        targetImage = (ImageView)findViewById(R.id.ivuserprofile);
-        etUser = ((EditText)findViewById(R.id.etUser)).toString();
-        etName = ((EditText)findViewById(R.id.etName)).toString();
-        etLastName = ((EditText)findViewById(R.id.etLastName)).toString();
-        etEmail = ((EditText)findViewById(R.id.etEmail)).toString();
+        targetImage = (ImageView)findViewById(R.id.miniatura);
 
         buttonLoadImage.setOnClickListener(new Button.OnClickListener(){
 
@@ -61,12 +61,11 @@ public class Event extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent( v.getContext(), Home.class );
-                Bundle bundle = new Bundle();
-                bundle.putString( "usuario", etUser );
-                bundle.putString( "nombre", etName );
-                bundle.putString( "apellido", etLastName );
-                bundle.putString( "email", etEmail );
-                intent.putExtra( "info", bundle );
+                eventObject.setTitle( etTitle.getText().toString() );
+                eventObject.setDescription( etDescription.getText().toString() );
+                eventObject.setCategory( etCategory.getText().toString() );
+                eventObject.setThumbnail( targetImage.getBaseline() ); //TO CHECK
+                intent.putExtra("evento", eventObject);
                 startActivity( intent );
             }
         });
