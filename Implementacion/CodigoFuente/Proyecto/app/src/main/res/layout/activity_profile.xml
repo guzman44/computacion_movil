@@ -27,7 +27,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:context=".Profile">
+            tools:context=".controller.Profile">
 
             <ImageView
                 android:id="@+id/ivuserprofile"
@@ -140,7 +140,7 @@
     <fragment
 
         android:id="@+id/menuFromProfile"
-        android:name="co.movil.computacion.MenuFragment"
+        android:name="co.movil.computacion.controller.MenuFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></fragment>
 

@@ -1,4 +1,4 @@
-package co.movil.computacion;
+package co.movil.computacion.model;
 
 public class ModelFeed {
     int id,likes,comments,propic,postpic;

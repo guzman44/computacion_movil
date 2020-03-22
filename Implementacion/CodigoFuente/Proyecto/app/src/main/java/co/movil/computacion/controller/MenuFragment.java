@@ -1,9 +1,9 @@
-package co.movil.computacion;
+package co.movil.computacion.controller;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import co.movil.computacion.R;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 //public class Menu extends AppCompatActivity {
 public class MenuFragment extends Fragment {

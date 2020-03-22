@@ -9,7 +9,7 @@
 
     <fragment
         android:id="@+id/menuUpFromHome"
-        android:name="co.movil.computacion.MenuUpFragment"
+        android:name="co.movil.computacion.controller.MenuUpFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="0dp">
@@ -25,7 +25,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:context=".Search">
+            tools:context=".controller.Search">
 
             <TextView
                 android:id="@+id/textView4"
@@ -45,7 +45,7 @@
     <fragment
 
         android:id="@+id/menuFromMultimedia"
-        android:name="co.movil.computacion.MenuFragment"
+        android:name="co.movil.computacion.controller.MenuFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="0dp"></fragment>

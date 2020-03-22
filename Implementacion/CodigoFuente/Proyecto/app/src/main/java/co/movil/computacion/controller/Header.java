@@ -1,4 +1,4 @@
-package co.movil.computacion;
+package co.movil.computacion.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
+import co.movil.computacion.R;
 
 public class Header extends AppCompatActivity {
 

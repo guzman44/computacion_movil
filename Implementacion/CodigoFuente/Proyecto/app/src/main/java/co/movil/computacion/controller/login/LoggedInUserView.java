@@ -1,4 +1,4 @@
-package co.movil.computacion.ui.login;
+package co.movil.computacion.controller.login;
 
 /**
  * Class exposing authenticated user details to the UI.

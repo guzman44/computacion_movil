@@ -1,4 +1,4 @@
-package co.movil.computacion.ui.login;
+package co.movil.computacion.controller.login;
 
 import android.app.Activity;
 
@@ -24,7 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import co.movil.computacion.R;
-import co.movil.computacion.ui.NewUser;
+import co.movil.computacion.controller.NewUser;
 
 public class LoginActivity extends AppCompatActivity {
 

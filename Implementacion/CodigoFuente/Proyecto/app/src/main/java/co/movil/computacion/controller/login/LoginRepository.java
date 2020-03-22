@@ -1,4 +1,4 @@
-package co.movil.computacion.data;
+package co.movil.computacion.controller.login;
 
 import co.movil.computacion.data.model.LoggedInUser;
 

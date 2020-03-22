@@ -1,4 +1,4 @@
-package co.movil.computacion.data.model;
+package co.movil.computacion.model;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
