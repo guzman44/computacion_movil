@@ -24,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import co.movil.computacion.R;
+import co.movil.computacion.controller.Home;
 import co.movil.computacion.controller.NewUser;
 
 public class LoginActivity extends AppCompatActivity {
@@ -62,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
         loginViewModel.getLoginResult().observe(this, new Observer<LoginResult>() {
             @Override
             public void onChanged(@Nullable LoginResult loginResult) {
-                if (loginResult == null) {
+               /* if (loginResult == null) {
                     return;
                 }
                 loadingProgressBar.setVisibility(View.GONE);
@@ -75,7 +76,12 @@ public class LoginActivity extends AppCompatActivity {
                 setResult(Activity.RESULT_OK);
 
                 //Complete and destroy login activity once successful
-                finish();
+                finish();*/
+
+                LoginActivity.this.startActivity(
+                        new Intent(LoginActivity.this, Home.class)
+                );
+                LoginActivity.this.finish();
             }
         });
 
