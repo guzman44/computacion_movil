@@ -1,6 +1,6 @@
 package co.movil.computacion.controller.login;
 
-import co.movil.computacion.data.model.LoggedInUser;
+import co.movil.computacion.model.LoggedInUser;
 
 /**
  * Class that requests authentication and user information from the remote data source and
