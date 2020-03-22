@@ -1,4 +1,4 @@
-package co.movil.computacion;
+package co.movil.computacion.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import co.movil.computacion.R;
 
 public class MenuUpFragment extends Fragment {
 

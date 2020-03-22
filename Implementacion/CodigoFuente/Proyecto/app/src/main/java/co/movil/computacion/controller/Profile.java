@@ -1,6 +1,7 @@
-package co.movil.computacion;
+package co.movil.computacion.controller;
 
 import androidx.appcompat.app.AppCompatActivity;
+import co.movil.computacion.R;
 
 import android.content.Intent;
 import android.os.Bundle;

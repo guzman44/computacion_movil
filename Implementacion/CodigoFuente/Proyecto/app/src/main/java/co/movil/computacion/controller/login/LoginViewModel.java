@@ -1,4 +1,4 @@
-package co.movil.computacion.ui.login;
+package co.movil.computacion.controller.login;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -6,9 +6,7 @@ import androidx.lifecycle.ViewModel;
 
 import android.util.Patterns;
 
-import co.movil.computacion.data.LoginRepository;
-import co.movil.computacion.data.Result;
-import co.movil.computacion.data.model.LoggedInUser;
+import co.movil.computacion.model.LoggedInUser;
 import co.movil.computacion.R;
 
 public class LoginViewModel extends ViewModel {

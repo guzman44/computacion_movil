@@ -1,4 +1,4 @@
-package co.movil.computacion.ui;
+package co.movil.computacion.controller;
 
 import android.os.Bundle;
 

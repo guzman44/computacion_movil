@@ -1,11 +1,8 @@
-package co.movil.computacion.ui.login;
+package co.movil.computacion.controller.login;
 
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.annotation.NonNull;
-
-import co.movil.computacion.data.LoginDataSource;
-import co.movil.computacion.data.LoginRepository;
 
 /**
  * ViewModel provider factory to instantiate LoginViewModel.

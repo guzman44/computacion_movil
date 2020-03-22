@@ -1,4 +1,4 @@
-package co.movil.computacion.data.model;
+package co.movil.computacion.model;
 
 /**
  * Data class that captures user information for logged in users retrieved from LoginRepository

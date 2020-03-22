@@ -1,4 +1,4 @@
-package co.movil.computacion.ui.login;
+package co.movil.computacion.controller.login;
 
 import androidx.annotation.Nullable;
 
