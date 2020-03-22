@@ -45,7 +45,7 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.ViewHolderFeed
         holder.tvNameFeed.setText(feed.getName());
         holder.tvTimeFeed.setText(feed.getTime());
         holder.tvLikesFeed.setText(String.valueOf(feed.getLikes()));
-        holder.tvCommentsFeed.setText(String.valueOf(feed.getComments()));
+       // holder.tvCommentsFeed.setText(String.valueOf(feed.getComments()));
         holder.tvStatusFeed.setText(feed.getStatus());
 
 
@@ -83,7 +83,7 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.ViewHolderFeed
             tvNameFeed = (TextView)itemView.findViewById(R.id.tvNameFeed);
             tvTimeFeed = (TextView)itemView.findViewById(R.id.tvTimeFeed);
             tvLikesFeed = (TextView)itemView.findViewById(R.id.tvLikesFeed);
-            tvCommentsFeed = (TextView)itemView.findViewById(R.id.tvCommentFeed);
+           // tvCommentsFeed = (TextView)itemView.findViewById(R.id.tvCommentFeed);
             tvStatusFeed = (TextView)itemView.findViewById(R.id.tvStatusFeed);
 
 
