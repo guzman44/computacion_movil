@@ -105,14 +105,14 @@
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/tvCommentFeed"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="5 commentarios"
-            android:textColor="@color/black"
-            android:textSize="13sp" />
+<!--        <TextView-->
+<!--            android:id="@+id/tvCommentFeed"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentRight="true"-->
+<!--            android:text="5 commentarios"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textSize="13sp" />-->
 
     </RelativeLayout>
 
