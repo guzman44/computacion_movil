@@ -1,10 +1,13 @@
 package co.movil.computacion.controller;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -39,16 +42,13 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.ViewHolderFeed
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterFeed.ViewHolderFeed holder, int position) {
+    public void onBindViewHolder(@NonNull final AdapterFeed.ViewHolderFeed holder, int position) {
         final ModelFeed feed = feedList.get(position);
-
         holder.tvNameFeed.setText(feed.getName());
         holder.tvTimeFeed.setText(feed.getTime());
         holder.tvLikesFeed.setText(String.valueOf(feed.getLikes()));
        // holder.tvCommentsFeed.setText(String.valueOf(feed.getComments()));
         holder.tvStatusFeed.setText(feed.getStatus());
-
-
 
 
         glide.load(feed.getPropic()).into(holder.ivProfileFeed);
@@ -61,6 +61,27 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.ViewHolderFeed
             glide.load(feed.getPostpic()).into(holder.ivPostFeed);
         }
 
+        holder.rlLikeAction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (feed.isClicked())
+                {
+                    feed.removeLike();
+                    feed.setClicked(false);
+                }
+                else
+                {
+                    feed.addLike();
+                    feed.setClicked(true);
+                }
+                Log.i( "Likes: ", "" + feed.getLikes() );
+                updateLikes();
+            }
+
+            private void updateLikes() {
+                holder.tvLikesFeed.setText(String.valueOf(feed.getLikes()));
+            }
+        });
     }
 
     @Override
@@ -73,9 +94,9 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.ViewHolderFeed
 
         TextView tvNameFeed, tvTimeFeed, tvLikesFeed, tvCommentsFeed, tvStatusFeed;
         ImageView ivProfileFeed,  ivPostFeed;
+        RelativeLayout rlLikeAction;
 
-
-        public ViewHolderFeed(@NonNull View itemView) {
+        public ViewHolderFeed(@NonNull final View itemView) {
             super(itemView);
             ivProfileFeed = (ImageView)itemView.findViewById(R.id.ivProfileFeed);
             ivPostFeed = (ImageView)itemView.findViewById(R.id.ivPostFeed);
@@ -85,8 +106,8 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.ViewHolderFeed
             tvLikesFeed = (TextView)itemView.findViewById(R.id.tvLikesFeed);
            // tvCommentsFeed = (TextView)itemView.findViewById(R.id.tvCommentFeed);
             tvStatusFeed = (TextView)itemView.findViewById(R.id.tvStatusFeed);
-
-
+            rlLikeAction = (RelativeLayout)itemView.findViewById(R.id.likeAction);
         }
+
     }
 }

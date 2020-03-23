@@ -130,6 +130,7 @@
         android:layout_below="@+id/imgView_line">
 
         <RelativeLayout
+            android:id="@+id/likeAction"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1">

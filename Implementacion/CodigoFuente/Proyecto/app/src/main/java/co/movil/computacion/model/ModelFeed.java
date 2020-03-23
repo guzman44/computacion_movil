@@ -3,6 +3,7 @@ package co.movil.computacion.model;
 public class ModelFeed {
     int id,likes,comments,propic,postpic;
     String name,time, status;
+    Boolean clicked = false;
 
     public ModelFeed(int id, int likes, int comments, int propic, int postpic, String name, String time, String status) {
         this.id = id;
@@ -77,5 +78,25 @@ public class ModelFeed {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public boolean isClicked()
+    {
+        return this.clicked;
+    }
+
+    public void setClicked( boolean clicked )
+    {
+        this.clicked = clicked;
+    }
+
+    public void addLike()
+    {
+        this.likes+=1;
+    }
+
+    public void removeLike()
+    {
+        this.likes-=1;
     }
 }
