@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,7 +14,7 @@ public class DetailEvent extends AppCompatActivity {
 
     private TextView tvtitle,tvdescription,tvcategory;
     private ImageView img;
-
+    private Menu menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,5 +39,13 @@ public class DetailEvent extends AppCompatActivity {
         tvdescription.setText(Description);
         img.setImageResource(image);
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.principal_menu, menu);
+        this.menu = menu;
+        return true;
     }
 }

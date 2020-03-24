@@ -2,5 +2,12 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="@string/menu1_close_session" />
+    <item
+        android:id="@+id/viewConfiguracion"
+        android:orderInCategory="100"
+        android:title="@string/menul_configuracion"/>
+    <item
+        android:id="@+id/closSession"
+        android:orderInCategory="100"
+        android:title="@string/menu1_close_session"/>
 </menu>
