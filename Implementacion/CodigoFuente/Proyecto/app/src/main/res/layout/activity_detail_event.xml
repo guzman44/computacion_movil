@@ -5,14 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".controller.DetailEvent"
-    android:background="#fcfcfc">
+    android:background="#fcfcfc"
+    android:orientation="vertical">
 
-
+    <fragment
+        android:id="@+id/menuUpFromHome"
+        android:name="co.movil.computacion.controller.MenuUpFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp">
+    </fragment>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:layout_weight="1"
         android:padding="10dp">
         android:fillViewport="true">
 
@@ -29,11 +37,11 @@
                 android:text="Inscribirse" />
 
             <ImageView
+                android:id="@+id/bookthumbnail"
                 android:layout_width="125dp"
                 android:layout_height="170dp"
                 android:background="#2d2d2d"
-                android:id="@+id/bookthumbnail"
-                android:scaleType="centerCrop"/>
+                android:scaleType="centerCrop" />
 
             <TextView
                 android:id="@+id/txttitle"
@@ -48,26 +56,31 @@
                 android:id="@+id/txtCat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Category"
+                android:layout_marginTop="10dp"
                 android:background="#edecec"
                 android:padding="8dp"
-                android:layout_marginTop="10dp"/>
+                android:text="Category" />
 
             <TextView
                 android:id="@+id/txtDesc"
-                android:textSize="18sp"
-                android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Description"/>
-
+                android:layout_marginTop="10dp"
+                android:text="Description"
+                android:textSize="18sp" />
 
 
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
 
+    <fragment
 
+        android:id="@+id/menuFromProfile"
+        android:name="co.movil.computacion.controller.MenuFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"></fragment>
 
 
 </LinearLayout>
