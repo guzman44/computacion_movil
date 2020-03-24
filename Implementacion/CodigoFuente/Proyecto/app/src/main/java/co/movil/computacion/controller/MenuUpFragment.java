@@ -47,6 +47,13 @@ public class MenuUpFragment extends Fragment {
             }
         });
 
+        ivConfig.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                Intent intent = new Intent(v.getContext(), Configuration.class );
+                startActivity(intent);
+            }
+        });
+
         ivCloseSesion.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
 

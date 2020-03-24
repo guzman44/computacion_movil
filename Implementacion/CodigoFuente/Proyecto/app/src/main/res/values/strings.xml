@@ -6,7 +6,7 @@
     <string name="prompt_username">Usuario</string>
     <string name="confirm_password">Confirmar clave</string>
     <string name="action_create_account">Crear cuenta</string>
-    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in">Iniciar sesión</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="welcome">"Welcome !"</string>
     <string name="invalid_username">Not a valid username</string>
@@ -28,6 +28,13 @@
     <string name="profile_image">"Imagen perfil"</string>
     <string name="profile_loadimage">"Cargar foto"</string>
     <string name="profile_save">"Guardar"</string>
+
+    <string name="configuration_user">"Nombre usuario"</string>
+    <string name="configuration_password">"Clave actual"</string>
+    <string name="configuration_password_new">"Clave nueva"</string>
+    <string name="configuration_password_repeat">"Confirmar clave"</string>
+    <string name="configuration_save">"Guardar"</string>
+    <string name="configuration_cancel">"Cancelar"</string>
 
     <string name="menu_home">"Inicio"</string>
     <string name="menu_search">"Busqueda"</string>
