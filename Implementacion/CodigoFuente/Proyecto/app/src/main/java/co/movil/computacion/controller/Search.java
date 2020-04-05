@@ -9,8 +9,6 @@ import co.movil.computacion.model.ModelEvent;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;

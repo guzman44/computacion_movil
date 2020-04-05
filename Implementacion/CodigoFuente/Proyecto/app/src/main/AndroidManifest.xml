@@ -3,7 +3,16 @@
     package="co.movil.computacion">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"  android:maxSdkVersion="18" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-feature android:name="android.hardware.camera"   android:required="true" />
+
+    <meta-data
+        android:name="com.google.android.gms.version"
+        android:value="@integer/google_play_services_version"/>
+
+    <meta-data
+        android:name="com.google.android.geo.API_KEY"
+        android:value="@string/google_maps_key" />
 
 
     <application
@@ -20,6 +29,7 @@
         <activity android:name=".controller.Event" />
         <activity android:name=".controller.Home" />
         <activity android:name=".controller.Search" />
+        <activity android:name=".controller.Map" />
         <activity android:name=".controller.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
