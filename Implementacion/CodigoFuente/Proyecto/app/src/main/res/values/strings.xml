@@ -58,7 +58,6 @@
     <string name="multimedia_title">"Multimedia"</string>
     <string name="multimedia_foto">"Foto Seleccionada"</string>
 
-    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">
-        AIzaSyCnMfGODI7U-QI9BUGEoP5keHHLkE-lea8
-    </string>
+
+    <string name="title_activity_test_map">Map</string>
 </resources>

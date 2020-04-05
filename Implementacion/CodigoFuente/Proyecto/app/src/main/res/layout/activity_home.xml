@@ -15,12 +15,13 @@
         android:layout_marginBottom="0dp">
     </fragment>
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.9"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:padding="10dp">
+
 
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -39,8 +40,7 @@
 
 
         </RelativeLayout>
-
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
     <fragment
 
