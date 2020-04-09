@@ -1,0 +1,13 @@
+################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+ 
+
+.vs/
+/.vs/
+/.vs/EventPlusAPI/v16
+/.vs/EventPlusAPI/DesignTimeBuild
+/.vs/
+bin/
+obj/
