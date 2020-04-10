@@ -1,11 +1,16 @@
 ﻿CREATE TABLE [dbo].[Login] (
-    [Id]       INT          NOT NULL,
-    [UserName] VARCHAR (20) NOT NULL,
-    [Password] VARCHAR (8)  NOT NULL,
-    [Email]    VARCHAR (20) NOT NULL,
-    [Activo]   CHAR (1)     DEFAULT ((1)) NOT NULL,
-    CONSTRAINT [PK_Login] PRIMARY KEY CLUSTERED ([Id] ASC)
+    [Id]            INT           IDENTITY (1, 1) NOT NULL,
+    [UserName]      VARCHAR (20)  NOT NULL,
+    [Password]      VARCHAR (8)   NOT NULL,
+    [Email]         VARCHAR (100) NOT NULL,
+    [Activo]        CHAR (1)      DEFAULT ((1)) NOT NULL,
+    [FechaRegistro] DATETIME      NOT NULL,
+    CONSTRAINT [PK_Login] PRIMARY KEY CLUSTERED ([Id] ASC),
+    CONSTRAINT [UQ_Login_Id] UNIQUE NONCLUSTERED ([Id] ASC),
+    CONSTRAINT [UQ_Login_UserName] UNIQUE NONCLUSTERED ([UserName] ASC)
 );
+
+
 
 
 GO
@@ -30,4 +35,8 @@ EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = 'Email del us
 
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = 'Si activo en el sistema', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'Login', @level2type = N'COLUMN', @level2name = N'Activo';
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = 'Fecha Registro', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'Login', @level2type = N'COLUMN', @level2name = N'FechaRegistro';
 

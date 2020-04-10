@@ -1,12 +1,16 @@
 ﻿CREATE TABLE [dbo].[Categoria] (
-    [Id]            INT      NOT NULL,
+    [Id]            INT      IDENTITY (1, 1) NOT NULL,
     [Id_Categoria]  INT      NOT NULL,
     [Id_Login]      INT      NOT NULL,
     [Id_Evento]     INT      NOT NULL,
     [Activo]        CHAR (1) DEFAULT ((1)) NOT NULL,
     [FechaRegistro] DATETIME NOT NULL,
-    CONSTRAINT [PK_Categoria] PRIMARY KEY CLUSTERED ([Id] ASC)
+    CONSTRAINT [PK_Categoria] PRIMARY KEY CLUSTERED ([Id] ASC),
+    CONSTRAINT [FK_Categoria_Evento] FOREIGN KEY ([Id_Evento]) REFERENCES [dbo].[Evento] ([Id]),
+    CONSTRAINT [FK_Categoria_Login] FOREIGN KEY ([Id_Login]) REFERENCES [dbo].[Login] ([Id])
 );
+
+
 
 
 GO

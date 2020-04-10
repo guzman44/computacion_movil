@@ -1,13 +1,17 @@
 ﻿CREATE TABLE [dbo].[Publicaciones] (
-    [Id]           INT           NOT NULL,
+    [Id]           INT           IDENTITY (1, 1) NOT NULL,
     [Id_Login]     INT           NOT NULL,
     [Id_Evento]    INT           NOT NULL,
     [Comentario]   VARCHAR (150) NOT NULL,
     [FechaIngreso] DATETIME      NOT NULL,
     [Imagen]       IMAGE         NULL,
     [Activo]       CHAR (1)      DEFAULT ((1)) NOT NULL,
-    CONSTRAINT [PK_Publicaciones] PRIMARY KEY CLUSTERED ([Id] ASC)
+    CONSTRAINT [PK_Publicaciones] PRIMARY KEY CLUSTERED ([Id] ASC),
+    CONSTRAINT [FK_Publicaciones_Evento] FOREIGN KEY ([Id_Evento]) REFERENCES [dbo].[Evento] ([Id]),
+    CONSTRAINT [FK_Publicaciones_Login] FOREIGN KEY ([Id_Login]) REFERENCES [dbo].[Login] ([Id])
 );
+
+
 
 
 GO

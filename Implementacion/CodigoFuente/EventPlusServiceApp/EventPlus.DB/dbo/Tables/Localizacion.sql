@@ -1,13 +1,18 @@
 ﻿CREATE TABLE [dbo].[Localizacion] (
-    [Id]         INT           NOT NULL,
-    [Id_Evento]  INT           NOT NULL,
-    [Latitud]    DECIMAL (20)  NOT NULL,
-    [Longitud]   DECIMAL (20)  NOT NULL,
-    [Direccion]  VARCHAR (100) NULL,
-    [Comentario] VARCHAR (100) NULL,
-    [Activo]     CHAR (1)      DEFAULT ((1)) NOT NULL,
-    CONSTRAINT [PK_Localizacion] PRIMARY KEY CLUSTERED ([Id] ASC)
+    [Id]            INT           IDENTITY (1, 1) NOT NULL,
+    [Id_Evento]     INT           NOT NULL,
+    [Latitud]       DECIMAL (20)  NOT NULL,
+    [Longitud]      DECIMAL (20)  NOT NULL,
+    [Direccion]     VARCHAR (100) NULL,
+    [Comentario]    VARCHAR (100) NULL,
+    [Activo]        CHAR (1)      DEFAULT ((1)) NOT NULL,
+    [FechaRegistro] DATETIME      NOT NULL,
+    CONSTRAINT [PK_Localizacion] PRIMARY KEY CLUSTERED ([Id] ASC),
+    CONSTRAINT [FK_Localizacion_Evento] FOREIGN KEY ([Id_Evento]) REFERENCES [dbo].[Evento] ([Id]),
+    CONSTRAINT [UQ_Localizacion_Id] UNIQUE NONCLUSTERED ([Id] ASC)
 );
+
+
 
 
 GO
@@ -41,4 +46,8 @@ EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = 'Descripcion 
 
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = 'Si activo en el sistema', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'Localizacion', @level2type = N'COLUMN', @level2name = N'Activo';
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = 'Fecha de Registro', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'Localizacion', @level2type = N'COLUMN', @level2name = N'FechaRegistro';
 

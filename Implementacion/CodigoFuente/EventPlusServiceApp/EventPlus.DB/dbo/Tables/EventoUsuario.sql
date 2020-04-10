@@ -1,8 +1,12 @@
 ﻿CREATE TABLE [dbo].[EventoUsuario] (
     [Id_Evento] INT NOT NULL,
     [Id_Login]  INT NOT NULL,
-    CONSTRAINT [PK_EventoUsuario] PRIMARY KEY CLUSTERED ([Id_Evento] ASC, [Id_Login] ASC)
+    CONSTRAINT [PK_EventoUsuario] PRIMARY KEY CLUSTERED ([Id_Evento] ASC, [Id_Login] ASC),
+    CONSTRAINT [FK_EventoUsuario_Evento] FOREIGN KEY ([Id_Evento]) REFERENCES [dbo].[Evento] ([Id]),
+    CONSTRAINT [FK_EventoUsuario_Login] FOREIGN KEY ([Id_Login]) REFERENCES [dbo].[Login] ([Id])
 );
+
+
 
 
 GO

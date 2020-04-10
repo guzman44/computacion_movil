@@ -1,12 +1,16 @@
 ﻿CREATE TABLE [dbo].[Usuario] (
-    [Id]        INT          NOT NULL,
-    [Nombres]   VARCHAR (30) NOT NULL,
-    [Apellidos] VARCHAR (30) NOT NULL,
+    [Id]        INT          IDENTITY (1, 1) NOT NULL,
+    [Nombres]   VARCHAR (50) NOT NULL,
+    [Apellidos] VARCHAR (50) NOT NULL,
     [Imagen]    IMAGE        NULL,
     [Id_Login]  INT          NOT NULL,
     [Activo]    CHAR (1)     DEFAULT ((1)) NOT NULL,
-    CONSTRAINT [PK_Usuario] PRIMARY KEY CLUSTERED ([Id] ASC)
+    CONSTRAINT [PK_Usuario] PRIMARY KEY CLUSTERED ([Id] ASC),
+    CONSTRAINT [FK_Usuario_Login] FOREIGN KEY ([Id_Login]) REFERENCES [dbo].[Login] ([Id]),
+    CONSTRAINT [UQ_Usuario_Id] UNIQUE NONCLUSTERED ([Id] ASC)
 );
+
+
 
 
 GO
