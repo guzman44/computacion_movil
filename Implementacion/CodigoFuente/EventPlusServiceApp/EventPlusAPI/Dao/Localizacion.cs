@@ -11,7 +11,7 @@ namespace EventPlusAPI.Dao
         public decimal Longitud { get; set; }
         public string Direccion { get; set; }
         public string Comentario { get; set; }
-        public string Activo { get; set; }
+        public Boolean Activo { get; set; }
 
         public virtual Evento IdEventoNavigation { get; set; }
     }

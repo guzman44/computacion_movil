@@ -19,11 +19,13 @@ namespace EventPlusAPI.Dao
         public byte[] Imagen { get; set; }
         public DateTime FechaInicio { get; set; }
         public DateTime FechaFin { get; set; }
-        public string Activo { get; set; }
+        public Boolean Activo { get; set; }
+        public int IdTipo { get; set; }        
 
         public virtual ICollection<Categoria> Categoria { get; set; }
         public virtual ICollection<EventoUsuario> EventoUsuario { get; set; }
         public virtual ICollection<Localizacion> Localizacion { get; set; }
         public virtual ICollection<Publicaciones> Publicaciones { get; set; }
+        public virtual ParametrizacionObjetos IdTipoNavigation { get; set; }
     }
 }

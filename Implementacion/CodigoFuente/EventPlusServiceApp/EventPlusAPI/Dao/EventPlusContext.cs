@@ -122,6 +122,12 @@ namespace EventPlusAPI.Dao
                     .HasMaxLength(100)
                     .IsUnicode(false)
                     .HasComment("Nombre del evento");
+
+                entity.HasOne(d => d.IdTipoNavigation)
+                    .WithMany(p => p.Evento)
+                    .HasForeignKey(d => d.IdTipo)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Evento_ParametrizacionObjetos");
             });
 
             modelBuilder.Entity<EventoUsuario>(entity =>

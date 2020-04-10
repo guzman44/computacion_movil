@@ -57,6 +57,7 @@ namespace EventPlusAPI
             services.AddScoped<IEvento, EventoService>();
             services.AddScoped<IPublicaciones, PublicacionesService>();
             services.AddScoped<IUsuario, UsuarioService>();
+            services.AddScoped<ISelect, SelectService>();
             services.AddDbContext<EventPlusAPI.Dao.EventPlusContext>(options => options.UseSqlServer(appSettings.ConnectionDB, opt => opt.CommandTimeout(150)));
             services.AddMvc().AddControllersAsServices();
 
@@ -72,6 +73,11 @@ namespace EventPlusAPI
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
             });
+
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
 
         }
 

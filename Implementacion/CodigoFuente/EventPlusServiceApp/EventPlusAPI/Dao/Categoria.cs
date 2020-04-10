@@ -9,7 +9,7 @@ namespace EventPlusAPI.Dao
         public int IdCategoria { get; set; }
         public int IdLogin { get; set; }
         public int IdEvento { get; set; }
-        public string Activo { get; set; }
+        public Boolean Activo { get; set; }
         public DateTime FechaRegistro { get; set; }
 
         public virtual Evento IdEventoNavigation { get; set; }
