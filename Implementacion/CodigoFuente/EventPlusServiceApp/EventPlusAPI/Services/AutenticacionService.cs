@@ -33,6 +33,7 @@ namespace EventPlusAPI.Services
             var user = eventPlusContext.Usuario.Where(s => s.IdLogin == loginCorrecto.Id).Select(s => new UserTokenViewModel
             {
                 Id = s.Id,
+                IdLogin = s.IdLogin,
                 FirstName = s.Nombres,
                 LastName  = s.Apellidos,
                 Username = s.IdLoginNavigation.UserName,

@@ -20,11 +20,12 @@ namespace EventPlusAPI.Dao
         public virtual DbSet<Categoria> Categoria { get; set; }
         public virtual DbSet<Evento> Evento { get; set; }
         public virtual DbSet<EventoUsuario> EventoUsuario { get; set; }
+        public virtual DbSet<Galeria> Galeria { get; set; }
         public virtual DbSet<Localizacion> Localizacion { get; set; }
         public virtual DbSet<Login> Login { get; set; }
         public virtual DbSet<ParametrizacionObjetos> ParametrizacionObjetos { get; set; }
         public virtual DbSet<Publicaciones> Publicaciones { get; set; }
-        public virtual DbSet<Usuario> Usuario { get; set; }
+        public virtual DbSet<Usuario> Usuario { get; set; }        
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -155,6 +156,30 @@ namespace EventPlusAPI.Dao
                     .HasForeignKey(d => d.IdLogin)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_EventoUsuario_Login");
+            });
+
+            modelBuilder.Entity<Galeria>(entity =>
+            {
+                entity.HasComment("Tabla que contiene la información de las imagenes de los eventos - Galleria");
+
+                entity.HasIndex(e => e.Id)
+                    .HasName("UQ_Galleria_Id")
+                    .IsUnique();
+
+                entity.Property(e => e.Id).HasComment("Id de la tabla");
+
+                entity.Property(e => e.IdEvento).HasComment("Llave Foranea");
+
+                entity.Property(e => e.Image)
+                    .IsRequired()
+                    .HasColumnType("image")
+                    .HasComment("Imagen de la galeria");
+
+                entity.HasOne(d => d.IdEventoNavigation)
+                    .WithMany(p => p.Galeria)
+                    .HasForeignKey(d => d.IdEvento)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Galeria_Evento");
             });
 
             modelBuilder.Entity<Localizacion>(entity =>
