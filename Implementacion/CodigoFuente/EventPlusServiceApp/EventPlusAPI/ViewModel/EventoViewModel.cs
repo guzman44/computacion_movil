@@ -206,4 +206,15 @@ namespace EventPlusAPI.ViewModel
         public string Comentario { get; set; }
     }
 
+    public class SearchEventLoginViewModel
+    {
+        public int IdLogin { get; set; }
+        public string Text { get; set; }
+    }
+
+    public class SearchEventAllViewModel
+    {
+        public string Text { get; set; }
+    }
+
 }

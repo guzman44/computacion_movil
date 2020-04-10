@@ -8,11 +8,11 @@ namespace EventPlusAPI.Controllers
     [Authorize]
     [ApiController]
     [Route("api/[controller]")]
-    public class AutenticacionController : ControllerBase
+    public class AuthenticationController : ControllerBase
     {
         private IAutenticacion _autenticacion;
 
-        public AutenticacionController(IAutenticacion autenticacion)
+        public AuthenticationController(IAutenticacion autenticacion)
         {
             _autenticacion = autenticacion;
         }

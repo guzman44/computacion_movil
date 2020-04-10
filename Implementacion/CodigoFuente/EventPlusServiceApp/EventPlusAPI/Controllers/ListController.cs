@@ -8,11 +8,11 @@ namespace EventPlusAPI.Controllers
     [Authorize]
     [ApiController]
     [Route("api/[controller]")]
-    public class SelectController : ControllerBase
+    public class ListController : ControllerBase
     {
         private ISelect Select;
 
-        public SelectController(ISelect Select)
+        public ListController(ISelect Select)
         {
             this.Select = Select;
         }

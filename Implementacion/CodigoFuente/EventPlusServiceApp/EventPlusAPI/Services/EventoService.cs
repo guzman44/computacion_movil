@@ -115,6 +115,37 @@ namespace EventPlusAPI.Services
             }
         }
 
+        public ResponseViewModel CreateLike(int idEvent, int idLogin)
+        {
+            ResponseViewModel reponse = new ResponseViewModel();
+
+            try
+            {
+                var categoriaLike = _eventPlusContext.ParametrizacionObjetos.Where(s => s.Nombre == "CAT_HISTORICO" && s.Valor == "Like").FirstOrDefault();
+                Categoria cat = new Categoria
+                {
+                   IdCategoria = categoriaLike.Id,
+                   IdEvento = idEvent,
+                   IdLogin = idLogin,
+                   FechaRegistro = DateTime.Now,
+                   Activo = "1"                   
+                };
+                _eventPlusContext.Categoria.Add(cat);
+                _eventPlusContext.SaveChanges();
+
+                reponse.Type = "success";
+                reponse.Response = "El regitsro se creo exitosamente.";
+
+                return reponse;
+            }
+            catch (Exception ex)
+            {
+                reponse.Type = "error";
+                reponse.Response = "Error en el procedimiento. ---> " + ex.Message;
+                return reponse;
+            }
+        }
+
         public ResponseViewModel CreateLocation(CreateLocationViewModel model)
         {
             ResponseViewModel reponse = new ResponseViewModel();
@@ -211,6 +242,73 @@ namespace EventPlusAPI.Services
             }
         }
 
+        public ResponseViewModel DeleteLike(int idEvent, int idLogin)
+        {
+            ResponseViewModel reponse = new ResponseViewModel();
+
+            try
+            {
+                var categoriaLike = _eventPlusContext.ParametrizacionObjetos.Where(s => s.Nombre == "CAT_HISTORICO" && s.Valor == "Like").FirstOrDefault();
+                var eliminar = _eventPlusContext.Categoria.Where(w => w.IdCategoria == categoriaLike.Id && w.IdEvento == idEvent && w.IdLogin == idLogin).FirstOrDefault();
+
+                _eventPlusContext.Categoria.Remove(eliminar);
+                _eventPlusContext.Entry(eliminar).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                _eventPlusContext.SaveChanges();
+
+                return reponse;
+            }
+            catch (Exception ex)
+            {
+                reponse.Type = "error";
+                reponse.Response = "Error en el procedimiento. ---> " + ex.Message;
+                return reponse;
+            }
+        }
+
+        public ResponseViewModel DeleteLocation(int idEvent, int idLogin)
+        {
+            ResponseViewModel reponse = new ResponseViewModel();
+
+            try
+            {
+                var eliminar = _eventPlusContext.Localizacion.Where(w => w.IdEvento == idEvent).FirstOrDefault();
+
+                _eventPlusContext.Localizacion.Remove(eliminar);
+                _eventPlusContext.Entry(eliminar).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                _eventPlusContext.SaveChanges();
+
+                return reponse;
+            }
+            catch (Exception ex)
+            {
+                reponse.Type = "error";
+                reponse.Response = "Error en el procedimiento. ---> " + ex.Message;
+                return reponse;
+            }
+        }
+
+        public ResponseViewModel DeletePublication(int idEvent, int idLogin)
+        {
+            ResponseViewModel reponse = new ResponseViewModel();
+
+            try
+            {
+                var eliminar = _eventPlusContext.Publicaciones.Where(w => w.IdEvento == idEvent && w.IdLogin == idLogin).FirstOrDefault();
+
+                _eventPlusContext.Publicaciones.Remove(eliminar);
+                _eventPlusContext.Entry(eliminar).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                _eventPlusContext.SaveChanges();
+
+                return reponse;
+            }
+            catch (Exception ex)
+            {
+                reponse.Type = "error";
+                reponse.Response = "Error en el procedimiento. ---> " + ex.Message;
+                return reponse;
+            }
+        }
+
         public List<AllHistoryEventoViewModel> GetAll(long idLogin)
         {
             var listEvent = _eventPlusContext.EventoUsuario.Where(w => w.IdLogin == idLogin).Select(s => new AllHistoryEventoViewModel
@@ -224,7 +322,7 @@ namespace EventPlusAPI.Services
                 IdTipo = s.IdEventoNavigation.IdTipo,
                 Tipo = s.IdEventoNavigation.IdTipoNavigation.Nombre,
                 ImagenMiniatura = s.IdEventoNavigation.Imagen,
-                //FechaRegistro = s.
+                FechaRegistro = s.IdEventoNavigation.FechaRegistro
             }).ToList();
 
             return listEvent;
@@ -235,7 +333,7 @@ namespace EventPlusAPI.Services
             var evento = _eventPlusContext.Evento.Where(w => w.Id == idEvento).Select(s => new AllEventoViewModel
             {
                 Id = s.Id,
-                IdLogin = _eventPlusContext.EventoUsuario.Where(s => s.IdEvento == idEvento).Select(s => s.IdLogin).FirstOrDefault(),
+                IdLogin = _eventPlusContext.EventoUsuario.Where(p => p.IdEvento == idEvento).Select(p => p.IdLogin).FirstOrDefault(),
                 Nombre = s.Nombre,
                 Descripcion = s.Descripcion,
                 FechaFin = s.FechaFin,
@@ -243,11 +341,18 @@ namespace EventPlusAPI.Services
                 IdTipo = s.IdTipo,
                 Tipo = s.IdTipoNavigation.Nombre,
                 ImagenMiniatura = s.Imagen,
-                Galeria = _eventPlusContext.Galeria.Where(s => s.IdEvento == s.Id).ToList(),
-                Localizacion = _eventPlusContext.Localizacion.Where(s => s.IdEvento == s.Id).ToList(),
-                Publicaciones = _eventPlusContext.Publicaciones.Where(s => s.IdEvento == s.Id).ToList(),
-               // FechaRegistro = 
+                Galeria = _eventPlusContext.Galeria.Where(p => p.IdEvento == p.Id).ToList(),
+                Localizacion = _eventPlusContext.Localizacion.Where(p => p.IdEvento == s.Id).ToList(),
+                Publicaciones = _eventPlusContext.Publicaciones.Where(p => p.IdEvento == s.Id).ToList(),
+                FechaRegistro = s.FechaRegistro
             }).FirstOrDefault();
+
+            var usuario = _eventPlusContext.Usuario.Where(w => w.IdLogin == evento.IdLogin).FirstOrDefault();
+            var nombre = (usuario.Nombres + " " + usuario.Apellidos).Trim();
+            
+            evento.NombreUsuario = (nombre!= null && !nombre.Equals(""))? usuario.IdLoginNavigation.UserName: nombre;
+            var categoriaLike = _eventPlusContext.ParametrizacionObjetos.Where(s => s.Nombre == "CAT_HISTORICO" && s.Valor == "Like").FirstOrDefault();
+            evento.Likes = _eventPlusContext.Categoria.Where(w => w.IdCategoria == categoriaLike.Id && w.IdEvento==idEvento).Count();
 
             return evento;
         }
@@ -265,8 +370,16 @@ namespace EventPlusAPI.Services
                 IdTipo = s.IdTipo,
                 Tipo = s.IdTipoNavigation.Nombre,
                 ImagenMiniatura = s.Imagen,
-                Galeria = _eventPlusContext.Galeria.Where(s => s.IdEvento == s.Id).ToList()
+                Galeria = _eventPlusContext.Galeria.Where(s => s.IdEvento == s.Id).ToList(),
+                FechaRegistro = s.FechaRegistro
             }).FirstOrDefault();
+
+            var usuario = _eventPlusContext.Usuario.Where(w => w.IdLogin == evento.IdLogin).FirstOrDefault();
+            var nombre = (usuario.Nombres + " " + usuario.Apellidos).Trim();
+
+            evento.NombreUsuario = (nombre != null && !nombre.Equals("")) ? usuario.IdLoginNavigation.UserName : nombre;
+            var categoriaLike = _eventPlusContext.ParametrizacionObjetos.Where(s => s.Nombre == "CAT_HISTORICO" && s.Valor == "Like").FirstOrDefault();
+            evento.Likes = _eventPlusContext.Categoria.Where(w => w.IdCategoria == categoriaLike.Id && w.IdEvento == idEvento).Count();
 
             return evento;
         }
@@ -284,8 +397,16 @@ namespace EventPlusAPI.Services
                 IdTipo = s.IdTipo,
                 Tipo = s.IdTipoNavigation.Nombre,
                 ImagenMiniatura = s.Imagen,
-                Localizacion = _eventPlusContext.Localizacion.Where(s => s.IdEvento == s.Id).ToList()
+                Localizacion = _eventPlusContext.Localizacion.Where(s => s.IdEvento == s.Id).ToList(),
+                FechaRegistro = s.FechaRegistro
             }).FirstOrDefault();
+
+            var usuario = _eventPlusContext.Usuario.Where(w => w.IdLogin == evento.IdLogin).FirstOrDefault();
+            var nombre = (usuario.Nombres + " " + usuario.Apellidos).Trim();
+
+            evento.NombreUsuario = (nombre != null && !nombre.Equals("")) ? usuario.IdLoginNavigation.UserName : nombre;
+            var categoriaLike = _eventPlusContext.ParametrizacionObjetos.Where(s => s.Nombre == "CAT_HISTORICO" && s.Valor == "Like").FirstOrDefault();
+            evento.Likes = _eventPlusContext.Categoria.Where(w => w.IdCategoria == categoriaLike.Id && w.IdEvento == idEvento).Count();
 
             return evento;
         }
@@ -303,10 +424,56 @@ namespace EventPlusAPI.Services
                 IdTipo = s.IdTipo,
                 Tipo = s.IdTipoNavigation.Nombre,
                 ImagenMiniatura = s.Imagen,
-                Publicaciones = _eventPlusContext.Publicaciones.Where(s => s.IdEvento == s.Id).ToList()
+                Publicaciones = _eventPlusContext.Publicaciones.Where(s => s.IdEvento == s.Id).ToList(),
+                FechaRegistro = s.FechaRegistro
             }).FirstOrDefault();
 
+            var usuario = _eventPlusContext.Usuario.Where(w => w.IdLogin == evento.IdLogin).FirstOrDefault();
+            var nombre = (usuario.Nombres + " " + usuario.Apellidos).Trim();
+
+            evento.NombreUsuario = (nombre != null && !nombre.Equals("")) ? usuario.IdLoginNavigation.UserName : nombre;
+            var categoriaLike = _eventPlusContext.ParametrizacionObjetos.Where(s => s.Nombre == "CAT_HISTORICO" && s.Valor == "Like").FirstOrDefault();
+            evento.Likes = _eventPlusContext.Categoria.Where(w => w.IdCategoria == categoriaLike.Id && w.IdEvento == idEvento).Count();
+
             return evento;
+        }
+
+        public List<AllHistoryEventoViewModel> SearchEventAll(SearchEventAllViewModel model)
+        {
+            var listEvent = _eventPlusContext.Evento.Where(w => w.Nombre.Contains(model.Text)).Select(s => new AllHistoryEventoViewModel
+            {
+                Id = s.Id,
+                IdLogin = _eventPlusContext.EventoUsuario.Where(w => w.IdEvento == s.Id).Select(w => w.IdLogin).FirstOrDefault(),
+                Nombre = s.Nombre,
+                Descripcion = s.Descripcion,
+                FechaFin = s.FechaFin,
+                FechaInicio = s.FechaInicio,
+                IdTipo = s.IdTipo,
+                Tipo = s.IdTipoNavigation.Nombre,
+                ImagenMiniatura = s.Imagen,
+                FechaRegistro = s.FechaRegistro
+            }).ToList();
+
+            return listEvent;
+        }
+
+        public List<AllHistoryEventoViewModel> SearchEventLogin(SearchEventLoginViewModel model)
+        {
+            var listEvent = _eventPlusContext.EventoUsuario.Where(w => w.IdLogin == model.IdLogin && w.IdEventoNavigation.Nombre.Contains(model.Text)).Select(s => new AllHistoryEventoViewModel
+            {
+                Id = s.IdEventoNavigation.Id,
+                IdLogin = s.IdLogin,
+                Nombre = s.IdEventoNavigation.Nombre,
+                Descripcion = s.IdEventoNavigation.Descripcion,
+                FechaFin = s.IdEventoNavigation.FechaFin,
+                FechaInicio = s.IdEventoNavigation.FechaInicio,
+                IdTipo = s.IdEventoNavigation.IdTipo,
+                Tipo = s.IdEventoNavigation.IdTipoNavigation.Nombre,
+                ImagenMiniatura = s.IdEventoNavigation.Imagen,
+                FechaRegistro = s.IdEventoNavigation.FechaRegistro
+            }).ToList();
+
+            return listEvent;
         }
 
         public ResponseViewModel Uptade(UpdateEventoViewModel model)
