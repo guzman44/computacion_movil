@@ -1,0 +1,3 @@
+﻿CREATE LOGIN [admin]
+    WITH PASSWORD = N'gbrmjy>jsmyfriv`Pqjyak6{msFT7_&#$!~<aksusXth`cgz', SID = 0x63E1821802513E4D94D2EE52F50C9D15, DEFAULT_DATABASE = [EventPlus], DEFAULT_LANGUAGE = [us_english], CHECK_POLICY = OFF;
+
