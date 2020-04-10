@@ -1,9 +1,8 @@
-﻿using EventPlusAPI.Interfaces;
-using EventPlusAPI.Dao;
+﻿using EventPlusAPI.Dao;
+using EventPlusAPI.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace EventPlusAPI.Controllers
 {

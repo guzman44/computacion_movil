@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using EventPlusAPI.Interfaces;
-using Microsoft.AspNetCore.Http;
+﻿using EventPlusAPI.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EventPlusAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
+    [Route("api/[controller]")]
     public class UsuarioController : ControllerBase
     {
         private IUsuario Usuario;
@@ -18,5 +15,13 @@ namespace EventPlusAPI.Controllers
         {
             this.Usuario = Usuario;
         }
+
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var users = Usuario.GetAll();
+            return Ok(users);
+        }
+
     }
 }

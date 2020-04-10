@@ -18,7 +18,7 @@ namespace EventPlusAPI.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost("authenticate")]
+        [HttpPost("login")]
         public IActionResult Authenticate([FromBody]AuthenticateModel model)
         {
             var user = _autenticacion.Authenticate(model.Username, model.Password);
@@ -29,11 +29,6 @@ namespace EventPlusAPI.Controllers
             return Ok(user);
         }
 
-        [HttpGet]
-        public IActionResult GetAll()
-        {
-            var users = _autenticacion.GetAll();
-            return Ok(users);
-        }
+        
     }
 }

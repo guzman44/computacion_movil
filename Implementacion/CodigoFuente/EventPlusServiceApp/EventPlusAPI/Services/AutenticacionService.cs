@@ -5,7 +5,6 @@ using EventPlusAPI.Interfaces;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
@@ -15,25 +14,29 @@ namespace EventPlusAPI.Services
 {
     public class AutenticacionService : IAutenticacion
     {
-        private List<UserEntity> _users = new List<UserEntity>
-        {
-            new UserEntity { Id = 1, FirstName = "Test", LastName = "User", Username = "test", Password = "test" }
-        };
-
         private readonly AppSettings _appSettings;
         private readonly EventPlusContext eventPlusContext;
 
-        public AutenticacionService(IOptions<AppSettings> appSettings)
+        public AutenticacionService(IOptions<AppSettings> appSettings, EventPlusContext _eventPlusContext)
         {
             _appSettings = appSettings.Value;
+            this.eventPlusContext = _eventPlusContext;
         }
 
         public UserEntity Authenticate(string username, string password)
         {
-            var user = _users.SingleOrDefault(x => x.Username == username && x.Password == password);
+            var loginCorrecto = eventPlusContext.Login.Where(s => s.UserName == username && s.Password == password).FirstOrDefault();
 
-            if (user == null)
+            if (loginCorrecto == null)
                 return null;
+
+            var user = eventPlusContext.Usuario.Where(s => s.IdLogin == loginCorrecto.Id).Select(s => new UserEntity
+            {
+                Id = s.Id,
+                FirstName = s.Nombres,
+                LastName  = s.Apellidos,
+                Username = s.IdLoginNavigation.UserName
+            }).FirstOrDefault();
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
@@ -51,10 +54,6 @@ namespace EventPlusAPI.Services
 
             return user.WithoutPassword();
         }
-
-        public IEnumerable<UserEntity> GetAll()
-        {
-            return _users.WithoutPasswords();
-        }
+      
     }
 }

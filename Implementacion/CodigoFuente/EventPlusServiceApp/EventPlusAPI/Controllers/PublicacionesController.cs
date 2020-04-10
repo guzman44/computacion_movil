@@ -1,27 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using EventPlusAPI.Dao;
+﻿using EventPlusAPI.Dao;
 using EventPlusAPI.Interfaces;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace EventPlusAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
+    [Route("api/[controller]")]
     public class PublicacionesController : ControllerBase
     {
-        IPublicaciones PublicacionesService;
+        IPublicaciones _publicacionesService;
 
         public PublicacionesController(IPublicaciones PublicacionesService)
         {
-            this.PublicacionesService = PublicacionesService;
+            this._publicacionesService = PublicacionesService;
         }
+
+
+        [HttpGet]
         public List<Publicaciones> GetAll()
         {
-            var eventos = PublicacionesService.GetAll();
+            var eventos = _publicacionesService.GetAll();
             return eventos;
         }
 
