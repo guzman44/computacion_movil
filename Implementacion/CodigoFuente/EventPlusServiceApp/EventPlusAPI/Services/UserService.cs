@@ -1,4 +1,5 @@
-﻿using EventPlusAPI.Entities;
+﻿using EventPlusAPI.Dao;
+using EventPlusAPI.Entities;
 using EventPlusAPI.Helpers;
 using EventPlusAPI.Interfaces;
 using Microsoft.Extensions.Options;
@@ -20,6 +21,7 @@ namespace EventPlusAPI.Services
         };
 
         private readonly AppSettings _appSettings;
+        private readonly EventPlusContext eventPlusContext;
 
         public UserService(IOptions<AppSettings> appSettings)
         {

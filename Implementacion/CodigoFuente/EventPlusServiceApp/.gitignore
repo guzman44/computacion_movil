@@ -13,3 +13,5 @@ bin/
 obj/
 /EventPlusAPI/bin/
 /EventPlusAPI/obj/
+/EventPlusAPI/bin/*
+/EventPlusAPI/obj/*
