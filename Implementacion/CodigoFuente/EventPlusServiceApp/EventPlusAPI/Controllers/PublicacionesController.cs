@@ -18,7 +18,9 @@ namespace EventPlusAPI.Controllers
             this._publicacionesService = PublicacionesService;
         }
 
-
+        /// <summary>
+        /// Listado de todos las publicaciones
+        /// </summary>
         [HttpGet]
         public List<Publicaciones> GetAll()
         {

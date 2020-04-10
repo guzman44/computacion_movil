@@ -16,7 +16,10 @@ namespace EventPlusAPI.Controllers
         {
             _autenticacion = autenticacion;
         }
-
+        /// <summary>
+        /// Autenticacion de la aplicación
+        /// </summary>
+        /// <param name="model"></param>   
         [AllowAnonymous]
         [HttpPost("login")]
         public IActionResult Authenticate([FromBody]AuthenticateModel model)

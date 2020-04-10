@@ -16,6 +16,9 @@ namespace EventPlusAPI.Controllers
             this.Usuario = Usuario;
         }
 
+        /// <summary>
+        /// Listado de todos los usuarios
+        /// </summary>
         [HttpGet]
         public IActionResult GetAll()
         {

@@ -18,6 +18,9 @@ namespace EventPlusAPI.Controllers
             _eventoService = eventoService;
         }
 
+        /// <summary>
+        /// Listado de todos los eventos
+        /// </summary>
         [HttpGet]
         public List<Evento> GetAll()
         {

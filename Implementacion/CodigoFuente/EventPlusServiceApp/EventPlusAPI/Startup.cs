@@ -8,6 +8,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using System;
+using System.IO;
+using System.Reflection;
 using System.Text;
 
 namespace EventPlusAPI
@@ -49,18 +53,38 @@ namespace EventPlusAPI
                 };
             });
 
-            
-
             services.AddScoped<IAutenticacion, AutenticacionService>();
             services.AddScoped<IEvento, EventoService>();
             services.AddScoped<IPublicaciones, PublicacionesService>();
             services.AddScoped<IUsuario, UsuarioService>();
             services.AddDbContext<EventPlusAPI.Dao.EventPlusContext>(options => options.UseSqlServer(appSettings.ConnectionDB, opt => opt.CommandTimeout(150)));
             services.AddMvc().AddControllersAsServices();
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { 
+                    Title = "Event Plus - Computacion Movil - Ingenieros", Version = "v1" ,
+                    Description = "Proyecto de Computación Móvil"
+                });
+
+                // Set the comments path for the Swagger JSON and UI.
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+            });
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseStaticFiles();
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Event Plus - Computacion Movil - Ingenieros");
+            });
+
             app.UseRouting();
 
             app.UseCors(x => x

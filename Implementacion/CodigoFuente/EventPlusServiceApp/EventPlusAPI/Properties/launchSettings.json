@@ -20,7 +20,7 @@
     "EventPlusAPI": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "users",
+      "launchUrl": "swagger",
       "applicationUrl": "https://localhost:8082",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
