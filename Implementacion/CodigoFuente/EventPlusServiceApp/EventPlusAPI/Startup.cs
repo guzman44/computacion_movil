@@ -51,7 +51,7 @@ namespace EventPlusAPI
 
             
 
-            services.AddScoped<IUser, UserService>();
+            services.AddScoped<IAutenticacion, AutenticacionService>();
             services.AddScoped<IEvento, EventoService>();
             services.AddDbContext<EventPlusAPI.Dao.EventPlusContext>(options => options.UseSqlServer(appSettings.ConnectionDB, opt => opt.CommandTimeout(150)));
             services.AddMvc().AddControllersAsServices();

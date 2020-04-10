@@ -11,5 +11,7 @@ namespace EventPlusAPI.Dao
         public byte[] Imagen { get; set; }
         public int IdLogin { get; set; }
         public string Activo { get; set; }
+
+        public virtual Login IdLoginNavigation { get; set; }
     }
 }

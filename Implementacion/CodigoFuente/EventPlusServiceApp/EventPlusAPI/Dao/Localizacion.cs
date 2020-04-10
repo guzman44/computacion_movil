@@ -12,5 +12,7 @@ namespace EventPlusAPI.Dao
         public string Direccion { get; set; }
         public string Comentario { get; set; }
         public string Activo { get; set; }
+
+        public virtual Evento IdEventoNavigation { get; set; }
     }
 }

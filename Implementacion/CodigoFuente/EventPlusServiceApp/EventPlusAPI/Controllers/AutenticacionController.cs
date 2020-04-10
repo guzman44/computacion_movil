@@ -8,20 +8,20 @@ namespace EventPlusAPI.Controllers
     [Authorize]
     [ApiController]
     [Route("api/[controller]")]
-    public class UsersController : ControllerBase
+    public class AutenticacionController : ControllerBase
     {
-        private IUser _userService;
+        private IAutenticacion _autenticacion;
 
-        public UsersController(IUser userService)
+        public AutenticacionController(IAutenticacion autenticacion)
         {
-            _userService = userService;
+            _autenticacion = autenticacion;
         }
 
         [AllowAnonymous]
         [HttpPost("authenticate")]
         public IActionResult Authenticate([FromBody]AuthenticateModel model)
         {
-            var user = _userService.Authenticate(model.Username, model.Password);
+            var user = _autenticacion.Authenticate(model.Username, model.Password);
 
             if (user == null)
                 return BadRequest(new { message = "Nombre de usuario o contraseña incorrectos" });
@@ -32,7 +32,7 @@ namespace EventPlusAPI.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var users = _userService.GetAll();
+            var users = _autenticacion.GetAll();
             return Ok(users);
         }
     }

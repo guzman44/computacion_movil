@@ -1,4 +1,4 @@
-﻿namespace EventPlusAPI.Entities
+﻿namespace EventPlusAPI.Dtos
 {
     public class UserEntity
     {

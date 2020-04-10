@@ -7,5 +7,8 @@ namespace EventPlusAPI.Dao
     {
         public int IdEvento { get; set; }
         public int IdLogin { get; set; }
+
+        public virtual Evento IdEventoNavigation { get; set; }
+        public virtual Login IdLoginNavigation { get; set; }
     }
 }

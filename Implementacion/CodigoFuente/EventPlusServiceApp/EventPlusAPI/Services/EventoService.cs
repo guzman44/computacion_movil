@@ -1,12 +1,7 @@
 ﻿using EventPlusAPI.Dao;
-using EventPlusAPI.Entities;
-using EventPlusAPI.Helpers;
 using EventPlusAPI.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace EventPlusAPI.Services
 {

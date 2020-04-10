@@ -9,7 +9,7 @@ namespace EventPlusAPI.Dao
     public partial class EventPlusContext : DbContext
     {
         public IConfiguration Configuration { get; }
-
+            
         public EventPlusContext()
         {
         }
@@ -42,11 +42,9 @@ namespace EventPlusAPI.Dao
         {
             modelBuilder.Entity<Categoria>(entity =>
             {
-                entity.HasComment("Tabla que contiene la informaci??e los Categoria");
+                entity.HasComment("Tabla que contiene la información de los Categoria");
 
-                entity.Property(e => e.Id)
-                    .HasComment("Id de la tabla")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.Id).HasComment("Id de la tabla");
 
                 entity.Property(e => e.Activo)
                     .IsRequired()
@@ -71,15 +69,29 @@ namespace EventPlusAPI.Dao
                 entity.Property(e => e.IdLogin)
                     .HasColumnName("Id_Login")
                     .HasComment("Llave Foranea");
+
+                entity.HasOne(d => d.IdEventoNavigation)
+                    .WithMany(p => p.Categoria)
+                    .HasForeignKey(d => d.IdEvento)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Categoria_Evento");
+
+                entity.HasOne(d => d.IdLoginNavigation)
+                    .WithMany(p => p.Categoria)
+                    .HasForeignKey(d => d.IdLogin)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Categoria_Login");
             });
 
             modelBuilder.Entity<Evento>(entity =>
             {
-                entity.HasComment("Tabla que contiene la informaci??e la Evento");
+                entity.HasComment("Tabla que contiene la información de la Evento");
 
-                entity.Property(e => e.Id)
-                    .HasComment("Id de la tabla")
-                    .ValueGeneratedNever();
+                entity.HasIndex(e => e.Id)
+                    .HasName("UQ_Evento_Id")
+                    .IsUnique();
+
+                entity.Property(e => e.Id).HasComment("Id de la tabla");
 
                 entity.Property(e => e.Activo)
                     .IsRequired()
@@ -93,7 +105,7 @@ namespace EventPlusAPI.Dao
                     .IsRequired()
                     .HasMaxLength(250)
                     .IsUnicode(false)
-                    .HasComment("Descripci??el evento");
+                    .HasComment("Descripción del evento");
 
                 entity.Property(e => e.FechaFin)
                     .HasColumnType("datetime")
@@ -118,24 +130,38 @@ namespace EventPlusAPI.Dao
             {
                 entity.HasKey(e => new { e.IdEvento, e.IdLogin });
 
-                entity.HasComment("Tabla que contiene la informaci??e la Evento y el usuario");
+                entity.HasComment("Tabla que contiene la información de la Evento y el usuario");
 
                 entity.Property(e => e.IdEvento)
                     .HasColumnName("Id_Evento")
-                    .HasComment("Llave For?a");
+                    .HasComment("Llave Foránea");
 
                 entity.Property(e => e.IdLogin)
                     .HasColumnName("Id_Login")
-                    .HasComment("Llave For?a");
+                    .HasComment("Llave Foránea");
+
+                entity.HasOne(d => d.IdEventoNavigation)
+                    .WithMany(p => p.EventoUsuario)
+                    .HasForeignKey(d => d.IdEvento)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_EventoUsuario_Evento");
+
+                entity.HasOne(d => d.IdLoginNavigation)
+                    .WithMany(p => p.EventoUsuario)
+                    .HasForeignKey(d => d.IdLogin)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_EventoUsuario_Login");
             });
 
             modelBuilder.Entity<Localizacion>(entity =>
             {
-                entity.HasComment("Tabla que contiene la informaci??e la Localizaci??");
+                entity.HasComment("Tabla que contiene la información de la Localización");
 
-                entity.Property(e => e.Id)
-                    .HasComment("Id de la tabla")
-                    .ValueGeneratedNever();
+                entity.HasIndex(e => e.Id)
+                    .HasName("UQ_Localizacion_Id")
+                    .IsUnique();
+
+                entity.Property(e => e.Id).HasComment("Id de la tabla");
 
                 entity.Property(e => e.Activo)
                     .IsRequired()
@@ -148,34 +174,46 @@ namespace EventPlusAPI.Dao
                 entity.Property(e => e.Comentario)
                     .HasMaxLength(100)
                     .IsUnicode(false)
-                    .HasComment("Descripcion de la ubicacion o la direcci??");
+                    .HasComment("Descripcion de la ubicacion o la dirección");
 
                 entity.Property(e => e.Direccion)
                     .HasMaxLength(100)
                     .IsUnicode(false)
-                    .HasComment("Descripcion de la ubicacion o la direcci??");
+                    .HasComment("Descripcion de la ubicacion o la dirección");
 
                 entity.Property(e => e.IdEvento)
                     .HasColumnName("Id_Evento")
-                    .HasComment("Llave For?a");
+                    .HasComment("Llave Foránea");
 
                 entity.Property(e => e.Latitud)
                     .HasColumnType("decimal(20, 0)")
-                    .HasComment("Latitud de la georeferenciaci??e googlemaps");
+                    .HasComment("Latitud de la georeferenciación de googlemaps");
 
                 entity.Property(e => e.Longitud)
                     .HasColumnType("decimal(20, 0)")
-                    .HasComment(@"Longitud de la georeferenciaci??e googlemaps
-Longitud de la georeferenciaci??e googlemaps");
+                    .HasComment(@"Longitud de la georeferenciación de googlemaps
+Longitud de la georeferenciación de googlemaps");
+
+                entity.HasOne(d => d.IdEventoNavigation)
+                    .WithMany(p => p.Localizacion)
+                    .HasForeignKey(d => d.IdEvento)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Localizacion_Evento");
             });
 
             modelBuilder.Entity<Login>(entity =>
             {
-                entity.HasComment("Tabla que contiene la informaci??el login asociado a un usuario");
+                entity.HasComment("Tabla que contiene la información del login asociado a un usuario");
 
-                entity.Property(e => e.Id)
-                    .HasComment("Id de la tabla")
-                    .ValueGeneratedNever();
+                entity.HasIndex(e => e.Id)
+                    .HasName("UQ_Login_Id")
+                    .IsUnique();
+
+                entity.HasIndex(e => e.UserName)
+                    .HasName("UQ_Login_UserName")
+                    .IsUnique();
+
+                entity.Property(e => e.Id).HasComment("Id de la tabla");
 
                 entity.Property(e => e.Activo)
                     .IsRequired()
@@ -208,9 +246,7 @@ Longitud de la georeferenciaci??e googlemaps");
             {
                 entity.HasComment("Parametrizacion de los objetos");
 
-                entity.Property(e => e.Id)
-                    .HasComment("Id de la tabla")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.Id).HasComment("Id de la tabla");
 
                 entity.Property(e => e.Activo)
                     .IsRequired()
@@ -218,7 +254,7 @@ Longitud de la georeferenciaci??e googlemaps");
                     .IsUnicode(false)
                     .IsFixedLength()
                     .HasDefaultValueSql("((1))")
-                    .HasComment("Activo en la lista.");
+                    .HasComment("Activo en la lista");
 
                 entity.Property(e => e.Nombre)
                     .HasMaxLength(50)
@@ -234,11 +270,9 @@ Longitud de la georeferenciaci??e googlemaps");
 
             modelBuilder.Entity<Publicaciones>(entity =>
             {
-                entity.HasComment("Tabla que contiene la informaci??e las publicaciones asociadas a una Evento");
+                entity.HasComment("Tabla que contiene la información de las publicaciones asociadas a una Evento");
 
-                entity.Property(e => e.Id)
-                    .HasComment("Id de la tabla")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.Id).HasComment("Id de la tabla");
 
                 entity.Property(e => e.Activo)
                     .IsRequired()
@@ -267,16 +301,30 @@ Longitud de la georeferenciaci??e googlemaps");
 
                 entity.Property(e => e.Imagen)
                     .HasColumnType("image")
-                    .HasComment("Imagen de la publicaci??");
+                    .HasComment("Imagen de la publicación");
+
+                entity.HasOne(d => d.IdEventoNavigation)
+                    .WithMany(p => p.Publicaciones)
+                    .HasForeignKey(d => d.IdEvento)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Publicaciones_Evento");
+
+                entity.HasOne(d => d.IdLoginNavigation)
+                    .WithMany(p => p.Publicaciones)
+                    .HasForeignKey(d => d.IdLogin)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Publicaciones_Login");
             });
 
             modelBuilder.Entity<Usuario>(entity =>
             {
-                entity.HasComment("Tabla que contiene la informaci??el usuario");
+                entity.HasComment("Tabla que contiene la información del usuario");
 
-                entity.Property(e => e.Id)
-                    .HasComment("Id de la tabla")
-                    .ValueGeneratedNever();
+                entity.HasIndex(e => e.Id)
+                    .HasName("UQ_Usuario_Id")
+                    .IsUnique();
+
+                entity.Property(e => e.Id).HasComment("Id de la tabla");
 
                 entity.Property(e => e.Activo)
                     .IsRequired()
@@ -294,7 +342,7 @@ Longitud de la georeferenciaci??e googlemaps");
 
                 entity.Property(e => e.IdLogin)
                     .HasColumnName("Id_Login")
-                    .HasComment("Llave For?a");
+                    .HasComment("Llave Foránea");
 
                 entity.Property(e => e.Imagen)
                     .HasColumnType("image")
@@ -305,6 +353,12 @@ Longitud de la georeferenciaci??e googlemaps");
                     .HasMaxLength(30)
                     .IsUnicode(false)
                     .HasComment("Nombres de la persona o usuario");
+
+                entity.HasOne(d => d.IdLoginNavigation)
+                    .WithMany(p => p.Usuario)
+                    .HasForeignKey(d => d.IdLogin)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Usuario_Login");
             });
 
             OnModelCreatingPartial(modelBuilder);

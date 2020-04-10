@@ -11,5 +11,8 @@ namespace EventPlusAPI.Dao
         public int IdEvento { get; set; }
         public string Activo { get; set; }
         public DateTime FechaRegistro { get; set; }
+
+        public virtual Evento IdEventoNavigation { get; set; }
+        public virtual Login IdLoginNavigation { get; set; }
     }
 }

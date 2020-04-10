@@ -1,5 +1,5 @@
 ﻿using EventPlusAPI.Dao;
-using EventPlusAPI.Entities;
+using EventPlusAPI.Dtos;
 using EventPlusAPI.Helpers;
 using EventPlusAPI.Interfaces;
 using Microsoft.Extensions.Options;
@@ -13,7 +13,7 @@ using System.Text;
 
 namespace EventPlusAPI.Services
 {
-    public class UserService : IUser
+    public class AutenticacionService : IAutenticacion
     {
         private List<UserEntity> _users = new List<UserEntity>
         {
@@ -23,7 +23,7 @@ namespace EventPlusAPI.Services
         private readonly AppSettings _appSettings;
         private readonly EventPlusContext eventPlusContext;
 
-        public UserService(IOptions<AppSettings> appSettings)
+        public AutenticacionService(IOptions<AppSettings> appSettings)
         {
             _appSettings = appSettings.Value;
         }

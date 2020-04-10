@@ -1,4 +1,4 @@
-﻿using EventPlusAPI.Entities;
+﻿using EventPlusAPI.Dtos;
 using System.Collections.Generic;
 using System.Linq;
 
