@@ -9,11 +9,11 @@ namespace EventPlusAPI.Controllers
     [Authorize]
     [ApiController]
     [Route("api/[controller]")]
-    public class PublicacionesController : ControllerBase
+    public class PublicationController : ControllerBase
     {
         IPublicaciones _publicacionesService;
 
-        public PublicacionesController(IPublicaciones PublicacionesService)
+        public PublicationController(IPublicaciones PublicacionesService)
         {
             this._publicacionesService = PublicacionesService;
         }

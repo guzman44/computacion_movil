@@ -18,7 +18,7 @@ namespace EventPlusAPI.Services
 
         public List<SelectViewModel> GetbyTipoValor(string tipoValor)
         {
-            return _eventPlusContext.ParametrizacionObjetos.Where(s => s.Nombre == tipoValor && s.Activo == true).Select(s => new SelectViewModel
+            return _eventPlusContext.ParametrizacionObjetos.Where(s => s.Nombre == tipoValor && s.Activo == "1").Select(s => new SelectViewModel
             {
                 Id = s.Id,
                 Valor = s.Valor

@@ -8,11 +8,11 @@ namespace EventPlusAPI.Controllers
     [Authorize]
     [ApiController]
     [Route("api/[controller]")]
-    public class UsuarioController : ControllerBase
+    public class UserController : ControllerBase
     {
         private IUsuario Usuario;
 
-        public UsuarioController(IUsuario Usuario)
+        public UserController(IUsuario Usuario)
         {
             this.Usuario = Usuario;
         }
