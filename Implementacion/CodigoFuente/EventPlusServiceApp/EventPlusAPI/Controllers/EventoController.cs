@@ -12,15 +12,15 @@ namespace EventPlusAPI.Controllers
     [Route("api/[controller]")]
     public class EventoController : ControllerBase
     {
-        private IEventoService _eventoService;
+        private IEvento _eventoService;
 
-        public EventoController(IEventoService eventoService)
+        public EventoController(IEvento eventoService)
         {
             _eventoService = eventoService;
         }
 
         [HttpGet]
-        public Task<List<Evento>> GetAll()
+        public List<Evento> GetAll()
         {
             var eventos = _eventoService.GetAll();
             return eventos;

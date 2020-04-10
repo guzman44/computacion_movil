@@ -13,7 +13,7 @@ using System.Text;
 
 namespace EventPlusAPI.Services
 {
-    public class UserService : IUserService
+    public class UserService : IUser
     {
         private List<UserEntity> _users = new List<UserEntity>
         {

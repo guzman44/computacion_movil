@@ -5,23 +5,26 @@ using EventPlusAPI.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace EventPlusAPI.Services
 {
-    public class EventoService : IEventoService
+    public class EventoService : IEvento
     {
-        private readonly AppSettings _appSettings;
-        private readonly EventPlusContext _eventPlusContext;
+        
+        public readonly EventPlusContext _eventPlusContext;
 
-        public EventoService(IOptions<AppSettings> appSettings)
+
+        
+        public EventoService(EventPlusContext _eventPlusContext)
         {
-            _appSettings = appSettings.Value;
+            this._eventPlusContext = _eventPlusContext;
         }
 
-        public async Task<List<Evento>> GetAll()
+        public List<Evento> GetAll()
         {
-            return await _eventPlusContext.Evento.ToListAsync();
+            return _eventPlusContext.Evento.ToList();
         }
     }
 }

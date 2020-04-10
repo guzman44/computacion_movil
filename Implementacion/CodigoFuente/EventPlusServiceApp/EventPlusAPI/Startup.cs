@@ -4,6 +4,7 @@ using EventPlusAPI.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -48,7 +49,12 @@ namespace EventPlusAPI
                 };
             });
 
-            services.AddScoped<IUserService, UserService>();
+            
+
+            services.AddScoped<IUser, UserService>();
+            services.AddScoped<IEvento, EventoService>();
+            services.AddDbContext<EventPlusAPI.Dao.EventPlusContext>(options => options.UseSqlServer(appSettings.ConnectionDB, opt => opt.CommandTimeout(150)));
+            services.AddMvc().AddControllersAsServices();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

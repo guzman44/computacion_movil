@@ -10,9 +10,9 @@ namespace EventPlusAPI.Controllers
     [Route("api/[controller]")]
     public class UsersController : ControllerBase
     {
-        private IUserService _userService;
+        private IUser _userService;
 
-        public UsersController(IUserService userService)
+        public UsersController(IUser userService)
         {
             _userService = userService;
         }
