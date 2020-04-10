@@ -9,6 +9,48 @@ namespace EventPlusAPI.ViewModel
 {
     public class EventoViewModel
     {
+        
+    }
+
+
+    public class CreateEventoViewModel
+    {
+        public int Id { get; set; }
+        [Required]
+        public int IdLogin { get; set; }
+        [Required]
+        public string Nombre { get; set; }
+        [Required]
+        public string Descripcion { get; set; }
+        public byte[] ImagenMiniatura { get; set; }
+        [Required]
+        public DateTime FechaInicio { get; set; }
+        [Required]
+        public DateTime FechaFin { get; set; }
+        [Required]
+        public int IdTipo { get; set; }
+    }
+
+    public class UpdateEventoViewModel
+    {
+        public int Id { get; set; }
+        [Required]
+        public int IdLogin { get; set; }
+        [Required]
+        public string Nombre { get; set; }
+        [Required]
+        public string Descripcion { get; set; }
+        public byte[] ImagenMiniatura { get; set; }
+        [Required]
+        public DateTime FechaInicio { get; set; }
+        [Required]
+        public DateTime FechaFin { get; set; }
+        [Required]
+        public int IdTipo { get; set; }
+    }
+
+    public class AllHistoryEventoViewModel
+    {
         public int Id { get; set; }
         [Required]
         public int IdLogin { get; set; }
@@ -24,10 +66,144 @@ namespace EventPlusAPI.ViewModel
         [Required]
         public int IdTipo { get; set; }
         public string Tipo { get; set; }
+        public string NombreUsuario { get; set; }
+        public Boolean Like { get; set; }
+        public int Likes { get; set; }
+        public DateTime FechaRegistro { get; set; }
+    }
+
+
+    public class AllEventoViewModel
+    {
+        public int Id { get; set; }
+        [Required]
+        public int IdLogin { get; set; }
+        [Required]
+        public string Nombre { get; set; }
+        [Required]
+        public string Descripcion { get; set; }
+        public byte[] ImagenMiniatura { get; set; }
+        [Required]
+        public DateTime FechaInicio { get; set; }
+        [Required]
+        public DateTime FechaFin { get; set; }
+        [Required]
+        public int IdTipo { get; set; }
+        public string Tipo { get; set; }
+        public string NombreUsuario { get; set; }
+        public Boolean Like { get; set; }
+        public int Likes { get; set; }
+        public DateTime FechaRegistro { get; set; }
 
         public List<Galeria> Galeria { get; set; }
         public List<Localizacion> Localizacion { get; set; }
         public List<Publicaciones> Publicaciones { get; set; }
+    }
+
+    public class GalleryEventoViewModel
+    {
+        public int Id { get; set; }
+        [Required]
+        public int IdLogin { get; set; }
+        [Required]
+        public string Nombre { get; set; }
+        [Required]
+        public string Descripcion { get; set; }
+        public byte[] ImagenMiniatura { get; set; }
+        [Required]
+        public DateTime FechaInicio { get; set; }
+        [Required]
+        public DateTime FechaFin { get; set; }
+        [Required]
+        public int IdTipo { get; set; }
+        public string Tipo { get; set; }
+        public string NombreUsuario { get; set; }
+        public Boolean Like { get; set; }
+        public int Likes { get; set; }
+        public DateTime FechaRegistro { get; set; }
+
+        public List<Galeria> Galeria { get; set; }
+    }
+    public class LocationEventoViewModel
+    {
+        public int Id { get; set; }
+        [Required]
+        public int IdLogin { get; set; }
+        [Required]
+        public string Nombre { get; set; }
+        [Required]
+        public string Descripcion { get; set; }
+        public byte[] ImagenMiniatura { get; set; }
+        [Required]
+        public DateTime FechaInicio { get; set; }
+        [Required]
+        public DateTime FechaFin { get; set; }
+        [Required]
+        public int IdTipo { get; set; }
+        public string Tipo { get; set; }
+        public string NombreUsuario { get; set; }
+        public Boolean Like { get; set; }
+        public int Likes { get; set; }
+        public DateTime FechaRegistro { get; set; }
+
+        public List<Localizacion> Localizacion { get; set; }
+    }
+
+    public class PublicationEventoViewModel
+    {
+        public int Id { get; set; }
+        [Required]
+        public int IdLogin { get; set; }
+        [Required]
+        public string Nombre { get; set; }
+        [Required]
+        public string Descripcion { get; set; }
+        public byte[] ImagenMiniatura { get; set; }
+        [Required]
+        public DateTime FechaInicio { get; set; }
+        [Required]
+        public DateTime FechaFin { get; set; }
+        [Required]
+        public int IdTipo { get; set; }
+        public string Tipo { get; set; }
+        public string NombreUsuario { get; set; }
+        public Boolean Like { get; set; }
+        public int Likes { get; set; }
+        public DateTime FechaRegistro { get; set; }
+
+        public List<Publicaciones> Publicaciones { get; set; }
+    }
+
+
+    public class CreateGalleryViewModel
+    {
+        public int Id { get; set; }
+        public int IdLogin { get; set; }
+        public byte[] Image { get; set; }
+        public int IdEvento { get; set; }
+    }
+
+
+    public class CreatePublicationViewModel
+    {
+        public int Id { get; set; }
+        public int IdLogin { get; set; }
+        public int IdEvento { get; set; }
+        public string Comentario { get; set; }
+        public DateTime FechaIngreso { get; set; }
+        public byte[] Imagen { get; set; }
+    }
+
+
+    public class CreateLocationViewModel
+    {
+        public int Id { get; set; }
+        public int IdLogin { get; set; }
+        public int IdEvento { get; set; }
+        public decimal Latitud { get; set; }
+        public decimal Longitud { get; set; }
+        public string Direccion { get; set; }
+        public string Comentario { get; set; }
     }
 
 }

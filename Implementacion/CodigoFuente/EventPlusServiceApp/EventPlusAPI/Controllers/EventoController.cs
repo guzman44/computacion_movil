@@ -25,7 +25,7 @@ namespace EventPlusAPI.Controllers
         /// </summary>
         /// <param name="model"></param>   
         [HttpPost("create")]
-        public IActionResult Create([FromBody]EventoViewModel model)
+        public IActionResult Create([FromBody]CreateEventoViewModel model)
         {
             var user = _eventoService.Create(model);
 
@@ -37,7 +37,7 @@ namespace EventPlusAPI.Controllers
         /// </summary>
         /// <param name="model"></param>   
         [HttpPut("uptade")]
-        public IActionResult Uptade([FromBody]EventoViewModel model)
+        public IActionResult Uptade([FromBody]UpdateEventoViewModel model)
         {
             var user = _eventoService.Uptade(model);
 
@@ -48,7 +48,7 @@ namespace EventPlusAPI.Controllers
         /// Listado de todos los eventos
         /// </summary>
         [HttpGet("list/{idLogin}")]
-        public List<EventoViewModel> GetAll([Required] long idLogin)
+        public List<AllHistoryEventoViewModel> GetAll([Required] long idLogin)
         {
             var eventos = _eventoService.GetAll(idLogin);
             return eventos;
@@ -58,7 +58,7 @@ namespace EventPlusAPI.Controllers
         /// Listado de todas los eventos que trae las imagenes de la galeria, publicaciones, localizacion
         /// </summary>
         [HttpGet("list/{idEvento}")]
-        public EventoViewModel GetAllEvento([Required] long idEvento)
+        public AllEventoViewModel GetAllEvento([Required] long idEvento)
         {
             var evento = _eventoService.GetAllEvento(idEvento);
             return evento;
@@ -68,18 +68,17 @@ namespace EventPlusAPI.Controllers
         /// Listado de todas las imagenes de galeria por un evento
         /// </summary>
         [HttpGet("gallery/{idEvento}")]
-        public EventoViewModel GetAllGaleriaxEvento([Required] long idEvento)
+        public GalleryEventoViewModel GetAllGaleriaxEvento([Required] long idEvento)
         {
             var evento = _eventoService.GetAllGaleriaxEvento(idEvento);
             return evento;
         }
 
-
         /// <summary>
         /// Listado de todas las publicaciones por un evento
         /// </summary>
         [HttpGet("publication/{idEvento}")]
-        public EventoViewModel GetAllPublicacionxEvento([Required] long idEvento)
+        public PublicationEventoViewModel GetAllPublicacionxEvento([Required] long idEvento)
         {
             var evento = _eventoService.GetAllPublicacionxEvento(idEvento);
             return evento;
@@ -89,10 +88,74 @@ namespace EventPlusAPI.Controllers
         /// Listado de todas las localizaciones por un evento
         /// </summary>
         [HttpGet("location/{idEvento}")]
-        public EventoViewModel GetAllLocalizacionxEvento([Required] long idEvento)
+        public LocationEventoViewModel GetAllLocalizacionxEvento([Required] long idEvento)
         {
             var evento = _eventoService.GetAllLocalizacionxEvento(idEvento);
             return evento;
         }
+    
+
+        /// <summary>
+        /// Cargar las imagenes de la galeria x una
+        /// </summary>
+        /// <param name="model"></param>   
+        [HttpPost("gallery/id")]
+        public IActionResult CreateGallery([FromBody]CreateGalleryViewModel model)
+        {
+            var user = _eventoService.CreateGallery(model);
+
+            return Ok(user);
+        }
+
+        /// <summary>
+        /// Cargar las imagenes de la galeria x varias
+        /// </summary>
+        /// <param name="model"></param>   
+        [HttpPost("gallery/all")]
+        public IActionResult CreateGalleryAll([FromBody]List<CreateGalleryViewModel> model)
+        {
+            var user = _eventoService.CreateGalleryAll(model);
+
+            return Ok(user);
+        }
+
+        /// <summary>
+        /// Crear una publicacion
+        /// </summary>
+        /// <param name="model"></param>   
+        [HttpPost("publication")]
+        public IActionResult CreatePublication([FromBody]CreatePublicationViewModel model)
+        {
+            var user = _eventoService.CreatePublication(model);
+
+            return Ok(user);
+        }
+
+        /// <summary>
+        /// Creacion de una localizacion x una
+        /// </summary>
+        /// <param name="model"></param>   
+        [HttpPost("location")]
+        public IActionResult CreateLocation([FromBody]CreateLocationViewModel model)
+        {
+            var user = _eventoService.CreateLocation(model);
+
+            return Ok(user);
+        }
+
+        /// <summary>
+        /// Creacion de una localizacion x varias
+        /// </summary>
+        /// <param name="model"></param>   
+        [HttpPost("location")]
+        public IActionResult CreateLocationAll([FromBody]List<CreateLocationViewModel> model)
+        {
+            var user = _eventoService.CreateLocationAll(model);
+
+            return Ok(user);
+        }
+
+
+
     }
 }

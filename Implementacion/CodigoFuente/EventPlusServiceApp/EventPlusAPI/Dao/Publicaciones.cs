@@ -11,7 +11,7 @@ namespace EventPlusAPI.Dao
         public string Comentario { get; set; }
         public DateTime FechaIngreso { get; set; }
         public byte[] Imagen { get; set; }
-        public Boolean Activo { get; set; }
+        public string Activo { get; set; }
 
         public virtual Evento IdEventoNavigation { get; set; }
         public virtual Login IdLoginNavigation { get; set; }

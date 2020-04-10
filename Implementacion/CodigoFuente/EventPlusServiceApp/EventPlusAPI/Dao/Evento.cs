@@ -9,9 +9,9 @@ namespace EventPlusAPI.Dao
         {
             Categoria = new HashSet<Categoria>();
             EventoUsuario = new HashSet<EventoUsuario>();
+            Galeria = new HashSet<Galeria>();
             Localizacion = new HashSet<Localizacion>();
             Publicaciones = new HashSet<Publicaciones>();
-            Galeria = new HashSet<Galeria>();
         }
 
         public int Id { get; set; }
@@ -21,13 +21,14 @@ namespace EventPlusAPI.Dao
         public DateTime FechaInicio { get; set; }
         public DateTime FechaFin { get; set; }
         public string Activo { get; set; }
-        public int IdTipo { get; set; }        
+        public int IdTipo { get; set; }
+        public DateTime FechaRegistro { get; set; }
 
+        public virtual ParametrizacionObjetos IdTipoNavigation { get; set; }
         public virtual ICollection<Categoria> Categoria { get; set; }
         public virtual ICollection<EventoUsuario> EventoUsuario { get; set; }
+        public virtual ICollection<Galeria> Galeria { get; set; }
         public virtual ICollection<Localizacion> Localizacion { get; set; }
         public virtual ICollection<Publicaciones> Publicaciones { get; set; }
-        public virtual ParametrizacionObjetos IdTipoNavigation { get; set; }
-        public virtual ICollection<Galeria> Galeria { get; set; }
     }
 }

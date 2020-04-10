@@ -18,6 +18,7 @@ namespace EventPlusAPI.Dao
         public string Password { get; set; }
         public string Email { get; set; }
         public string Activo { get; set; }
+        public DateTime FechaRegistro { get; set; }
 
         public virtual ICollection<Categoria> Categoria { get; set; }
         public virtual ICollection<EventoUsuario> EventoUsuario { get; set; }

@@ -13,7 +13,7 @@ namespace EventPlusAPI.Dao
         public int Id { get; set; }
         public string Nombre { get; set; }
         public string Valor { get; set; }
-        public Boolean Activo { get; set; }
+        public string Activo { get; set; }
 
         public virtual ICollection<Evento> Evento { get; set; }
     }

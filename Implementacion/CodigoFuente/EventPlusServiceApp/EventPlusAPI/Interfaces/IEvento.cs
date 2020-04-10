@@ -6,12 +6,17 @@ namespace EventPlusAPI.Interfaces
 {
     public interface IEvento
     {
-        List<EventoViewModel> GetAll(long idLogin);
-        ResponseViewModel Create(EventoViewModel model);
-        ResponseViewModel Uptade(EventoViewModel model);
-        EventoViewModel GetAllEvento(long idEvento);
-        EventoViewModel GetAllGaleriaxEvento(long idEvento);
-        EventoViewModel GetAllPublicacionxEvento(long idEvento);
-        EventoViewModel GetAllLocalizacionxEvento(long idEvento);
+        List<AllHistoryEventoViewModel> GetAll(long idLogin);
+        ResponseViewModel Create(CreateEventoViewModel model);
+        ResponseViewModel Uptade(UpdateEventoViewModel model);
+        AllEventoViewModel GetAllEvento(long idEvento);
+        GalleryEventoViewModel GetAllGaleriaxEvento(long idEvento);
+        PublicationEventoViewModel GetAllPublicacionxEvento(long idEvento);
+        LocationEventoViewModel GetAllLocalizacionxEvento(long idEvento);
+        ResponseViewModel CreateGallery(CreateGalleryViewModel model);
+        ResponseViewModel CreateGalleryAll(List<CreateGalleryViewModel> model);
+        ResponseViewModel CreatePublication(CreatePublicationViewModel model);
+        ResponseViewModel CreateLocation(CreateLocationViewModel model);
+        ResponseViewModel CreateLocationAll(List<CreateLocationViewModel> model);
     }
 }

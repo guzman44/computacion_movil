@@ -25,7 +25,7 @@ namespace EventPlusAPI.Dao
         public virtual DbSet<Login> Login { get; set; }
         public virtual DbSet<ParametrizacionObjetos> ParametrizacionObjetos { get; set; }
         public virtual DbSet<Publicaciones> Publicaciones { get; set; }
-        public virtual DbSet<Usuario> Usuario { get; set; }        
+        public virtual DbSet<Usuario> Usuario { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -114,6 +114,12 @@ namespace EventPlusAPI.Dao
                     .HasColumnType("datetime")
                     .HasComment("Fecha de Inicio del evento");
 
+                entity.Property(e => e.FechaRegistro)
+                    .HasColumnType("datetime")
+                    .HasComment("Fecha de Registro");
+
+                entity.Property(e => e.IdTipo).HasComment("El tipo de evento asociado a la parametrizacion de objetos en CAT_EVENTO");
+
                 entity.Property(e => e.Imagen)
                     .HasColumnType("image")
                     .HasComment("Imagen en miniatura");
@@ -168,6 +174,10 @@ namespace EventPlusAPI.Dao
 
                 entity.Property(e => e.Id).HasComment("Id de la tabla");
 
+                entity.Property(e => e.FechaRegistro)
+                    .HasColumnType("datetime")
+                    .HasComment("Fecha Registro");
+
                 entity.Property(e => e.IdEvento).HasComment("Llave Foranea");
 
                 entity.Property(e => e.Image)
@@ -209,6 +219,10 @@ namespace EventPlusAPI.Dao
                     .HasMaxLength(100)
                     .IsUnicode(false)
                     .HasComment("Descripcion de la ubicacion o la dirección");
+
+                entity.Property(e => e.FechaRegistro)
+                    .HasColumnType("datetime")
+                    .HasComment("Fecha de Registro");
 
                 entity.Property(e => e.IdEvento)
                     .HasColumnName("Id_Evento")
@@ -254,9 +268,13 @@ Longitud de la georeferenciación de googlemaps");
 
                 entity.Property(e => e.Email)
                     .IsRequired()
-                    .HasMaxLength(20)
+                    .HasMaxLength(100)
                     .IsUnicode(false)
                     .HasComment("Email del usuario");
+
+                entity.Property(e => e.FechaRegistro)
+                    .HasColumnType("datetime")
+                    .HasComment("Fecha Registro");
 
                 entity.Property(e => e.Password)
                     .IsRequired()
@@ -283,7 +301,7 @@ Longitud de la georeferenciación de googlemaps");
                     .IsUnicode(false)
                     .IsFixedLength()
                     .HasDefaultValueSql("((1))")
-                    .HasComment("Activo en la lista");
+                    .HasComment("Activo en la lista.");
 
                 entity.Property(e => e.Nombre)
                     .HasMaxLength(50)
@@ -365,7 +383,7 @@ Longitud de la georeferenciación de googlemaps");
 
                 entity.Property(e => e.Apellidos)
                     .IsRequired()
-                    .HasMaxLength(30)
+                    .HasMaxLength(50)
                     .IsUnicode(false)
                     .HasComment("Apellidos  de la persona o usuario");
 
@@ -379,7 +397,7 @@ Longitud de la georeferenciación de googlemaps");
 
                 entity.Property(e => e.Nombres)
                     .IsRequired()
-                    .HasMaxLength(30)
+                    .HasMaxLength(50)
                     .IsUnicode(false)
                     .HasComment("Nombres de la persona o usuario");
 
