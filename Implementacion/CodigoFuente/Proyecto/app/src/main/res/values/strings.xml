@@ -18,7 +18,8 @@
     <string name="event_description">"Descripción del evento"</string>
     <string name="event_category">"Categoría"</string>
     <string name="event_thumbnail">"Miniatura"</string>
-    <string name="event_save">"Crear evento"</string>
+    <string name="event_save">"Crear"</string>
+    <string name="cancel">"Cancelar"</string>
 
 
     <string name="profile_user">"Usuario"</string>

@@ -35,7 +35,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Evento"
+                android:textColor="@color/black"
                 android:textSize="36sp"
+                android:layout_marginTop="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -56,7 +58,6 @@
                 android:id="@+id/tvDescription"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:text="@string/event_description"
                 app:layout_constraintEnd_toEndOf="@+id/etTitulo"
                 app:layout_constraintStart_toStartOf="@+id/etTitulo"
@@ -96,7 +97,6 @@
                 android:id="@+id/tvCategory"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:text="@string/event_category"
                 app:layout_constraintEnd_toEndOf="@+id/etDescription"
                 app:layout_constraintStart_toStartOf="@+id/etDescription"
@@ -106,7 +106,6 @@
                 android:id="@+id/tvMiniatura"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:text="@string/event_thumbnail"
                 app:layout_constraintEnd_toEndOf="@+id/etCategory"
                 app:layout_constraintStart_toStartOf="@+id/etCategory"
@@ -125,31 +124,40 @@
                 android:paddingRight="10dp"
                 android:src="@drawable/img_base"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvMiniatura" />
 
             <Button
-                android:id="@+id/btnSave"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="141dp"
-                android:layout_marginTop="36dp"
-                android:layout_marginEnd="145dp"
-                android:text="@string/event_save"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnLoadImage" />
-
-            <Button
                 android:id="@+id/btnLoadImage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
                 android:text="Cargar imagen"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/miniatura" />
+
+            <Button
+                android:id="@+id/btnSave"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="72dp"
+                android:layout_marginTop="40dp"
+                android:text="@string/event_save"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnLoadImage" />
+
+            <Button
+                android:id="@+id/btnCancel"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:text="@string/cancel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.29"
+                app:layout_constraintStart_toEndOf="@+id/btnSave"
+                app:layout_constraintTop_toTopOf="@+id/btnSave" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
