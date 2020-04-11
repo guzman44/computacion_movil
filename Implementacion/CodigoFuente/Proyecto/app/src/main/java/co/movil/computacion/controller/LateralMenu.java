@@ -3,34 +3,26 @@ package co.movil.computacion.controller;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 
-import java.io.FileNotFoundException;
-
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
 import co.movil.computacion.R;
 import co.movil.computacion.controller.login.LoginActivity;
-import co.movil.computacion.model.User;
 
-public class Configuration extends AppCompatActivity {
+public class LateralMenu extends AppCompatActivity {
 
-    private Button btnSave, btnCancel;
-    View view ;
+    LinearLayout menuProfile;
+    LinearLayout menuConfig;
+    LinearLayout menuExit;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_configuration);
+        setContentView(R.layout.activity_upper_menu);
 
         Intent intent = getIntent();
         String optionMenu = intent.getStringExtra("event");
@@ -40,40 +32,46 @@ public class Configuration extends AppCompatActivity {
             fragmentDemo.activity(optionMenu);
         }
 
-        btnSave = findViewById(R.id.btnSaveConfig);
-        btnCancel = findViewById(R.id.btnCancelConfig);
+        menuProfile = (LinearLayout) findViewById(R.id.menu_profile);
+        menuConfig = (LinearLayout) findViewById(R.id.menu_config);
+        menuExit = (LinearLayout) findViewById(R.id.menu_exit);
 
-        btnCancel.setOnClickListener( new Button.OnClickListener(){
-
+        menuProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent( v.getContext(), Home.class );
-                startActivity( intent );
+                Intent intent = new Intent( v.getContext(), Profile.class );
+                intent.putExtra("event", "profile");
+                startActivity(intent);
             }
         });
 
-        btnSave.setOnClickListener( new Button.OnClickListener(){
-
+        menuConfig.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                view = v;
+                Intent intent = new Intent( v.getContext(), Configuration.class );
+                intent.putExtra("event", "config");
+                startActivity(intent);
+            }
+        });
 
-                new AlertDialog.Builder(v.getContext())
-                        .setTitle("Confirmar Cambio Clave")
+        menuExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(LateralMenu.this)
+                        .setTitle("Cerrar Sesion")
                         .setCancelable(false)
-                        .setMessage("¿Desea cambiar la clave actual, lo cual el sistema debe loguearse nuevamente?")
+                        .setMessage("¿Desea salir del sistema?")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                Intent intent = new Intent(view.getContext(), LoginActivity.class );
+
+                                Intent intent = new Intent( LateralMenu.this, LoginActivity.class );
                                 startActivity(intent);
                             }
                         })
                         .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                Intent intent = new Intent( view.getContext(), Home.class );
-                                startActivity( intent );
                             }
                         })
                         .show();

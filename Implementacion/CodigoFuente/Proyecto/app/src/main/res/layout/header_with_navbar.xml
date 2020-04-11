@@ -11,7 +11,9 @@
     android:layout_gravity="right"
     tools:openDrawer="start">
 
-    <include layout="@layout/activity_header"/>
+    <include layout="@layout/activity_home"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
@@ -20,6 +22,7 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header"
+        android:foregroundGravity="right"
         app:menu="@menu/nav_menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

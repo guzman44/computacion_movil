@@ -37,6 +37,14 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        Intent intent = getIntent();
+        String optionMenu = intent.getStringExtra("event");
+
+        if(optionMenu != null){
+            MenuFragment fragmentDemo = (MenuFragment)getSupportFragmentManager().findFragmentById(R.id.menuFromHome);
+            fragmentDemo.activity(optionMenu);
+        }
+
         etName = (EditText)findViewById(R.id.etName);
         etLastName = (EditText)findViewById(R.id.etLastname);
         etUsername = (EditText)findViewById(R.id.etUsername);
