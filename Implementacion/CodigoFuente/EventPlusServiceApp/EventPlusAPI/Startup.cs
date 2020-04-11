@@ -27,7 +27,13 @@ namespace EventPlusAPI
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors();
+            //services.AddCors();
+
+            services.AddCors(c =>
+            {
+                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod());
+            });
+
             services.AddControllers();
 
             var appSettingsSection = Configuration.GetSection("AppSettings");

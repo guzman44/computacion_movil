@@ -7,6 +7,7 @@ import android.util.Log;
 
 import co.movil.Helper.RetrofitClientInstance;
 import co.movil.computacion.interfaces.IAuthentication;
+import co.movil.computacion.model.RequestAuthentication;
 import co.movil.computacion.model.UserTokenViewModel;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -21,20 +22,26 @@ public class Testing extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_testing);
 
-        RequestBody requestBody = new MultipartBody.Builder()
-                .setType(MultipartBody.FORM)
+       /* RequestBody requestBody = new MultipartBody.Builder()
+                .setType( )
                 .addFormDataPart("UserName", "mguzman")
                 .addFormDataPart("Password", "123")
-                .build();
+                .build();*/
+
+        RequestAuthentication authentication = new RequestAuthentication();
+        authentication.setUsername("mguzman");
+        authentication.setPassword("123");
+
 
         IAuthentication service = RetrofitClientInstance.getRetrofitInstance().create(IAuthentication.class);
-        Call<UserTokenViewModel> call = service.getUserProfile(requestBody);
+        Call<UserTokenViewModel> call = service.getUserProfile("application/json",authentication);
 
         call.enqueue(new Callback<UserTokenViewModel>() {
 
             @Override
             public void onResponse(Call<UserTokenViewModel> call, Response<UserTokenViewModel> response) {
-                response.body();
+                UserTokenViewModel result =  response.body();
+                int llego = 1;
             }
 
             @Override

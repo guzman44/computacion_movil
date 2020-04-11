@@ -2,24 +2,25 @@ package co.movil.computacion.model;
 
 public class RequestAuthentication {
 
-    private String username;
-    private String password;
-
     public String getUsername() {
-        return username;
+        return Username;
     }
 
     public void setUsername(String username) {
-        username = username;
+        Username = username;
     }
 
     public String getPassword() {
-        return password;
+        return Password;
     }
 
     public void setPassword(String password) {
-        password = password;
+        Password = password;
     }
+
+    private String Username;
+    private String Password;
+
 
 
 }

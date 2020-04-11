@@ -8,25 +8,19 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface IAuthentication {
 
 
+   // @Headers("Content-Type: application/json")
+    @POST("api/Authentication/login")
+    //Call<UserTokenViewModel> getUserProfile(@Body RequestAuthentication body);
+   Call<UserTokenViewModel> getUserProfile(@Header("Content-Type") String content_type, @Body RequestAuthentication body);
 
-    @POST("api/Autenticacion/login")
-    Call<UserTokenViewModel> getUserProfile(@Body RequestBody body);
-    //Call<List<UserTokenViewModel>> getUserProfile(@Path("Username") String user,);
-
-    @POST("api/v1/Autenticacion/Login")
-    Call<UserTokenViewModel> getToken(
-            @Body RequestAuthentication body
-    );
 
 }
 
-
-/*
-
-*/
