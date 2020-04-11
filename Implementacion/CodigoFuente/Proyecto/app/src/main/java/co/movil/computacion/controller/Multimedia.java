@@ -11,11 +11,12 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class Multimedia extends AppCompatActivity {
     static final int REQUEST_IMAGE_CAPTURE = 1;
     ImageView imagen;
-    Button btnGrid;
+    TextView btnGrid;
 
 
     @Override
@@ -25,8 +26,8 @@ public class Multimedia extends AppCompatActivity {
 
         Intent intent = getIntent();
         String optionMenu = intent.getStringExtra("event");
-        imagen= (ImageView) findViewById(R.id.idImagen);
-        btnGrid = (Button) findViewById(R.id.btnGrid);
+        imagen= (ImageView) findViewById(R.id.ivPostPic);
+        btnGrid = (TextView) findViewById(R.id.btnGrid);
 
         if(optionMenu != null){
             MenuFragment fragmentDemo = (MenuFragment)

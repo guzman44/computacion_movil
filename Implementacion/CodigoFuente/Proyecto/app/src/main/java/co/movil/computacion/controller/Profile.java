@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.io.FileNotFoundException;
 
@@ -29,7 +30,7 @@ public class Profile extends AppCompatActivity {
     private EditText etLastName;
     private EditText etUsername;
     private EditText etEmail;
-    private Button btnLoadImage;
+    private TextView btnLoadImage;
     private Button btnSave;
 
     @Override
@@ -37,20 +38,12 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        Intent intent = getIntent();
-        String optionMenu = intent.getStringExtra("event");
-
-        if(optionMenu != null){
-            MenuFragment fragmentDemo = (MenuFragment)getSupportFragmentManager().findFragmentById(R.id.menuFromHome);
-            fragmentDemo.activity(optionMenu);
-        }
-
         etName = (EditText)findViewById(R.id.etName);
         etLastName = (EditText)findViewById(R.id.etLastname);
         etUsername = (EditText)findViewById(R.id.etUsername);
         etEmail = (EditText)findViewById(R.id.etEmail);
         ivProfilePic = (ImageView)findViewById(R.id.ivuserprofile);
-        btnLoadImage = (Button)findViewById(R.id.btnLoadPicture);
+        btnLoadImage = (TextView) findViewById(R.id.btnLoadPicture);
         btnSave = (Button)findViewById(R.id.btnSaveProfile);
 
         //load user data
