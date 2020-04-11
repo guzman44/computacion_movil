@@ -158,23 +158,11 @@
                 android:id="@+id/btnSaveProfile"
                 android:layout_width="120dp"
                 android:layout_height="40dp"
-                android:layout_marginStart="72dp"
                 android:layout_marginTop="40dp"
                 android:text="@string/profile_save"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.013"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btnLoadPicture" />
-
-            <Button
-                android:id="@+id/btnCancelProfile"
-                android:layout_width="120dp"
-                android:layout_height="40dp"
-                android:text="@string/cancel"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.29"
-                app:layout_constraintStart_toEndOf="@+id/btnSaveProfile"
-                app:layout_constraintTop_toTopOf="@+id/btnSaveProfile" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
