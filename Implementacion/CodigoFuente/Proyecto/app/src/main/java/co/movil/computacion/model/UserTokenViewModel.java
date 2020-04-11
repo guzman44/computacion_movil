@@ -11,7 +11,7 @@ public class UserTokenViewModel
     private String username;
     private String password;
     private String token;
-    private byte[] image;
+    private String image;
 
     public int getId() {
         return id;
@@ -69,11 +69,11 @@ public class UserTokenViewModel
         this.token = token;
     }
 
-    public byte[] getImage() {
+    public String  getImage() {
         return image;
     }
 
-    public void setImage(byte[] image) {
+    public void setImage(String image) {
         this.image = image;
     }
 

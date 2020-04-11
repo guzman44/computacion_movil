@@ -33,6 +33,7 @@ public class TestRest extends AppCompatActivity {
 
 
 
+/*
 
         RequestBody requestBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
@@ -55,6 +56,7 @@ public class TestRest extends AppCompatActivity {
 
             }
         });
+*/
 
 
 
