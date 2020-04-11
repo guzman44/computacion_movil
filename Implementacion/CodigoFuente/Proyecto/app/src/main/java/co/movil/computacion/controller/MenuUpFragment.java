@@ -1,32 +1,25 @@
 package co.movil.computacion.controller;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.net.Uri;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.DownloadListener;
-import android.webkit.WebView;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import co.movil.computacion.R;
-import co.movil.computacion.controller.login.LoginActivity;
 
 public class MenuUpFragment extends Fragment {
 
-    ImageView ivProfile, ivCloseSesion, ivConfig;
+    ImageView ivMenu;
     private Menu menu;
 
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //   someTitle = getArguments().getString("someTitle", "");
     }
 
 
@@ -35,7 +28,14 @@ public class MenuUpFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.activity_header, container, false);
 
-        ivProfile = (ImageView) view.findViewById(R.id.ivProfile);
+        ivMenu = (ImageView) view.findViewById(R.id.ivMenu);
+
+        ivMenu.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                
+            }
+        });
+       /* ivProfile = (ImageView) view.findViewById(R.id.ivProfile);
         ivCloseSesion = (ImageView) view.findViewById(R.id.ivCloseSesion);
         ivConfig = (ImageView) view.findViewById(R.id.ivConfig);
 
@@ -77,6 +77,8 @@ public class MenuUpFragment extends Fragment {
                         .show();
             }
         });
+
+        */
         return view;
     }
 

@@ -9,6 +9,7 @@
         android:name="co.movil.computacion.controller.MenuUpFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="0.05"
         android:layout_marginBottom="0dp"/>
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
@@ -16,8 +17,8 @@
         android:id="@+id/map"
         class="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0.8"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.9"
         tools:context="co.movil.computacion.controller.Map" />
 
     <fragment
@@ -25,6 +26,7 @@
         android:name="co.movil.computacion.controller.MenuFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="0.05"
         android:layout_marginBottom="0dp"/>
 
 </LinearLayout>

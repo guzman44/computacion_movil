@@ -44,6 +44,7 @@
 
 
     <string name="menu1_color">"#FFF"</string>
+    <string name="men1_perfil">Perfil</string>
     <string name="menul_configuracion">"Configuración"</string>
     <string name="menu1_close_session">"Cerrar sesión"</string>
 
@@ -60,4 +61,5 @@
 
 
     <string name="title_activity_test_map">Map</string>
+    <string name="event_detail">Ver detalles</string>
 </resources>
