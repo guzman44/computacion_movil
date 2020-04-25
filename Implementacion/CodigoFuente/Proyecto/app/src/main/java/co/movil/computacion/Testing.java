@@ -1,32 +1,39 @@
 package co.movil.computacion;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
+import android.os.LocaleList;
 import android.util.Log;
+
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 import co.movil.Helper.RetrofitClientInstance;
 import co.movil.computacion.interfaces.IAuthentication;
 import co.movil.computacion.model.RequestAuthentication;
 import co.movil.computacion.model.UserTokenViewModel;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Testing extends AppCompatActivity {
 
+    private FusedLocationProviderClient fuseLocationProviderClient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_testing);
 
-       /* RequestBody requestBody = new MultipartBody.Builder()
-                .setType( )
-                .addFormDataPart("UserName", "mguzman")
-                .addFormDataPart("Password", "123")
-                .build();*/
+
+
 
         RequestAuthentication authentication = new RequestAuthentication();
         authentication.setUsername("mguzman");
