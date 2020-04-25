@@ -24,7 +24,7 @@ import co.movil.computacion.model.User;
 
 public class Configuration extends AppCompatActivity {
 
-    private Button btnSave, btnCancel;
+    private Button btnSave;
     View view ;
 
     @Override
@@ -32,25 +32,7 @@ public class Configuration extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuration);
 
-        Intent intent = getIntent();
-        String optionMenu = intent.getStringExtra("event");
-
-        if(optionMenu != null){
-            MenuFragment fragmentDemo = (MenuFragment)getSupportFragmentManager().findFragmentById(R.id.menuFromHome);
-            fragmentDemo.activity(optionMenu);
-        }
-
         btnSave = findViewById(R.id.btnSaveConfig);
-        btnCancel = findViewById(R.id.btnCancelConfig);
-
-        btnCancel.setOnClickListener( new Button.OnClickListener(){
-
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent( v.getContext(), Home.class );
-                startActivity( intent );
-            }
-        });
 
         btnSave.setOnClickListener( new Button.OnClickListener(){
 

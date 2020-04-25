@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".controller.Header">
+    android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/ivLogo"
@@ -23,6 +22,6 @@
         android:layout_marginEnd="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/menu" />
+        app:srcCompat="@drawable/open_menu"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

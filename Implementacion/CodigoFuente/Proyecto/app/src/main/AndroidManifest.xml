@@ -31,10 +31,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity android:name=".Testing">
-
         </activity>
         <activity android:name=".TestRest">
-
         </activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -53,7 +51,6 @@
             android:label="@string/title_activity_test_map" />
         <activity android:name=".controller.DetailEvent" />
         <activity android:name=".controller.Feed" />
-        <activity android:name=".controller.Header" />
         <activity android:name=".controller.LateralMenu" />
         <activity android:name=".controller.Multimedia" />
         <activity android:name=".controller.Event" />

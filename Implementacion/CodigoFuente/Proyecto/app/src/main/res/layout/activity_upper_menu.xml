@@ -29,11 +29,12 @@
             android:layout_height="wrap_content"
             android:paddingTop="10dp"
             android:id="@+id/menu_profile"
+            android:textAlignment="center"
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
@@ -48,7 +49,7 @@
                 android:layout_marginTop="20dp"
                 android:gravity="center"
                 android:text="@string/menu_profile"
-                android:textSize="15sp"/>
+                android:textSize="16sp" />
 
         </LinearLayout>
 
@@ -60,12 +61,12 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
-                android:src="@drawable/config"
+                android:src="@drawable/refresh"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -76,20 +77,20 @@
                 android:layout_marginTop="20dp"
                 android:gravity="center"
                 android:text="@string/menul_configuracion"
-                android:textSize="15sp"/>
+                android:textSize="16sp"/>
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="20dp"
             android:id="@+id/menu_exit"
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
@@ -104,7 +105,7 @@
                 android:layout_marginTop="20dp"
                 android:gravity="center"
                 android:text="@string/menu1_close_session"
-                android:textSize="15sp"/>
+                android:textSize="16sp"/>
 
         </LinearLayout>
 

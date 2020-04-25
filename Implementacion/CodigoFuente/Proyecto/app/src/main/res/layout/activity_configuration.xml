@@ -8,13 +8,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include
-        layout="@layout/activity_header"
+    <fragment
+        android:id="@+id/menuUpFromHome"
+        android:name="co.movil.computacion.controller.MenuUpFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        ></include>
-
-
+        android:layout_marginBottom="0dp">
+    </fragment>
 
 
     <ScrollView
@@ -31,29 +31,18 @@
 
 
             <TextView
-                android:id="@+id/title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="Cambio Contraseña"
-                android:textSize="20dp"
-                app:layout_constraintBottom_toTopOf="@+id/tvUser"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
                 android:id="@+id/tvUser"
                 android:layout_width="0dp"
                 android:layout_height="29dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="56dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"
+                android:textSize="16sp"
                 android:text="@string/configuration_user"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/title" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
                 android:id="@+id/etPassword"
@@ -61,9 +50,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:ems="10"
+                android:textSize="16sp"
                 android:inputType="textPassword"
-                android:textSize="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -75,6 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
+                android:textSize="16sp"
                 android:text="@string/configuration_password"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
@@ -87,6 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
+                android:textSize="16sp"
                 android:text="@string/configuration_password_new"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
@@ -99,9 +89,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:ems="10"
+                android:textSize="16sp"
                 android:inputType="textPassword"
-                android:textSize="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -113,6 +102,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
+                android:textSize="16sp"
                 android:text="@string/configuration_password_repeat"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
@@ -125,9 +115,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:ems="10"
+                android:textSize="16sp"
                 android:inputType="textPassword"
-                android:textSize="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -139,34 +128,24 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:ems="10"
+                android:textSize="16sp"
                 android:inputType="text"
                 android:text="Marco Guzman"
-                android:textSize="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvUser" />
 
             <Button
-                android:id="@+id/btnCancelConfig"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="52dp"
-                android:text="@string/configuration_cancel"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.663"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etPasswordRepeat" />
-
-            <Button
                 android:id="@+id/btnSaveConfig"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="52dp"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="36dp"
                 android:text="@string/configuration_save"
+                android:background="#002d56"
+                android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.303"
+                app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/etPasswordRepeat" />
 

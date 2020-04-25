@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.io.FileNotFoundException;
 
@@ -20,7 +21,7 @@ public class Event extends AppCompatActivity {
 
     ModelEvent eventObject;
     ImageView targetImage;
-    Button buttonLoadImage;
+    TextView buttonLoadImage;
     Button buttonSave;
     EditText etTitle;
     EditText etDescription;
@@ -44,7 +45,7 @@ public class Event extends AppCompatActivity {
         }
 
         buttonSave = (Button)findViewById(R.id.btnSave);
-        buttonLoadImage = (Button)findViewById(R.id.btnLoadImage);
+        buttonLoadImage = (TextView)findViewById(R.id.btnLoadImage);
         targetImage = (ImageView)findViewById(R.id.miniatura);
 
         buttonLoadImage.setOnClickListener(new Button.OnClickListener(){

@@ -27,12 +27,12 @@
     <string name="profile_lastname">"Apellidos"</string>
     <string name="profile_email">"Correo electónico"</string>
     <string name="profile_image">"Imagen perfil"</string>
-    <string name="profile_loadimage">"Cargar foto"</string>
+    <string name="profile_loadimage">"Cambiar foto de perfil"</string>
     <string name="profile_save">"Guardar"</string>
 
     <string name="configuration_user">"Nombre usuario"</string>
     <string name="configuration_password">"Clave actual"</string>
-    <string name="configuration_password_new">"Clave nueva"</string>
+    <string name="configuration_password_new">"Nueva clave"</string>
     <string name="configuration_password_repeat">"Confirmar clave"</string>
     <string name="configuration_save">"Guardar"</string>
     <string name="configuration_cancel">"Cancelar"</string>
@@ -46,7 +46,7 @@
 
     <string name="menu1_color">"#FFF"</string>
     <string name="men1_perfil">Perfil</string>
-    <string name="menul_configuracion">"Configuración"</string>
+    <string name="menul_configuracion">"Cambiar clave"</string>
     <string name="menu1_close_session">"Cerrar sesión"</string>
 
     <string name="no_account">¿No tienes cuenta? </string>
@@ -59,8 +59,12 @@
 
     <string name="multimedia_title">"Multimedia"</string>
     <string name="multimedia_foto">"Foto Seleccionada"</string>
+    <string name="multimedia_buton">"Seleccionar foto"</string>
+    <string name="multimedia_post">"Escribir comentario"</string>
+    <string name="multimedia_save">"Publicar"</string>
 
 
     <string name="title_activity_test_map">Map</string>
     <string name="event_detail">Ver detalles</string>
+    <string name="cargar_imagen">Cargar imagen de evento</string>
 </resources>

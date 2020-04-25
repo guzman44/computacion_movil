@@ -8,13 +8,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include
-        layout="@layout/activity_header"
+    <fragment
+        android:id="@+id/menuUpFromHome"
+        android:name="co.movil.computacion.controller.MenuUpFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        ></include>
-
-
+        android:layout_marginBottom="0dp">
+    </fragment>
 
 
     <ScrollView
@@ -31,8 +31,8 @@
 
             <ImageView
                 android:id="@+id/ivuserprofile"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
                 android:layout_marginTop="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
@@ -42,15 +42,14 @@
 
             <TextView
                 android:id="@+id/tvName"
-                android:layout_width="0dp"
+                android:layout_width="371dp"
                 android:layout_height="29dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginTop="20dp"
+                android:textSize="16sp"
                 android:text="@string/profile_name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ivuserprofile" />
+                app:layout_constraintTop_toBottomOf="@+id/btnLoadPicture" />
 
             <EditText
                 android:id="@+id/etName"
@@ -58,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:ems="10"
+                android:textSize="16sp"
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -70,6 +69,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
+                android:textSize="16sp"
                 android:text="@string/profile_lastname"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -81,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:ems="10"
+                android:textSize="16sp"
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -93,6 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
+                android:textSize="16sp"
                 android:text="@string/profile_user"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -104,7 +105,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:ems="10"
+                android:textSize="16sp"
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -127,42 +128,36 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:ems="10"
+                android:textSize="16sp"
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
 
             <TextView
-                android:id="@+id/tvProfilePic"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:text="@string/profile_image"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etEmail" />
-
-            <Button
                 android:id="@+id/btnLoadPicture"
-                android:layout_width="120dp"
+                android:layout_width="wrap_content"
                 android:layout_height="40dp"
+                android:layout_marginTop="16sp"
+                android:textSize="16sp"
                 android:text="@string/profile_loadimage"
+                android:textAlignment="center"
+                android:textColor="#007fff"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvProfilePic" />
+                app:layout_constraintTop_toBottomOf="@+id/ivuserprofile" />
 
             <Button
                 android:id="@+id/btnSaveProfile"
                 android:layout_width="120dp"
                 android:layout_height="40dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="36dp"
+                android:background="#002d56"
+                android:textColor="@color/white"
                 android:text="@string/profile_save"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnLoadPicture" />
+                app:layout_constraintTop_toBottomOf="@+id/etEmail" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
