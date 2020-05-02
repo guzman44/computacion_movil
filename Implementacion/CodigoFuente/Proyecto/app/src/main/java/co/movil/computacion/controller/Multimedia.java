@@ -4,54 +4,73 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import co.movil.computacion.R;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 public class Multimedia extends AppCompatActivity {
     static final int REQUEST_IMAGE_CAPTURE = 1;
-    ImageView imagen;
-    TextView btnGrid;
+    EditText etCategory;
+    ImageView ivPhoto;
+    Context ctx;
 
+    private void Show(){
+        findViewById(R.id.MenuOptionPhoto1).setVisibility(View.VISIBLE);
+        findViewById(R.id.menuFromMultimedia).setVisibility(View.GONE);
+    }
+    private void Hide(){
+        findViewById(R.id.MenuOptionPhoto1).setVisibility(View.GONE);
+        findViewById(R.id.menuFromMultimedia).setVisibility(View.GONE);
+    }
+    public static void hideKeyboardFrom(Context context, View view) {
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_multimedia);
 
+        ivPhoto = (ImageView) findViewById(R.id.ivPhotoMenu);
+        etCategory = (EditText) findViewById(R.id.acvCategory);
+        ctx = this.getApplicationContext();
+
         Intent intent = getIntent();
         String optionMenu = intent.getStringExtra("event");
-        imagen= (ImageView) findViewById(R.id.ivPostPic);
-        btnGrid = (TextView) findViewById(R.id.btnGrid);
 
-        if(optionMenu != null){
+        if (optionMenu != null) {
             MenuFragment fragmentDemo = (MenuFragment)
                     getSupportFragmentManager().findFragmentById(R.id.menuFromMultimedia);
             fragmentDemo.activity(optionMenu);
         }
 
-        btnGrid.setEnabled(true);
-    }
 
-    public void onClick(View view) {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-        }
-    }
+        etCategory.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if (hasFocus) {
+                    Hide();
+                } else {
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-            imagen.setImageBitmap(imageBitmap);
-        }
-    }
+                }
+            }
+        });
 
+        ivPhoto.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Show();
+                hideKeyboardFrom(ctx, v);
+                etCategory.clearFocus();
+
+            }
+        });
+    }
 }

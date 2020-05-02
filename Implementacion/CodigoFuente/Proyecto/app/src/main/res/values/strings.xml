@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name"></string>
+    <string name="app_name">PlusE</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Correo</string>
     <string name="prompt_password">Clave</string>
@@ -17,9 +17,16 @@
     <string name="event_name">"Nombre del evento"</string>
     <string name="event_description">"Descripción del evento"</string>
     <string name="event_category">"Categoría"</string>
+    <string name="event_location">"Dirección del evento"</string>
+    <string name="event_startdate">"Fecha de inicio"</string>
+    <string name="event_starttime">"Hora de inicio"</string>
+    <string name="event_duration">"Duración"</string>
     <string name="event_thumbnail">"Miniatura"</string>
-    <string name="event_save">"Crear"</string>
+    <string name="event_save">"Guardar Evento"</string>
     <string name="cancel">"Cancelar"</string>
+    <string name="event_img_mini">"Miniatura"</string>
+    <string name="event_img_add">"Seleccionar foto"</string>
+    <string name="event_category_value">"Categoría"</string>
 
 
     <string name="profile_user">"Usuario"</string>
@@ -67,4 +74,19 @@
     <string name="title_activity_test_map">Map</string>
     <string name="event_detail">Ver detalles</string>
     <string name="cargar_imagen">Cargar imagen de evento</string>
+    <string name="foto_del_evento">Foto del evento</string>
+    <string name="event_foto">Foto</string>
+    <string name="event_galeria">Galeria</string>
+
+    <string-array name="categories" >
+        <item>Cumpleaños</item>
+        <item>Fiesta de egresados</item>
+        <item>Fiesta de despedida</item>
+        <item>Eventos infantiles</item>
+        <item>Despedidas de solteros</item>
+        <item>Fiestas privadas</item>
+        <item>Fiestas temáticas</item>
+        <item>Otro</item>
+    </string-array>
+
 </resources>
