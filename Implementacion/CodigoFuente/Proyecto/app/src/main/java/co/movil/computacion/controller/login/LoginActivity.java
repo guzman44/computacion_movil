@@ -84,10 +84,10 @@ public class LoginActivity extends AppCompatActivity {
 
                 //Complete and destroy login activity once successful
                 finish();*/
+                Intent intent = new Intent(LoginActivity.this, Home.class );
+                intent.putExtra("event", "Home");
 
-                LoginActivity.this.startActivity(
-                        new Intent(LoginActivity.this, Home.class)
-                );
+                LoginActivity.this.startActivity(intent);
                 LoginActivity.this.finish();
             }
         });

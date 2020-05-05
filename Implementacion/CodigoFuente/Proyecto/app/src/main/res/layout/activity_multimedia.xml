@@ -5,19 +5,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    >
 
     <fragment
         android:id="@+id/menuUpFromHome"
         android:name="co.movil.computacion.controller.MenuUpFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="0dp">
+        android:layout_marginBottom="0dp"
+        tools:layout="@layout/activity_header">
     </fragment>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="0.9"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp">
@@ -28,91 +32,146 @@
             tools:context=".controller.Search">
 
 
-            <TextView
-                android:id="@+id/btnGrid"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/lyCalendar"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1"
-                android:textColor="#007fff"
-                android:textSize="16sp"
-                android:onClick="onClick"
-                android:text="@string/multimedia_buton"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ivPostPic" />
+                android:background="#E5E6EC"
 
-            <TextView
-                android:id="@+id/tvEvento"
-                android:layout_width="124dp"
-                android:layout_height="17dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="20dp"
-                android:text="@string/multimedia_foto"
+                android:gravity="center|center_horizontal"
+                android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/ivMiniatura"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginBottom="25dp"
+                    android:src="@drawable/photo_upload"
+                    app:srcCompat="@drawable/photo_upload"
+
+                    />
+            </LinearLayout>
+
+            <AutoCompleteTextView
+                android:id="@+id/acEvent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="15dp"
+                android:hint="Evento"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lyCalendar" />
+
 
             <ImageView
-                android:id="@+id/ivPostPic"
-                android:layout_width="144dp"
-                android:layout_height="144dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="10dp"
-                android:maxWidth="10dp"
-                android:paddingLeft="10dp"
-                android:paddingTop="5dp"
-                android:paddingRight="10dp"
-                android:src="@drawable/img_base"
+                android:id="@+id/ivPhoto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="25dp"
+                android:paddingBottom="@dimen/cardview_compat_inset_shadow"
+                app:layout_constraintBottom_toTopOf="@+id/acEvent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvEvento" />
-
-            <TextView
-                android:id="@+id/tvPostText"
-                android:layout_width="371dp"
-                android:layout_height="29dp"
-                android:paddingTop="10dp"
-                android:text="@string/multimedia_post"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnGrid" />
-
-            <EditText
-                android:id="@+id/etPostText"
-                android:inputType="textMultiLine"
-                android:lines="2"
-                android:maxLines="4"
-                android:layout_height="match_parent"
-                android:layout_width="0dp"
-                android:scrollbars="vertical"
-                app:layout_constraintEnd_toEndOf="@+id/tvPostText"
-                app:layout_constraintStart_toStartOf="@+id/tvPostText"
-                app:layout_constraintTop_toBottomOf="@+id/tvPostText" />
+                app:srcCompat="@drawable/camera_circle" />
 
             <Button
-                android:id="@+id/btnSavePost"
-                android:layout_width="120dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="36dp"
-                android:text="@string/multimedia_save"
+                android:id="@+id/btnPublish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
                 android:background="#002d56"
+                android:padding="10dp"
+                android:text="@string/multimedia_save"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etPostText" />
-
+                app:layout_constraintTop_toBottomOf="@+id/acEvent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/containerPhoto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        >
+
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="?android:attr/listDivider" />
+
+        <TextView
+            android:id="@+id/tvTitleMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/foto_del_evento"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:id="@+id/lyPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/ivPhotoMenu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:contentDescription="@string/event_foto"
+                app:srcCompat="@drawable/menu_camera" />
+            <ImageView
+                android:id="@+id/ivGalleryMenu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:contentDescription="@string/event_galeria"
+                app:srcCompat="@drawable/menu_gallery" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lyTextMenu"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="20dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tvPhoto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:gravity="center_horizontal"
+                android:text="@string/event_foto" />
+
+            <TextView
+                android:id="@+id/tvGallery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:gravity="center_horizontal"
+                android:text="@string/event_galeria" />
+        </LinearLayout>
+    </LinearLayout>
+
 
     <fragment
 
@@ -120,6 +179,7 @@
         android:name="co.movil.computacion.controller.MenuFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="0dp"></fragment>
+        android:layout_marginBottom="0dp"
+        tools:layout="@layout/activity_menu"></fragment>
 
 </LinearLayout>

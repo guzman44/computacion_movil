@@ -1,6 +1,7 @@
 package co.movil.computacion.controller;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -9,6 +10,10 @@ import co.movil.computacion.model.ModelEvent;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -19,6 +24,9 @@ import java.util.List;
 public class Search extends AppCompatActivity {
 
     List<ModelEvent> eventList;
+    AdapterSearch adapterSearch;
+    ImageView ivMap;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +41,28 @@ public class Search extends AppCompatActivity {
             fragmentDemo.activity(optionMenu);
         }
         SetEventGallery();
+        SearchView searchView =  (SearchView)findViewById(R.id.svSearch);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapterSearch.getFilter().filter(newText);
+                return false;
+            }
+        });
+
+        ivMap = findViewById(R.id.ivMap);
+        ivMap.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                Intent intent = new Intent(v.getContext(), Map.class );
+                intent.putExtra("event", "Map");
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -56,7 +86,7 @@ public class Search extends AppCompatActivity {
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerviewGallery);
         recyclerView.setLayoutManager(new GridLayoutManager(this,2));
-        AdapterSearch adapterSearch = new AdapterSearch(this,eventList);
+        adapterSearch = new AdapterSearch(this,eventList);
 
         recyclerView.setAdapter(adapterSearch);
         adapterSearch.notifyDataSetChanged();

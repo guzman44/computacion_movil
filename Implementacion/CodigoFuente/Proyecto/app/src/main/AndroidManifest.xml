@@ -8,6 +8,10 @@
     -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />
@@ -30,10 +34,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".Testing">
-        </activity>
-        <activity android:name=".TestRest">
-        </activity>
+        <activity android:name=".controller.Menu_Photo_Gallery"></activity>
+        <activity android:name=".Testing"></activity>
+        <activity android:name=".TestRest"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -54,7 +57,9 @@
         <activity android:name=".controller.LateralMenu" />
         <activity android:name=".controller.Multimedia" />
         <activity android:name=".controller.Event" />
-        <activity android:name=".controller.Home" />
+        <activity android:name=".controller.Home">
+
+        </activity>
         <activity android:name=".controller.Search" />
         <activity android:name=".controller.Map" />
         <activity android:name=".controller.Splash">
@@ -63,6 +68,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity android:name=".controller.Profile" />
         <activity android:name=".controller.Configuration" />

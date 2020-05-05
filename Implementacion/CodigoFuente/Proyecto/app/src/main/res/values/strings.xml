@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name"></string>
+    <string name="app_name">PlusE</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Correo</string>
     <string name="prompt_password">Clave</string>
@@ -17,16 +17,23 @@
     <string name="event_name">"Nombre del evento"</string>
     <string name="event_description">"Descripción del evento"</string>
     <string name="event_category">"Categoría"</string>
-    <string name="event_thumbnail">"Miniatura"</string>
-    <string name="event_save">"Crear"</string>
-    <string name="cancel">"Cancelar"</string>
+    <string name="event_location">"Dirección del evento"</string>
+    <string name="event_startdate">"Fecha de inicio"</string>
+    <string name="event_starttime">"Hora de inicio"</string>
+    <string name="event_duration">"Duración"</string>
+    <string name="event_save">"Guardar Evento"</string>
+    <string name="event_img_mini">"Miniatura"</string>
+    <string name="event_img_add">"Seleccionar foto"</string>
+    <string name="event_foto">Foto</string>
+    <string name="event_galeria">Galeria</string>
+    <string name="foto_del_evento">Foto del evento</string>
+
 
 
     <string name="profile_user">"Usuario"</string>
     <string name="profile_name">"Nombres"</string>
     <string name="profile_lastname">"Apellidos"</string>
     <string name="profile_email">"Correo electónico"</string>
-    <string name="profile_image">"Imagen perfil"</string>
     <string name="profile_loadimage">"Cambiar foto de perfil"</string>
     <string name="profile_save">"Guardar"</string>
 
@@ -35,36 +42,43 @@
     <string name="configuration_password_new">"Nueva clave"</string>
     <string name="configuration_password_repeat">"Confirmar clave"</string>
     <string name="configuration_save">"Guardar"</string>
-    <string name="configuration_cancel">"Cancelar"</string>
 
     <string name="menu_home">"Inicio"</string>
     <string name="menu_search">"Busqueda"</string>
     <string name="menu_addEvent">"Adicionar evento"</string>
     <string name="menu_profile">"Perfil"</string>
-    <string name="title_activity_n">n</string>
 
 
-    <string name="menu1_color">"#FFF"</string>
-    <string name="men1_perfil">Perfil</string>
     <string name="menul_configuracion">"Cambiar clave"</string>
     <string name="menu1_close_session">"Cerrar sesión"</string>
 
     <string name="no_account">¿No tienes cuenta? </string>
     <string name="register">Registrate</string>
-    <string name="configutarion">Configuración</string>
-    <string name="logout">Cerrar sesión</string>
-    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-        eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
 
-    <string name="multimedia_title">"Multimedia"</string>
-    <string name="multimedia_foto">"Foto Seleccionada"</string>
-    <string name="multimedia_buton">"Seleccionar foto"</string>
-    <string name="multimedia_post">"Escribir comentario"</string>
     <string name="multimedia_save">"Publicar"</string>
 
 
     <string name="title_activity_test_map">Map</string>
     <string name="event_detail">Ver detalles</string>
-    <string name="cargar_imagen">Cargar imagen de evento</string>
+
+
+    <string-array name="categories" >
+        <item>Cumpleaños</item>
+        <item>Fiesta de egresados</item>
+        <item>Fiesta de despedida</item>
+        <item>Eventos infantiles</item>
+        <item>Despedidas de solteros</item>
+        <item>Fiestas privadas</item>
+        <item>Fiestas temáticas</item>
+        <item>Otro</item>
+    </string-array>
+
+    <string-array name="events" >
+        <item>Planeta</item>
+        <item>Fiesta Javeriana</item>
+        <item>Despedida Ecopetrol</item>
+        <item>Multiparque</item>
+        <item>Microsoft Day</item>
+    </string-array>
+
 </resources>
