@@ -2,9 +2,12 @@ package co.movil.computacion.controller;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.ColorSpace;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,10 +25,11 @@ import co.movil.computacion.R;
 import co.movil.computacion.model.ModelEvent;
 import co.movil.computacion.model.ModelFeed;
 
-public class AdapterSearch  extends RecyclerView.Adapter<AdapterSearch.ViewHolderSearch> {
+public class AdapterSearch  extends RecyclerView.Adapter<AdapterSearch.ViewHolderSearch>  implements Filterable  {
 
     Context context;
     List<ModelEvent> eventList;
+    List<ModelEvent> allList;
     RequestManager glide;
 
 
@@ -33,6 +37,9 @@ public class AdapterSearch  extends RecyclerView.Adapter<AdapterSearch.ViewHolde
         this.context = context;
         this.eventList = eventList;
         glide = Glide.with(context);
+        allList = new ArrayList<>();
+        allList.addAll(eventList);
+
     }
 
     @NonNull
@@ -64,8 +71,45 @@ public class AdapterSearch  extends RecyclerView.Adapter<AdapterSearch.ViewHolde
 
             }
         });
-
     }
+
+    @Override
+    public Filter getFilter() {
+
+        return myFilter;
+    }
+    Filter myFilter = new Filter() {
+
+        //Automatic on background thread
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+
+            List<ModelEvent> filteredList = new ArrayList<>();
+
+            if (charSequence == null || charSequence.length() == 0) {
+                filteredList.addAll(allList);
+            } else {
+                for (ModelEvent event: allList) {
+                    if (event.getTitle().toLowerCase().contains(charSequence.toString().toLowerCase())) {
+                        filteredList.add(event);
+                    }
+                }
+            }
+
+            FilterResults filterResults = new FilterResults();
+            filterResults.values = filteredList;
+            return filterResults;
+        }
+
+        //Automatic on UI thread
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            eventList.clear();
+            eventList.addAll((List<ModelEvent>)filterResults.values);
+            notifyDataSetChanged();
+        }
+    };
+
 
     @Override
     public int getItemCount() {

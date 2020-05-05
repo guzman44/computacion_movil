@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -33,9 +31,6 @@
             android:layout_height="wrap_content"
             tools:context=".controller.Event">
 
-            <!-- Evento-->
-
-
             <LinearLayout
                 android:id="@+id/lyCalendar"
                 android:layout_width="match_parent"
@@ -50,10 +45,10 @@
 
                 <ImageView
                     android:id="@+id/ivMiniatura"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="15dp"
+                    android:layout_width="125dp"
+                    android:layout_height="125dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:contentDescription="@string/event_img_mini"
                     android:src="@drawable/event_image"
                     app:srcCompat="@drawable/event_image" />
@@ -65,8 +60,6 @@
                 android:id="@+id/ivPhoto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
-
                 android:layout_marginEnd="20dp"
                 android:contentDescription="@string/event_img_add"
                 app:layout_constraintBottom_toTopOf="@+id/etTitulo"
@@ -79,13 +72,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
+                android:layout_marginTop="28dp"
                 android:layout_marginEnd="10dp"
                 android:autofillHints="@string/event_name"
                 android:hint="@string/event_name"
                 android:inputType="text"
                 app:layout_constraintEnd_toEndOf="@+id/lyCalendar"
-                app:layout_constraintStart_toStartOf="@+id/lyCalendar"
 
+                app:layout_constraintStart_toStartOf="@+id/lyCalendar"
                 app:layout_constraintTop_toBottomOf="@+id/lyCalendar" />
 
 
@@ -93,6 +87,7 @@
                 android:id="@+id/etDescription"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:autofillHints=""
                 android:gravity="top"
                 android:hint="@string/event_description"
@@ -103,64 +98,25 @@
                 app:layout_constraintStart_toStartOf="@+id/etTitulo"
                 app:layout_constraintTop_toBottomOf="@+id/etTitulo" />
 
-
-   <!--         <TextView
-                android:id="@+id/tvCategory"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:text="@string/event_category"
-                android:textColor="#A8A8A8"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="@+id/etDescription"
-                app:layout_constraintStart_toStartOf="@+id/etDescription"
-                app:layout_constraintTop_toBottomOf="@+id/etDescription" />-->
-
-
-<!--            android:dropDownAnchor="@id/tvCategory"-->
             <AutoCompleteTextView
                 android:id="@+id/acCategory"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
 
-                android:completionThreshold="1"
+                android:layout_marginTop="10dp"
 
+                android:completionThreshold="1"
                 android:hint="@string/event_category"
                 android:popupBackground="@color/light_grey"
                 app:layout_constraintEnd_toEndOf="@+id/etDescription"
                 app:layout_constraintStart_toStartOf="@+id/etDescription"
-                app:layout_constraintTop_toBottomOf="@+id/etDescription"
-                />
-           <!-- <TextView
-                android:id="@+id/tvCategory"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:paddingLeft="3dp"
-                android:hint="@string/event_category_value"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="@+id/acCategory"
-                app:layout_constraintStart_toStartOf="@+id/acCategory"
-                app:layout_constraintTop_toBottomOf="@+id/acCategory"
-                />-->
-<!--            <Spinner
-                android:id="@+id/spCategory"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:hint="@string/event_category"
-
-                android:spinnerMode="dropdown"
-                app:layout_constraintEnd_toEndOf="@+id/etDescription"
-
-                app:layout_constraintStart_toStartOf="@+id/tvCategory"
-                app:layout_constraintTop_toBottomOf="@+id/tvCategory" />-->
-
-
+                app:layout_constraintTop_toBottomOf="@+id/etDescription" />
 
             <EditText
                 android:id="@+id/etLocation"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:autofillHints=""
                 android:hint="@string/event_location"
                 android:inputType="text"
@@ -168,36 +124,35 @@
                 app:layout_constraintStart_toStartOf="@+id/acCategory"
                 app:layout_constraintTop_toBottomOf="@+id/acCategory" />
 
-
             <EditText
                 android:id="@+id/etStartDate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:focusable="false"
                 android:hint="@string/event_startdate"
                 android:inputType="date"
-                android:focusable="false"
                 app:layout_constraintEnd_toEndOf="@+id/etLocation"
                 app:layout_constraintStart_toStartOf="@+id/etLocation"
-                app:layout_constraintTop_toBottomOf="@+id/etLocation"
+                app:layout_constraintTop_toBottomOf="@+id/etLocation" />
 
-                />
             <EditText
                 android:id="@+id/etStartTime"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:focusable="false"
                 android:hint="@string/event_starttime"
                 android:inputType="text"
-                android:focusable="false"
                 app:layout_constraintEnd_toEndOf="@+id/etStartDate"
                 app:layout_constraintStart_toStartOf="@+id/etStartDate"
-                app:layout_constraintTop_toBottomOf="@+id/etStartDate"
-
-                />
+                app:layout_constraintTop_toBottomOf="@+id/etStartDate" />
 
             <EditText
                 android:id="@+id/etDuration"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:hint="@string/event_duration"
                 android:inputType="datetime"
                 app:layout_constraintEnd_toEndOf="@+id/etStartTime"
@@ -208,7 +163,7 @@
                 android:id="@+id/btnSave"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
                 android:background="#002d56"
                 android:padding="10dp"
                 android:text="@string/event_save"
@@ -216,14 +171,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/etDuration" />
-
-
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </ScrollView>
-
 
     <LinearLayout
         android:id="@+id/containerPhoto"
@@ -238,7 +187,7 @@
             android:background="?android:attr/listDivider" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/tvTitleMenu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
@@ -253,8 +202,7 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="15dp"
-            android:orientation="horizontal">>
-
+            android:orientation="horizontal">
             <ImageView
                 android:id="@+id/ivPhotoMenu"
                 android:layout_width="wrap_content"
@@ -262,7 +210,6 @@
                 android:layout_weight="0.5"
                 android:contentDescription="@string/event_foto"
                 app:srcCompat="@drawable/menu_camera" />
-
             <ImageView
                 android:id="@+id/ivGalleryMenu"
                 android:layout_width="wrap_content"
@@ -276,16 +223,14 @@
             android:id="@+id/lyTextMenu"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-
             android:layout_marginLeft="15dp"
             android:layout_marginTop="15dp"
             android:layout_marginRight="15dp"
             android:layout_marginBottom="20dp"
             android:layout_weight="1"
             android:orientation="horizontal">
-
             <TextView
-                android:id="@+id/textView7"
+                android:id="@+id/tvPhoto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
@@ -293,7 +238,7 @@
                 android:text="@string/event_foto" />
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/tvGallery"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
@@ -301,21 +246,11 @@
                 android:text="@string/event_galeria" />
         </LinearLayout>
     </LinearLayout>
-
-
-
-
-
     <fragment
-
         android:id="@+id/menuFromEvent"
         android:name="co.movil.computacion.controller.MenuFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="0dp"
-        tools:layout="@layout/activity_menu">
-
-    </fragment>
-
-
+        tools:layout="@layout/activity_menu" />
 </LinearLayout>
