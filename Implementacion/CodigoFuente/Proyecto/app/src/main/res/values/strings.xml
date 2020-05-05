@@ -29,11 +29,10 @@
     <string name="foto_del_evento">Foto del evento</string>
 
 
-
     <string name="profile_user">"Usuario"</string>
     <string name="profile_name">"Nombres"</string>
     <string name="profile_lastname">"Apellidos"</string>
-    <string name="profile_email">"Correo electónico"</string>
+    <string name="profile_email">"Correo electrónico"</string>
     <string name="profile_loadimage">"Cambiar foto de perfil"</string>
     <string name="profile_save">"Guardar"</string>
 
@@ -60,9 +59,9 @@
 
     <string name="title_activity_test_map">Map</string>
     <string name="event_detail">Ver detalles</string>
+    <string name="qr">Codigo QR</string>
 
-
-    <string-array name="categories" >
+    <string-array name="categories">
         <item>Cumpleaños</item>
         <item>Fiesta de egresados</item>
         <item>Fiesta de despedida</item>
@@ -73,7 +72,7 @@
         <item>Otro</item>
     </string-array>
 
-    <string-array name="events" >
+    <string-array name="events">
         <item>Planeta</item>
         <item>Fiesta Javeriana</item>
         <item>Despedida Ecopetrol</item>

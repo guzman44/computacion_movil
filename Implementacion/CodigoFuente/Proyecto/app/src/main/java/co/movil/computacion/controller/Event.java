@@ -1,15 +1,21 @@
 package co.movil.computacion.controller;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import co.movil.computacion.R;
 import co.movil.computacion.model.ModelEvent;
+
+import android.Manifest;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -47,6 +53,11 @@ public class Event extends AppCompatActivity implements DatePickerDialog.OnDateS
     EditText etStartTime;
     AutoCompleteTextView acCategory;
     Context ctx;
+    View view;
+
+    final int  ACCESS_CAMERA = 114;
+
+
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         Calendar c = Calendar.getInstance();
@@ -90,18 +101,59 @@ public class Event extends AppCompatActivity implements DatePickerDialog.OnDateS
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode ==  Option.PICK_IMAGE.value){
-            Uri Selected_Image_Uri = data.getData();
-            ivMiniatura.setImageURI(Selected_Image_Uri);
-            Hide();
+        if(data != null){
+            if(requestCode ==  Option.PICK_IMAGE.value){
+                Uri Selected_Image_Uri = data.getData();
+                ivMiniatura.setImageURI(Selected_Image_Uri);
+                Hide();
+            }
+            if(requestCode ==  Option.TAKE_PHOTO.value){
+                Bitmap bitmap = (Bitmap)data.getExtras().get("data");
+                ivMiniatura.setImageBitmap(bitmap);
+                Hide();
+            }
         }
 
-        if(requestCode ==  Option.TAKE_PHOTO.value){
-            Bitmap bitmap = (Bitmap)data.getExtras().get("data");
-            ivMiniatura.setImageBitmap(bitmap);
-            Hide();
+    }
+
+    public void requestPermission(Context context, String permission, int id) {
+        boolean result = false;
+        if (ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED) {
+            ExecuteAction(id,true);
+        }else{
+            ActivityCompat.requestPermissions(this, new String[]{permission}, id);
         }
     }
+
+    private void ExecuteAction(int requestCode, boolean resultRequestPermission){
+        switch (requestCode) {
+            case ACCESS_CAMERA: {
+                if (resultRequestPermission) {
+                    StartCamera();
+                } else {
+                    //Intent intent = new Intent(getApplicationContext(), e.class );
+                    //startActivity(intent);
+                }
+                return;
+            }
+        }
+
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        boolean result = false;
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            result = true;
+        }
+        ExecuteAction(requestCode, result);
+    }
+    private void StartCamera(){
+        Show();
+        hideKeyboardFrom(ctx,view);
+        etTitle.clearFocus();
+        etDescription.clearFocus();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,13 +169,15 @@ public class Event extends AppCompatActivity implements DatePickerDialog.OnDateS
             fragmentDemo.activity(optionMenu);
         }
 
+
+
         String[] categories = getResources().getStringArray(R.array.categories);
         acCategory = findViewById(R.id.acCategory);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,R.layout.row_category, R.id.text_view_list_item, categories);
         acCategory.setAdapter(adapter);
 
         ivMiniatura = (ImageView) findViewById(R.id.ivMiniatura);
-        ivPhoto = (ImageView) findViewById(R.id.ivPhoto);
+        ivPhoto = (ImageView) findViewById(R.id.ivPhoto1);
         etTitle = (EditText)findViewById(R.id.etTitulo);
         etDescription = (EditText)findViewById(R.id.etDescription);
         buttonSave = (Button)findViewById(R.id.btnSave);
@@ -170,13 +224,14 @@ public class Event extends AppCompatActivity implements DatePickerDialog.OnDateS
                 }
             }
         });
+
         ivPhoto.setOnClickListener(new Button.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Show();
-                hideKeyboardFrom(ctx,v);
-                etTitle.clearFocus();
-                etDescription.clearFocus();
+                view = v;
+                requestPermission(getApplicationContext(), Manifest.permission.CAMERA,  ACCESS_CAMERA);
+
+
         }});
         ivPhotoMenu.setOnClickListener(new View.OnClickListener() {
             @Override

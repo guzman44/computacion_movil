@@ -162,7 +162,7 @@ public class Map extends FragmentActivity implements  OnMapReadyCallback, Google
                 if (resultRequestPermission) {
                     RequestLocationUpdates();
                 } else {
-                    Intent intent = new Intent(getApplicationContext(), Event.class );
+                    Intent intent = new Intent(getApplicationContext(), Search.class );
                     startActivity(intent);
                 }
                 return;

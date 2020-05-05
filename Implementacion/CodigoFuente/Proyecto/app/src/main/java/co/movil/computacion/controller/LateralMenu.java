@@ -18,6 +18,7 @@ public class LateralMenu extends AppCompatActivity {
     LinearLayout menuProfile;
     LinearLayout menuConfig;
     LinearLayout menuExit;
+    LinearLayout menuQR;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,6 +36,7 @@ public class LateralMenu extends AppCompatActivity {
         menuProfile = (LinearLayout) findViewById(R.id.menu_profile);
         menuConfig = (LinearLayout) findViewById(R.id.menu_config);
         menuExit = (LinearLayout) findViewById(R.id.menu_exit);
+        menuQR = (LinearLayout) findViewById(R.id.menu_qr);
 
         menuProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +52,15 @@ public class LateralMenu extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent( v.getContext(), Configuration.class );
                 intent.putExtra("event", "config");
+                startActivity(intent);
+            }
+        });
+
+        menuQR.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent( v.getContext(), ReaderQR.class );
+                intent.putExtra("event", "QR");
                 startActivity(intent);
             }
         });
