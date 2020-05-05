@@ -25,9 +25,16 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import co.movil.Helper.RetrofitClientInstance;
 import co.movil.computacion.R;
 import co.movil.computacion.controller.Home;
 import co.movil.computacion.controller.NewUser;
+import co.movil.computacion.interfaces.IAuthentication;
+import co.movil.computacion.model.RequestAuthentication;
+import co.movil.computacion.model.UserTokenViewModel;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -70,25 +77,42 @@ public class LoginActivity extends AppCompatActivity {
         loginViewModel.getLoginResult().observe(this, new Observer<LoginResult>() {
             @Override
             public void onChanged(@Nullable LoginResult loginResult) {
-               /* if (loginResult == null) {
-                    return;
-                }
-                loadingProgressBar.setVisibility(View.GONE);
-                if (loginResult.getError() != null) {
-                    showLoginFailed(loginResult.getError());
-                }
-                if (loginResult.getSuccess() != null) {
-                    updateUiWithUser(loginResult.getSuccess());
-                }
-                setResult(Activity.RESULT_OK);
 
-                //Complete and destroy login activity once successful
-                finish();*/
-                Intent intent = new Intent(LoginActivity.this, Home.class );
-                intent.putExtra("event", "Home");
+                RequestAuthentication authentication = new RequestAuthentication();
+                authentication.setUsername(usernameEditText.getText().toString());
+                authentication.setPassword(passwordEditText.getText().toString());
 
-                LoginActivity.this.startActivity(intent);
-                LoginActivity.this.finish();
+
+                IAuthentication service = RetrofitClientInstance.getRetrofitInstance().create(IAuthentication.class);
+                Call<UserTokenViewModel> call = service.getUserProfile("application/json",authentication);
+
+                call.enqueue(new Callback<UserTokenViewModel>() {
+
+                    @Override
+                    public void onResponse(Call<UserTokenViewModel> call, Response<UserTokenViewModel> response) {
+                        if(response.errorBody()!= null){
+                            Toast.makeText(getApplicationContext(), "Usuario/clave Incorrectos...", Toast.LENGTH_LONG).show();
+                            return;
+                        }
+
+                        UserTokenViewModel result =  response.body();
+
+                        Intent intent = new Intent(LoginActivity.this, Home.class );
+                        intent.putExtra("event", "Home");
+
+                        LoginActivity.this.startActivity(intent);
+                        LoginActivity.this.finish();
+                    }
+
+                    @Override
+                    public void onFailure(Call<UserTokenViewModel> call, Throwable t) {
+                        Log.w("error proyecto AAAAAAA:" , t.getMessage().toString());
+                        Toast.makeText(getApplicationContext(), "Usuario/clave Incorrectos", Toast.LENGTH_LONG).show();
+                    }
+                });
+
+
+
             }
         });
 
