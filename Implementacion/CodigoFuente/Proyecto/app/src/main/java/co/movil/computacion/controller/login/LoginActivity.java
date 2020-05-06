@@ -92,16 +92,15 @@ public class LoginActivity extends AppCompatActivity {
                     public void onResponse(Call<UserTokenViewModel> call, Response<UserTokenViewModel> response) {
                         if(response.errorBody()!= null){
                             Toast.makeText(getApplicationContext(), "Usuario/clave Incorrectos...", Toast.LENGTH_LONG).show();
-                            return;
+                        }else{
+                            UserTokenViewModel result =  response.body();
+
+                            Intent intent = new Intent(LoginActivity.this, Home.class );
+                            intent.putExtra("event", "Home");
+
+                            LoginActivity.this.startActivity(intent);
+                            LoginActivity.this.finish();
                         }
-
-                        UserTokenViewModel result =  response.body();
-
-                        Intent intent = new Intent(LoginActivity.this, Home.class );
-                        intent.putExtra("event", "Home");
-
-                        LoginActivity.this.startActivity(intent);
-                        LoginActivity.this.finish();
                     }
 
                     @Override
