@@ -21,12 +21,12 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import co.movil.Helper.RetrofitClientInstance;
 import co.movil.computacion.R;
+import co.movil.computacion.assets.utilidades.ViewComponent;
 import co.movil.computacion.controller.Home;
 import co.movil.computacion.controller.NewUser;
 import co.movil.computacion.interfaces.IAuthentication;
@@ -41,9 +41,10 @@ public class LoginActivity extends AppCompatActivity {
     private LoginViewModel loginViewModel;
 
     private final String SHARED_PREFS = "sharedPreferences";
-    private final String USERNAME = "username";
     EditText usernameEditText;
     EditText passwordEditText;
+
+    public ViewComponent vc = new ViewComponent(this,"LOGIN",null);
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
         passwordEditText = findViewById(R.id.password);
         final TextView register = findViewById(R.id.registrar);
         final Button loginButton = findViewById(R.id.login);
-        final ProgressBar loadingProgressBar = findViewById(R.id.loading);
+        vc.progressBarProcess(R.id.loading,true);
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
@@ -73,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
-
+        vc.progressBarProcess(R.id.loading,false);
         loginViewModel.getLoginResult().observe(this, new Observer<LoginResult>() {
             @Override
             public void onChanged(@Nullable LoginResult loginResult) {
@@ -81,7 +82,6 @@ public class LoginActivity extends AppCompatActivity {
                 RequestAuthentication authentication = new RequestAuthentication();
                 authentication.setUsername(usernameEditText.getText().toString());
                 authentication.setPassword(passwordEditText.getText().toString());
-
 
                 IAuthentication service = RetrofitClientInstance.getRetrofitInstance().create(IAuthentication.class);
                 Call<UserTokenViewModel> call = service.getUserProfile("application/json",authentication);
@@ -94,24 +94,27 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Usuario/clave Incorrectos...", Toast.LENGTH_LONG).show();
                         }else{
                             UserTokenViewModel result =  response.body();
+                            final Bundle bundle = new Bundle();
+                            bundle.putSerializable("USER",result);
+                            bundle.putString("userName",usernameEditText.getText().toString());
+                            bundle.putString("password",passwordEditText.getText().toString());
 
-                            Intent intent = new Intent(LoginActivity.this, Home.class );
+                            Intent intent = new Intent(LoginActivity.this, Home.class ).putExtras(bundle);
                             intent.putExtra("event", "Home");
 
                             LoginActivity.this.startActivity(intent);
                             LoginActivity.this.finish();
                         }
+                        vc.progressBarProcess(R.id.loading,false);
                     }
 
                     @Override
                     public void onFailure(Call<UserTokenViewModel> call, Throwable t) {
                         Log.w("error proyecto AAAAAAA:" , t.getMessage().toString());
                         Toast.makeText(getApplicationContext(), "Usuario/clave Incorrectos", Toast.LENGTH_LONG).show();
+                        vc.progressBarProcess(R.id.loading,false);
                     }
                 });
-
-
-
             }
         });
 
@@ -151,7 +154,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 saveData();
                 Log.i("username: ", usernameEditText.getText().toString() );
-                loadingProgressBar.setVisibility(View.VISIBLE);
+                vc.progressBarProcess(R.id.loading,true);
                 loginViewModel.login(usernameEditText.getText().toString(),
                         passwordEditText.getText().toString());
             }

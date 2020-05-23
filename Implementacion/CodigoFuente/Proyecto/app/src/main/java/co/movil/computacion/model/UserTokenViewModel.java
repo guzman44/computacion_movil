@@ -1,7 +1,9 @@
 package co.movil.computacion.model;
 
 
-public class UserTokenViewModel
+import java.io.Serializable;
+
+public class UserTokenViewModel implements Serializable
 {
 
     private int id;
