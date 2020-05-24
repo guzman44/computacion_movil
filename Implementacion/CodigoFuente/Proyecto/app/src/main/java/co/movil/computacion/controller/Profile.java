@@ -1,28 +1,13 @@
 package co.movil.computacion.controller;
 
-import androidx.appcompat.app.AppCompatActivity;
-import co.movil.Helper.RetrofitClientInstance;
-import co.movil.computacion.R;
-import co.movil.computacion.assets.utilidades.ViewComponent;
-import co.movil.computacion.controller.login.LoginActivity;
-import co.movil.computacion.dtos.Account.PerfilUserDTO;
-import co.movil.computacion.dtos.ResponseDTO;
-import co.movil.computacion.interfaces.IAuthentication;
-import co.movil.computacion.model.RequestAuthentication;
-import co.movil.computacion.model.User;
-import co.movil.computacion.model.UserTokenViewModel;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -31,7 +16,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
+
+import androidx.appcompat.app.AppCompatActivity;
+import co.movil.Helper.RetrofitClientInstance;
+import co.movil.computacion.R;
+import co.movil.computacion.assets.utilidades.ViewComponent;
+import co.movil.computacion.dtos.Account.PerfilUserDTO;
+import co.movil.computacion.dtos.ResponseDTO;
+import co.movil.computacion.interfaces.IAuthentication;
+import co.movil.computacion.model.User;
+import co.movil.computacion.model.UserTokenViewModel;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Profile extends AppCompatActivity {
 
@@ -45,6 +45,7 @@ public class Profile extends AppCompatActivity {
     private EditText etEmail;
     private TextView btnLoadImage;
     private Button btnSave;
+    private String imageSeleccionada;
     ViewComponent vc;
 
     @Override
@@ -53,6 +54,7 @@ public class Profile extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         vc = new ViewComponent(this,"PROFILE",null);
         vc.setDatosLogin();
+        imageSeleccionada = vc.getUserToken().getImage();
 
         etName = (EditText)findViewById(R.id.etName);
         etLastName = (EditText)findViewById(R.id.etLastname);
@@ -61,6 +63,11 @@ public class Profile extends AppCompatActivity {
         ivProfilePic = (ImageView)findViewById(R.id.ivuserprofile);
         btnLoadImage = (TextView) findViewById(R.id.btnLoadPicture);
         btnSave = (Button)findViewById(R.id.btnSaveProfile);
+
+        byte[] decodedString = Base64.decode(imageSeleccionada, Base64.DEFAULT);
+        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+
+        ivProfilePic.setImageBitmap(decodedByte);
 
         //load user data
         loadData();
@@ -91,8 +98,17 @@ public class Profile extends AppCompatActivity {
             Uri targetUri = data.getData();
             Bitmap bitmap;
             try {
+                Uri imageUri = data.getData();
                 bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
                 ivProfilePic.setImageBitmap(bitmap);
+                InputStream imageStream = getContentResolver().openInputStream(imageUri);
+                Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                selectedImage.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                byte[] byteArray = stream.toByteArray();
+                imageSeleccionada = Base64.encodeToString(byteArray, 2);
+
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -120,6 +136,7 @@ public class Profile extends AppCompatActivity {
         perfil.setLastName(etLastName.getText().toString());
         perfil.setFirstName(etName.getText().toString());
         perfil.setUsername(etUsername.getText().toString());
+        perfil.setImage(imageSeleccionada);
 
         IAuthentication service = RetrofitClientInstance.getRetrofitInstance().create(IAuthentication.class);
         Call<ResponseDTO> call = service.actualizarPerfil("application/json","Bearer " + vc.getUserToken().getToken(),perfil);
@@ -132,10 +149,18 @@ public class Profile extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), response.body().getResponse().toString(), Toast.LENGTH_LONG).show();
                 }else{
                     Toast.makeText(getApplicationContext(), "SUCCESS --->"+response.body().getResponse().toString(), Toast.LENGTH_LONG).show();
-                    /*Intent intent = new Intent( this., Home.class );
+
+                    UserTokenViewModel datosActualizar = vc.getUserToken();
+                    datosActualizar.setEmail(etEmail.getText().toString());
+                    datosActualizar.setLastName(etLastName.getText().toString());
+                    datosActualizar.setFirstName(etName.getText().toString());
+                    datosActualizar.setUsername(etUsername.getText().toString());
+                    datosActualizar.setImage(imageSeleccionada);
+
+                    Intent intent = new Intent( Profile.this, Home.class );
                     intent.putExtras(vc.getUserBuble());
                     intent.putExtra("evento", user);
-                    startActivity( intent );*/
+                    startActivity( intent );
                 }
                 vc.progressBarProcess(R.id.loading,false);
             }

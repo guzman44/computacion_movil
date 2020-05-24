@@ -84,6 +84,7 @@ public class LateralMenu extends AppCompatActivity {
 
                                 Intent intent = new Intent( LateralMenu.this, LoginActivity.class );
                                 startActivity(intent);
+                                LateralMenu.this.finish();
                             }
                         })
                         .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
