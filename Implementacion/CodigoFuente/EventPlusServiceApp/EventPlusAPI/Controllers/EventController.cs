@@ -182,7 +182,7 @@ namespace EventPlusAPI.Controllers
         }
 
         /// <summary>
-        /// Eliminacion de una like de una publicacion por usuario
+        /// Eliminacion de una localizcion de un evento por usuario
         /// </summary>
         /// param name="idEvent"
         /// param name="idLogin"
@@ -195,7 +195,7 @@ namespace EventPlusAPI.Controllers
         }
 
         /// <summary>
-        /// Eliminacion de una like de un evento por usuario
+        /// Eliminacion de una localizacion de un evento por usuario
         /// </summary>
         /// param name="idEvent"
         /// param name="idLogin"
