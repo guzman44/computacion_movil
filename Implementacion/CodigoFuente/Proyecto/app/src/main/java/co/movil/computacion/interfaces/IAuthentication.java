@@ -26,6 +26,7 @@ public interface IAuthentication {
     @POST("api/Authentication/create/acount")
     Call<ResponseDTO> crarCuenta(
             @Header("Content-Type") String content_type,
+            @Header("Authorization") String token,
             @Body AcountDTO body
     );
 
@@ -33,6 +34,7 @@ public interface IAuthentication {
     @POST("api/Authentication/change/password")
     Call<ResponseDTO> cambiarPassword(
             @Header("Content-Type") String content_type,
+            @Header("Authorization") String token,
             @Body PasswordDTO body
     );
 
@@ -40,8 +42,11 @@ public interface IAuthentication {
     @PUT("api/Authentication/update/perfilUser")
     Call<ResponseDTO> actualizarPerfil(
             @Header("Content-Type") String content_type,
+            @Header("Authorization") String token,
             @Body PerfilUserDTO body
     );
+
+    /**Componente Event**/
 
 
 }

@@ -62,7 +62,7 @@ namespace EventPlusAPI.Controllers
         /// Actualizacion de un usuario
         /// </summary>
         /// <param name="model"></param>   
-        [HttpPost("update/perfilUser")]
+        [HttpPut("update/perfilUser")]
         public IActionResult UpdatePerfilUser([FromBody]PerfilAccountViewModel model)
         {
             var user = _autenticacion.UpdatePerfilUser(model);

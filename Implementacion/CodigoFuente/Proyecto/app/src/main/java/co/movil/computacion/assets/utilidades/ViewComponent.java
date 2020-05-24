@@ -44,10 +44,12 @@ public class ViewComponent extends AppCompatActivity implements NavigationView.O
 
     public void progressBarProcess(int id, boolean loading) {
         ProgressBar bar = this.activity.findViewById(id);
-        if (loading) {
-            bar.setVisibility(View.VISIBLE);
-        } else {
-            bar.setVisibility(View.GONE);
+        if(bar!= null){
+            if (loading) {
+                bar.setVisibility(View.VISIBLE);
+            } else {
+                bar.setVisibility(View.GONE);
+            }
         }
     }
 

@@ -41,7 +41,7 @@ public class Testing extends AppCompatActivity {
 
 
         IAuthentication service = RetrofitClientInstance.getRetrofitInstance().create(IAuthentication.class);
-        Call<UserTokenViewModel> call = service.getUserProfile("application/json",authentication);
+        Call<UserTokenViewModel> call = service.login("application/json",authentication);
 
         call.enqueue(new Callback<UserTokenViewModel>() {
 
