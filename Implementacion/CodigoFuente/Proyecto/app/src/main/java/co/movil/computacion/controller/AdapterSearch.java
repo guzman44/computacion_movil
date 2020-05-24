@@ -65,6 +65,7 @@ public class AdapterSearch  extends RecyclerView.Adapter<AdapterSearch.ViewHolde
                 intent.putExtra("Title",event.getTitle());
                 intent.putExtra("Description",event.getDescription());
                 intent.putExtra("Thumbnail",event.getThumbnail());
+                intent.putExtras(vc.getUserBuble());
                 // start the activity
                 context.startActivity(intent);
 

@@ -23,6 +23,7 @@ public class MenuFragment extends Fragment {
     ImageView ivAddEvent = null;
     ImageView ivMultimedia = null;
     String someTitle = "";
+    ViewComponent vc;
 
     public void activity(String param) {
         Context c = getActivity().getApplicationContext();
@@ -47,6 +48,8 @@ public class MenuFragment extends Fragment {
 
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        vc = new ViewComponent(this.getActivity());
+        vc.setDatosLogin();
      //   someTitle = getArguments().getString("someTitle", "");
     }
 
@@ -64,6 +67,7 @@ public class MenuFragment extends Fragment {
         ivHome.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 Intent intent = new Intent(v.getContext(), Home.class );
+                intent.putExtras(vc.getUserBuble());
                 intent.putExtra("event", "Home");
                 startActivity(intent);
 
@@ -73,6 +77,7 @@ public class MenuFragment extends Fragment {
         ivSearch.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 Intent intent = new Intent(v.getContext(), Search.class);
+                intent.putExtras(vc.getUserBuble());
                 intent.putExtra("event", "Search");
                 startActivity(intent);
 
@@ -81,6 +86,7 @@ public class MenuFragment extends Fragment {
         ivAddEvent.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 Intent intent = new Intent(v.getContext(), Event.class );
+                intent.putExtras(vc.getUserBuble());
                 intent.putExtra("event", "Calendar");
                 startActivity(intent);
 
@@ -90,6 +96,7 @@ public class MenuFragment extends Fragment {
         ivMultimedia.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 Intent intent = new Intent(v.getContext(),Multimedia.class );
+                intent.putExtras(vc.getUserBuble());
                 intent.putExtra("event", "Camera");
                 startActivity(intent);
 
