@@ -3,6 +3,7 @@ package co.movil.computacion.controller;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import co.movil.computacion.R;
+import co.movil.computacion.assets.utilidades.ViewComponent;
 import co.movil.computacion.model.ModelFeed;
 
 import android.os.Bundle;
@@ -14,11 +15,14 @@ public class Feed extends AppCompatActivity {
     RecyclerView recyclerView;
     ArrayList<ModelFeed> feedList = new ArrayList<>();
     AdapterFeed adapterFeed;
+    ViewComponent vc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
+        vc = new ViewComponent(this,"FEED",null);
+        vc.setDatosLogin();
 
       /*  recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);

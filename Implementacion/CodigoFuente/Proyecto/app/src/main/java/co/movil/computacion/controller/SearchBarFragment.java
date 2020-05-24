@@ -13,9 +13,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import co.movil.computacion.R;
+import co.movil.computacion.assets.utilidades.ViewComponent;
 
 
 public class SearchBarFragment extends Fragment {
+
     SearchView svSearch;
     ImageView ivMap;
 

@@ -23,6 +23,7 @@ import com.google.zxing.WriterException;
 import androidmads.library.qrgenearator.QRGContents;
 import androidmads.library.qrgenearator.QRGEncoder;
 import co.movil.computacion.R;
+import co.movil.computacion.assets.utilidades.ViewComponent;
 
 public class DetailEvent extends AppCompatActivity {
 
@@ -30,7 +31,7 @@ public class DetailEvent extends AppCompatActivity {
     private ImageView img;
     private Menu menu;
     private  ImageView ivShare;
-
+    ViewComponent vc;
 
 
 
@@ -38,7 +39,8 @@ public class DetailEvent extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_event);
-
+        vc = new ViewComponent(this,"DETALLE_EVENTO",null);
+        vc.setDatosLogin();
 
         tvtitle = (TextView) findViewById(R.id.txttitle);
         tvdescription = (TextView) findViewById(R.id.txtDesc);

@@ -2,7 +2,6 @@ package co.movil.computacion.controller;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.ColorSpace;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,19 +10,18 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
 import co.movil.computacion.R;
+import co.movil.computacion.assets.utilidades.ViewComponent;
 import co.movil.computacion.model.ModelEvent;
-import co.movil.computacion.model.ModelFeed;
 
 public class AdapterSearch  extends RecyclerView.Adapter<AdapterSearch.ViewHolderSearch>  implements Filterable  {
 
@@ -31,6 +29,7 @@ public class AdapterSearch  extends RecyclerView.Adapter<AdapterSearch.ViewHolde
     List<ModelEvent> eventList;
     List<ModelEvent> allList;
     RequestManager glide;
+    ViewComponent vc;
 
 
     public AdapterSearch(Context context, List<ModelEvent> eventList ) {

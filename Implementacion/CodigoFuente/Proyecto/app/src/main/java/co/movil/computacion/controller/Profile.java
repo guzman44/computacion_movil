@@ -2,6 +2,7 @@ package co.movil.computacion.controller;
 
 import androidx.appcompat.app.AppCompatActivity;
 import co.movil.computacion.R;
+import co.movil.computacion.assets.utilidades.ViewComponent;
 import co.movil.computacion.model.User;
 
 import android.content.Intent;
@@ -32,11 +33,14 @@ public class Profile extends AppCompatActivity {
     private EditText etEmail;
     private TextView btnLoadImage;
     private Button btnSave;
+    ViewComponent vc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        vc = new ViewComponent(this,"PROFILE",null);
+        vc.setDatosLogin();
 
         etName = (EditText)findViewById(R.id.etName);
         etLastName = (EditText)findViewById(R.id.etLastname);

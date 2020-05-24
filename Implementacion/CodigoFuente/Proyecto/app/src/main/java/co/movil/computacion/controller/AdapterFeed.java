@@ -6,33 +6,36 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-import co.movil.computacion.R;
-import co.movil.computacion.model.ModelFeed;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 
 import java.util.ArrayList;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+import co.movil.computacion.R;
+import co.movil.computacion.assets.utilidades.ViewComponent;
+import co.movil.computacion.model.ModelFeed;
+
 public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.ViewHolderFeed> {
 
     Context context;
     ArrayList<ModelFeed> feedList = new ArrayList<>();
     RequestManager glide;
+    ViewComponent vc;
 
     public AdapterFeed() {
     }
+
     public AdapterFeed(Context context,ArrayList<ModelFeed> feedList ) {
         this.context = context;
         this.feedList = feedList;
         glide = Glide.with(context);
     }
+
     @NonNull
     @Override
     public AdapterFeed.ViewHolderFeed onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

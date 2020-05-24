@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import co.movil.computacion.R;
+import co.movil.computacion.assets.utilidades.ViewComponent;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 
 //public class Menu extends AppCompatActivity {
 public class MenuFragment extends Fragment {
+
     @Nullable
     ImageView ivHome = null;
     ImageView ivSearch = null;
@@ -51,6 +53,7 @@ public class MenuFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_menu, container, false);
+
         SetControls(view);
         AddEvents();
         return view;

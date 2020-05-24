@@ -12,10 +12,12 @@ import android.view.View;
 import android.widget.ImageView;
 
 import co.movil.computacion.R;
+import co.movil.computacion.assets.utilidades.ViewComponent;
 
 public class Menu_Photo_Gallery extends AppCompatActivity {
 
     ImageView ivPhoto;
+    ViewComponent vc;
 
     private enum Option {
         PICK_IMAGE(1),
@@ -48,6 +50,8 @@ public class Menu_Photo_Gallery extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu__photo__gallery);
+        vc = new ViewComponent(this,"PHOTO",null);
+        vc.setDatosLogin();
 
         ivPhoto = findViewById(R.id.ivPhotoMenu);
         ivPhoto.setOnClickListener(new View.OnClickListener() {

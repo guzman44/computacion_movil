@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import co.movil.computacion.R;
+import co.movil.computacion.assets.utilidades.ViewComponent;
 import co.movil.computacion.model.ModelFeed;
+import co.movil.computacion.service.NotificationService;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,14 +15,17 @@ import java.util.ArrayList;
 
 public class Home extends AppCompatActivity {
 
-
+    ViewComponent vc;
     RecyclerView recyclerView;
     ArrayList<ModelFeed> feedList = new ArrayList<>();
     AdapterFeed adapterFeed;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        vc = new ViewComponent(this,"HOME",null);
+        vc.setDatosLogin();
         setContentView(R.layout.activity_home);
 
         Intent intent = getIntent();
@@ -31,11 +36,6 @@ public class Home extends AppCompatActivity {
             fragmentDemo.activity(optionMenu);
         }
 
-
-/*        MenuFragment menuSuperior = (MenuFragment)getSupportFragmentManager().findFragmentById(R.id.menuUpFromHome);
-        menuSuperior.activity(optionMenu);*/
-
-
         recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
@@ -44,6 +44,12 @@ public class Home extends AppCompatActivity {
         recyclerView.setAdapter(adapterFeed);
         SetRecyclerView();
 
+        Bundle extras = getIntent().getExtras();
+        Intent instenService = new Intent(this, NotificationService.class);
+        instenService.putExtra("token",vc.userToken.getToken());
+        instenService.putExtra("username",(String) extras.get("userName"));
+        instenService.putExtra("password",(String) extras.get("password"));
+        startService(instenService);
 
     }
 

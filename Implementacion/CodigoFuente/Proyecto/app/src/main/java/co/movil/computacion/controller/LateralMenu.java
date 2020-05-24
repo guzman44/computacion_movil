@@ -9,8 +9,8 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 import co.movil.computacion.R;
+import co.movil.computacion.assets.utilidades.ViewComponent;
 import co.movil.computacion.controller.login.LoginActivity;
 
 public class LateralMenu extends AppCompatActivity {
@@ -19,11 +19,14 @@ public class LateralMenu extends AppCompatActivity {
     LinearLayout menuConfig;
     LinearLayout menuExit;
     LinearLayout menuQR;
+    ViewComponent vc;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upper_menu);
+        vc = new ViewComponent(this,"MENU_LATERAL",null);
+        vc.setDatosLogin();
 
         Intent intent = getIntent();
         String optionMenu = intent.getStringExtra("event");
@@ -43,6 +46,7 @@ public class LateralMenu extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent( v.getContext(), Profile.class );
                 intent.putExtra("event", "profile");
+                intent.putExtras(vc.getUserBuble());
                 startActivity(intent);
             }
         });

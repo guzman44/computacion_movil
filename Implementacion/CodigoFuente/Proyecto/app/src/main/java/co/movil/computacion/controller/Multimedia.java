@@ -7,6 +7,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import co.movil.computacion.R;
+import co.movil.computacion.assets.utilidades.ViewComponent;
 
 import android.Manifest;
 import android.app.Activity;
@@ -37,6 +38,7 @@ public class Multimedia extends AppCompatActivity {
     Context ctx;
     final int  ACCESS_CAMERA = 113;
     View view;
+    ViewComponent vc;
 
     private enum Option {
         PICK_IMAGE(1),
@@ -124,6 +126,8 @@ public class Multimedia extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_multimedia);
         ctx = this.getApplicationContext();
+        vc = new ViewComponent(this,"MULTIMEDIA",null);
+        vc.setDatosLogin();
 
         Intent intent = getIntent();
         String optionMenu = intent.getStringExtra("event");

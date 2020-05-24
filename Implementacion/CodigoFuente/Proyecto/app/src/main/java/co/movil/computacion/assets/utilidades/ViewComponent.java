@@ -5,11 +5,13 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import co.movil.computacion.R;
 import co.movil.computacion.model.UserTokenViewModel;
 
 public class ViewComponent extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -51,5 +53,14 @@ public class ViewComponent extends AppCompatActivity implements NavigationView.O
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         return false;
+    }
+
+    public void setDatosLogin(){
+        Bundle requestUser = activity.getIntent().getExtras();
+        if(requestUser != null){
+            userToken = (UserTokenViewModel) requestUser.getSerializable("USER");
+                userBuble = new Bundle();
+            userBuble.putSerializable("USER",userToken);
+        }
     }
 }

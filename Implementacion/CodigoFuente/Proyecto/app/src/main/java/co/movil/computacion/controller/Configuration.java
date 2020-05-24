@@ -19,6 +19,7 @@ import java.io.FileNotFoundException;
 
 import androidx.appcompat.app.AppCompatActivity;
 import co.movil.computacion.R;
+import co.movil.computacion.assets.utilidades.ViewComponent;
 import co.movil.computacion.controller.login.LoginActivity;
 import co.movil.computacion.model.User;
 
@@ -26,11 +27,14 @@ public class Configuration extends AppCompatActivity {
 
     private Button btnSave;
     View view ;
+    ViewComponent vc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuration);
+        vc = new ViewComponent(this,"CONFIGURATION",null);
+        vc.setDatosLogin();
 
         btnSave = findViewById(R.id.btnSaveConfig);
 

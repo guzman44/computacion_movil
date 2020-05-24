@@ -7,6 +7,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import co.movil.computacion.R;
+import co.movil.computacion.assets.utilidades.ViewComponent;
 import co.movil.computacion.model.ModelEvent;
 
 import android.Manifest;
@@ -54,6 +55,7 @@ public class Event extends AppCompatActivity implements DatePickerDialog.OnDateS
     AutoCompleteTextView acCategory;
     Context ctx;
     View view;
+    ViewComponent vc;
 
     final int  ACCESS_CAMERA = 114;
 
@@ -159,6 +161,8 @@ public class Event extends AppCompatActivity implements DatePickerDialog.OnDateS
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event);
         ctx = this.getApplicationContext();
+        vc = new ViewComponent(this,"EVENTO",null);
+        vc.setDatosLogin();
 
         Intent intent = getIntent();
         String optionMenu = intent.getStringExtra("event");

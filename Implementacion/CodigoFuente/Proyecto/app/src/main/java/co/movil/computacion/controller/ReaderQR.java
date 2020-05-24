@@ -13,14 +13,20 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 import co.movil.computacion.R;
+import co.movil.computacion.assets.utilidades.ViewComponent;
 
 public class ReaderQR extends AppCompatActivity {
+
     private Button btnScanner;
     private TextView tvBarCode;
+    ViewComponent vc;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reader_q_r);
+        vc = new ViewComponent(this,"QR",null);
+        vc.setDatosLogin();
 
         tvBarCode = findViewById(R.id.tvBarCode);
         btnScanner = findViewById(R.id.btnScanner);

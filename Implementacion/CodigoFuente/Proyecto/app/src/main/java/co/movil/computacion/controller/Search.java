@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import co.movil.computacion.R;
+import co.movil.computacion.assets.utilidades.ViewComponent;
 import co.movil.computacion.model.ModelEvent;
 
 import android.content.Intent;
@@ -26,11 +27,14 @@ public class Search extends AppCompatActivity {
     List<ModelEvent> eventList;
     AdapterSearch adapterSearch;
     ImageView ivMap;
+    ViewComponent vc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+        vc = new ViewComponent(this,"SEARCH",null);
+        vc.setDatosLogin();
 
         Intent intent = getIntent();
         String optionMenu = intent.getStringExtra("event");

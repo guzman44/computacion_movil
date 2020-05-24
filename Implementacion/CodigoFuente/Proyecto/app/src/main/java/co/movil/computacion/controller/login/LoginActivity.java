@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -44,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText usernameEditText;
     EditText passwordEditText;
 
-    public ViewComponent vc = new ViewComponent(this,"LOGIN",null);
+    ViewComponent vc = new ViewComponent(this,"LOGIN",null);
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -99,11 +100,14 @@ public class LoginActivity extends AppCompatActivity {
                             bundle.putString("userName",usernameEditText.getText().toString());
                             bundle.putString("password",passwordEditText.getText().toString());
 
-                            Intent intent = new Intent(LoginActivity.this, Home.class ).putExtras(bundle);
-                            intent.putExtra("event", "Home");
-
-                            LoginActivity.this.startActivity(intent);
-                            LoginActivity.this.finish();
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    LoginActivity.this.startActivity(new Intent(LoginActivity.this,Home.class).putExtras(bundle));
+                                    vc.progressBarProcess(R.id.loading,false);
+                                    LoginActivity.this.finish();
+                                }
+                            },1000);
                         }
                         vc.progressBarProcess(R.id.loading,false);
                     }
