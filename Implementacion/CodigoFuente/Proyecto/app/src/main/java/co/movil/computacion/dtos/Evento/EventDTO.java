@@ -1,9 +1,15 @@
-package co.movil.computacion.dtos;
+package co.movil.computacion.dtos.Evento;
 
 import org.joda.time.DateTime;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.List;
+
+import co.movil.computacion.dtos.CategoriaDTO;
+import co.movil.computacion.dtos.EventoUsuarioDTO;
+import co.movil.computacion.dtos.GaleriaDTO;
+import co.movil.computacion.dtos.LocalizacionDTO;
+import co.movil.computacion.dtos.PublicacionesDTO;
 
 public class EventDTO  implements Serializable {
 
@@ -23,6 +29,12 @@ public class EventDTO  implements Serializable {
     private Integer likes;
     private String fechaRegistroMostrar;
     private DateTime fechaRegistro;
+
+    private List<CategoriaDTO> categoria;
+    private List<EventoUsuarioDTO> eventoUsuario;
+    private List<GaleriaDTO> galeria;
+    private List<LocalizacionDTO> localizacion;
+    private List<PublicacionesDTO> publicaciones;
 
     public EventDTO() {
     }
@@ -153,5 +165,45 @@ public class EventDTO  implements Serializable {
 
     public void setFechaRegistro(DateTime fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
+    }
+
+    public List<CategoriaDTO> getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(List<CategoriaDTO> categoria) {
+        this.categoria = categoria;
+    }
+
+    public List<EventoUsuarioDTO> getEventoUsuario() {
+        return eventoUsuario;
+    }
+
+    public void setEventoUsuario(List<EventoUsuarioDTO> eventoUsuario) {
+        this.eventoUsuario = eventoUsuario;
+    }
+
+    public List<GaleriaDTO> getGaleria() {
+        return galeria;
+    }
+
+    public void setGaleria(List<GaleriaDTO> galeria) {
+        this.galeria = galeria;
+    }
+
+    public List<LocalizacionDTO> getLocalizacion() {
+        return localizacion;
+    }
+
+    public void setLocalizacion(List<LocalizacionDTO> localizacion) {
+        this.localizacion = localizacion;
+    }
+
+    public List<PublicacionesDTO> getPublicaciones() {
+        return publicaciones;
+    }
+
+    public void setPublicaciones(List<PublicacionesDTO> publicaciones) {
+        this.publicaciones = publicaciones;
     }
 }

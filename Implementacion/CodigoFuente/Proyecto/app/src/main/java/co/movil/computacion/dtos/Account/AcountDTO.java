@@ -1,9 +1,9 @@
-package co.movil.computacion.dtos;
+package co.movil.computacion.dtos.Account;
 
 import java.io.Serializable;
 
 public class AcountDTO implements Serializable {
-    
+
     private String email;
     private String username;
     private String password;

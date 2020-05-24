@@ -1,4 +1,4 @@
-package co.movil.computacion.dtos;
+package co.movil.computacion.dtos.Account;
 
 import java.io.Serializable;
 
