@@ -55,6 +55,7 @@ public class ReaderQR extends AppCompatActivity {
 
                 Intent intent = new Intent(this, DetailEvent.class);
                 intent.putExtra("Title", result.getContents());
+                intent.putExtras(vc.getUserBuble());
                 startActivity(intent);
 
             }else{

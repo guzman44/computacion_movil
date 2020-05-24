@@ -32,6 +32,10 @@ public class ViewComponent extends AppCompatActivity implements NavigationView.O
         this.userToken = userToken;
     }
 
+
+    public ViewComponent(){
+    }
+
     public ViewComponent(Activity _activity, String _activityString, UserTokenViewModel _userToken) {
         this.activity = _activity;
         this.activityString = _activityString;

@@ -109,6 +109,8 @@ public class DetailEvent extends AppCompatActivity {
             shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Iniciar App");
             shareIntent.putExtra(Intent.EXTRA_TEXT, text);
             shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+            shareIntent.putExtras(vc.getUserBuble());
+
             startActivity(Intent.createChooser(shareIntent, "Compartir evento"));
         }catch (Exception ex){
             Toast.makeText(context,"Whatsapp have not been installed.",Toast.LENGTH_LONG);

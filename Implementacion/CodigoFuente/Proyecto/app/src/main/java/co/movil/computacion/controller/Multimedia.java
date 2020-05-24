@@ -84,6 +84,7 @@ public class Multimedia extends AppCompatActivity {
                     StartCamera();
                 } else {
                     //Intent intent = new Intent(getApplicationContext(), e.class );
+                    //intent.putExtras(vc.getUserBuble());
                     //startActivity(intent);
                 }
                 return;

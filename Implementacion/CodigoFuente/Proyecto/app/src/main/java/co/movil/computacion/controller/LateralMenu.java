@@ -56,6 +56,7 @@ public class LateralMenu extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent( v.getContext(), Configuration.class );
                 intent.putExtra("event", "config");
+                intent.putExtras(vc.getUserBuble());
                 startActivity(intent);
             }
         });
@@ -65,6 +66,7 @@ public class LateralMenu extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent( v.getContext(), ReaderQR.class );
                 intent.putExtra("event", "QR");
+                intent.putExtras(vc.getUserBuble());
                 startActivity(intent);
             }
         });

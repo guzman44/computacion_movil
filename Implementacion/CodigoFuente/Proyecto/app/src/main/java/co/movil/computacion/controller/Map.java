@@ -84,6 +84,7 @@ public class Map extends FragmentActivity implements  OnMapReadyCallback, Google
     public void onInfoWindowClick(Marker marker) {
         Intent intent = new Intent(this, DetailEvent.class);
         intent.putExtra("Title", marker.getTitle());
+        intent.putExtras(vc.getUserBuble());
         startActivity(intent);
     }
 
@@ -153,6 +154,7 @@ public class Map extends FragmentActivity implements  OnMapReadyCallback, Google
                     RequestLocationUpdates();
                 } else {
                     Intent intent = new Intent(getApplicationContext(), Search.class );
+                    intent.putExtras(vc.getUserBuble());
                     startActivity(intent);
                 }
                 return;

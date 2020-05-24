@@ -1,18 +1,7 @@
 package co.movil.computacion.controller;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import co.movil.computacion.R;
-import co.movil.computacion.assets.utilidades.ViewComponent;
-import co.movil.computacion.model.ModelEvent;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -21,6 +10,14 @@ import com.google.android.gms.maps.model.LatLng;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import co.movil.computacion.R;
+import co.movil.computacion.assets.utilidades.ViewComponent;
+import co.movil.computacion.model.ModelEvent;
 
 public class Search extends AppCompatActivity {
 
@@ -64,6 +61,7 @@ public class Search extends AppCompatActivity {
             public void onClick(View v){
                 Intent intent = new Intent(v.getContext(), Map.class );
                 intent.putExtra("event", "Map");
+                intent.putExtras(vc.getUserBuble());
                 startActivity(intent);
             }
         });

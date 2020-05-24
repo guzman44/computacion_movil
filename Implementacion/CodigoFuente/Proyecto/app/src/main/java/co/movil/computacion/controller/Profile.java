@@ -72,6 +72,7 @@ public class Profile extends AppCompatActivity {
                 user.setLastName( etLastName.getText().toString() );
                 user.setEmail( etEmail.getText().toString() );
                 user.setProfilePic( ivProfilePic.getDrawable() );
+                intent.putExtras(vc.getUserBuble());
                 updateData();
                 //TODO: Persis info
                 intent.putExtra("evento", user);

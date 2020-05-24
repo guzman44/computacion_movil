@@ -241,6 +241,7 @@ public class Event extends AppCompatActivity implements DatePickerDialog.OnDateS
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                intent.putExtras(vc.getUserBuble());
                 startActivityForResult(intent, Option.TAKE_PHOTO.value);
             }
         });
@@ -250,6 +251,7 @@ public class Event extends AppCompatActivity implements DatePickerDialog.OnDateS
                 Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
+                intent.putExtras(vc.getUserBuble());
                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), Option.PICK_IMAGE.value);
             }
         });
@@ -261,6 +263,7 @@ public class Event extends AppCompatActivity implements DatePickerDialog.OnDateS
                     eventObject.setDescription( etDescription.getText().toString() );
                     eventObject.setThumbnail( targetImage.getBaseline() ); //TO CHECK
                     intent.putExtra("evento", eventObject);
+                    intent.putExtras(vc.getUserBuble());
                     startActivity( intent );
                 }
             });

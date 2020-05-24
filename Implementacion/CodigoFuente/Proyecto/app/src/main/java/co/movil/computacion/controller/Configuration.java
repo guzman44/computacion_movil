@@ -53,12 +53,14 @@ public class Configuration extends AppCompatActivity {
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 Intent intent = new Intent(view.getContext(), LoginActivity.class );
                                 startActivity(intent);
+                                Configuration.this.finish();
                             }
                         })
                         .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 Intent intent = new Intent( view.getContext(), Home.class );
+                                intent.putExtras(vc.getUserBuble());
                                 startActivity( intent );
                             }
                         })

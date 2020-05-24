@@ -46,6 +46,7 @@ public class Home extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         Intent instenService = new Intent(this, NotificationService.class);
+        instenService.putExtras(vc.getUserBuble());
         instenService.putExtra("token",vc.userToken.getToken());
         instenService.putExtra("username",(String) extras.get("userName"));
         instenService.putExtra("password",(String) extras.get("password"));

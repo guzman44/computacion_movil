@@ -12,8 +12,6 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
-
 import co.movil.computacion.R;
 import co.movil.computacion.assets.utilidades.ViewComponent;
 
@@ -39,6 +37,7 @@ public class MenuUpFragment extends Fragment {
             public void onClick(View v){
                 Intent intent = new Intent( v.getContext(), LateralMenu.class);
                 intent.putExtra("event", "menu");
+                intent.putExtras(vc.getUserBuble());
                 startActivity(intent);
             }
         });
