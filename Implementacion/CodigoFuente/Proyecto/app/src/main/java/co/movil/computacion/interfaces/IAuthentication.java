@@ -66,7 +66,7 @@ public interface IAuthentication {
     Call<ResponseDTO> crearEvento(
             @Header("Content-Type") String content_type,
             @Header("Authorization") String token,
-            @Body PasswordDTO body
+            @Body EventDTO body
     );
 
 
@@ -75,7 +75,7 @@ public interface IAuthentication {
     Call<ResponseDTO> actualizarEvento(
             @Header("Content-Type") String content_type,
             @Header("Authorization") String token,
-            @Body PasswordDTO body
+            @Body EventDTO body
     );
 
 
