@@ -1,6 +1,7 @@
 package co.movil.computacion.controller;
 
 import android.os.Bundle;
+import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +11,11 @@ import co.movil.computacion.assets.utilidades.ViewComponent;
 public class NewUser extends AppCompatActivity {
 
     ViewComponent vc;
+
+    private EditText etUser;
+    private EditText etPassword;
+    private EditText etPasswordNew;
+    private EditText etPasswordRepeat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

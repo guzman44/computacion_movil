@@ -48,13 +48,20 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import org.joda.time.DateTime;
+import org.joda.time.LocalDateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import java.io.ByteArrayOutputStream;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
@@ -325,13 +332,16 @@ public class Event extends AppCompatActivity implements DatePickerDialog.OnDateS
                     int hours = Integer.parseInt( etDuration.getText().toString());
                     DateTime endDate = dtStart.plusHours(hours);
 
+                    DateTimeFormatter timeFormatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.SSS");
+                    String inicio = dtStart.toString(timeFormatter);
+                    String fin = endDate.toString(timeFormatter);
 
-                    event.setFechaInicio(dtStart);
-                    event.setFechaFin(endDate);
+                    event.setFechaInicio(inicio);
+                    event.setFechaFin(fin);
 
                     event.setLocalizacion(localizationList);
                     String category = acCategory.getText().toString();
-                    int idCategory = 0;
+                    int idCategory = 1;
 
                     if(category != ""){
                         idCategory = GetValue(category);
@@ -339,6 +349,9 @@ public class Event extends AppCompatActivity implements DatePickerDialog.OnDateS
 
                     event.setIdTipo(idCategory);
                     event.setIdLogin(vc.getUserToken().getIdLogin());
+
+                    Gson gson = new Gson();
+                    String json = gson.toJson(event);
 
                     IAuthentication service = RetrofitClientInstance.getRetrofitInstance().create(IAuthentication.class);
                     Call<ResponseDTO> call = service.crearEvento("application/json","Bearer " + vc.getUserToken().getToken(), event);

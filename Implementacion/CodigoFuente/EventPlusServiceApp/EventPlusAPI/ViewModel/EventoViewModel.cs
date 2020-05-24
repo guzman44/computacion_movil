@@ -24,9 +24,12 @@ namespace EventPlusAPI.ViewModel
         public string Descripcion { get; set; }
         public byte[] ImagenMiniatura { get; set; }
         [Required]
-        public DateTime FechaInicio { get; set; }
+        public string FechaInicio { get; set; }
         [Required]
-        public DateTime FechaFin { get; set; }
+        public string FechaFin { get; set; }
+
+        public DateTime FechaInicioG { get; set; }
+        public DateTime FechaFinG { get; set; }
         [Required]
         public int IdTipo { get; set; }
     }

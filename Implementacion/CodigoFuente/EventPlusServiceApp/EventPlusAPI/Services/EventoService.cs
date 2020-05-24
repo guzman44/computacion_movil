@@ -22,16 +22,21 @@ namespace EventPlusAPI.Services
 
             try
             {
+
+               model.FechaFinG = DateTime.Parse(model.FechaFin);
+               model.FechaInicioG = DateTime.Parse(model.FechaInicio);
+
                 Evento ev = new Evento
                 {
                     Nombre = model.Nombre,  
                     
                     Descripcion = model.Descripcion,
                     Imagen = model.ImagenMiniatura,
-                    FechaInicio = model.FechaInicio,
-                    FechaFin = model.FechaFin,
+                    FechaInicio = model.FechaInicioG,
+                    FechaFin = model.FechaFinG,
                     Activo = "1",
-                    IdTipo = model.IdTipo
+                    IdTipo = model.IdTipo,
+                    FechaRegistro = DateTime.Now
                 };
                 _eventPlusContext.Evento.Add(ev);
                 _eventPlusContext.SaveChanges();

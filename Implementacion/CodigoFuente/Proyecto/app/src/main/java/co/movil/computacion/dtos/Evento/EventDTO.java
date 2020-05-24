@@ -20,15 +20,15 @@ public class EventDTO  implements Serializable {
     private String imagenMiniatura;
     private String fechaInicioMostrar;
     private String fechaFinMostrar;
-    private DateTime fechaInicio;
-    private DateTime fechaFin;
+    private String fechaInicio;
+    private String fechaFin;
     private Integer idTipo;
     private String tipo;
     private String nombreUsuario;
     private Boolean like;
     private Integer likes;
     private String fechaRegistroMostrar;
-    private DateTime fechaRegistro;
+    private String fechaRegistro;
 
     private List<CategoriaDTO> categoria;
     private List<EventoUsuarioDTO> eventoUsuario;
@@ -95,22 +95,6 @@ public class EventDTO  implements Serializable {
         this.fechaFinMostrar = fechaFinMostrar;
     }
 
-    public DateTime getFechaInicio() {
-        return fechaInicio;
-    }
-
-    public void setFechaInicio(DateTime fechaInicio) {
-        this.fechaInicio = fechaInicio;
-    }
-
-    public DateTime getFechaFin() {
-        return fechaFin;
-    }
-
-    public void setFechaFin(DateTime fechaFin) {
-        this.fechaFin = fechaFin;
-    }
-
     public Integer getIdTipo() {
         return idTipo;
     }
@@ -159,14 +143,6 @@ public class EventDTO  implements Serializable {
         this.fechaRegistroMostrar = fechaRegistroMostrar;
     }
 
-    public DateTime getFechaRegistro() {
-        return fechaRegistro;
-    }
-
-    public void setFechaRegistro(DateTime fechaRegistro) {
-        this.fechaRegistro = fechaRegistro;
-    }
-
     public List<CategoriaDTO> getCategoria() {
         return categoria;
     }
@@ -205,5 +181,29 @@ public class EventDTO  implements Serializable {
 
     public void setPublicaciones(List<PublicacionesDTO> publicaciones) {
         this.publicaciones = publicaciones;
+    }
+
+    public String getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public void setFechaInicio(String fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+    public String getFechaFin() {
+        return fechaFin;
+    }
+
+    public void setFechaFin(String fechaFin) {
+        this.fechaFin = fechaFin;
+    }
+
+    public String getFechaRegistro() {
+        return fechaRegistro;
+    }
+
+    public void setFechaRegistro(String fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
     }
 }
