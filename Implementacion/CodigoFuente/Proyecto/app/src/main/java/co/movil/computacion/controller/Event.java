@@ -6,9 +6,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
+
+import co.movil.Helper.RetrofitClientInstance;
 import co.movil.computacion.R;
 import co.movil.computacion.assets.utilidades.ViewComponent;
+import co.movil.computacion.dtos.CategoriaDTO;
+import co.movil.computacion.dtos.Evento.EventDTO;
+import co.movil.computacion.dtos.LocalizacionDTO;
+import co.movil.computacion.dtos.ResponseDTO;
+import co.movil.computacion.interfaces.IAuthentication;
 import co.movil.computacion.model.ModelEvent;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import android.Manifest;
 import android.app.Activity;
@@ -18,9 +28,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -34,8 +46,17 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
+
+import org.joda.time.DateTime;
+
+import java.io.ByteArrayOutputStream;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+import java.util.TimeZone;
 
 
 public class Event extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
@@ -52,10 +73,13 @@ public class Event extends AppCompatActivity implements DatePickerDialog.OnDateS
     ImageView ivGalleryMenu;
     EditText etStartDate;
     EditText etStartTime;
+    EditText etDuration;
     AutoCompleteTextView acCategory;
     Context ctx;
     View view;
     ViewComponent vc;
+    EditText etLocation;
+    DateTime dtStart;
 
     final int  ACCESS_CAMERA = 114;
 
@@ -67,6 +91,8 @@ public class Event extends AppCompatActivity implements DatePickerDialog.OnDateS
         c.set(Calendar.MONTH, month);
         c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
         String currentDateString = DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
+        DateTime dt = new DateTime(year,month,dayOfMonth,0,0);
+        dtStart = dt;
         TextView textView = (TextView) findViewById(R.id.etStartDate);
         textView.setText(currentDateString);
     }
@@ -117,7 +143,6 @@ public class Event extends AppCompatActivity implements DatePickerDialog.OnDateS
         }
 
     }
-
     public void requestPermission(Context context, String permission, int id) {
         boolean result = false;
         if (ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED) {
@@ -126,7 +151,6 @@ public class Event extends AppCompatActivity implements DatePickerDialog.OnDateS
             ActivityCompat.requestPermissions(this, new String[]{permission}, id);
         }
     }
-
     private void ExecuteAction(int requestCode, boolean resultRequestPermission){
         switch (requestCode) {
             case ACCESS_CAMERA: {
@@ -155,7 +179,6 @@ public class Event extends AppCompatActivity implements DatePickerDialog.OnDateS
         etTitle.clearFocus();
         etDescription.clearFocus();
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -190,6 +213,8 @@ public class Event extends AppCompatActivity implements DatePickerDialog.OnDateS
         ivGalleryMenu = findViewById(R.id.ivGalleryMenu);
         etStartDate = (EditText) findViewById(R.id.etStartDate);
         etStartTime = (EditText) findViewById(R.id.etStartTime);
+        etDuration =  (EditText) findViewById(R.id.etDuration);
+        etLocation =  (EditText) findViewById(R.id.etLocation);
 
         acCategory.setOnTouchListener(new View.OnTouchListener(){
             @Override
@@ -258,14 +283,112 @@ public class Event extends AppCompatActivity implements DatePickerDialog.OnDateS
         buttonSave.setOnClickListener( new Button.OnClickListener(){
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent( v.getContext(), Home.class );
-                    eventObject.setTitle( etTitle.getText().toString() );
+
+                    LocalizacionDTO localization = new LocalizacionDTO();
+                    localization.setDireccion(etLocation.getText().toString());
+
+                    List<LocalizacionDTO> localizationList = new ArrayList<>();
+                    localizationList.add(localization);
+
+                    CategoriaDTO categoriaDTO = new CategoriaDTO();
+                    List<CategoriaDTO> categoryList = new ArrayList<>();
+
+                    EventDTO event = new EventDTO();
+                    event.setNombre(etTitle.getText().toString());
+                    event.setDescripcion(etDescription.getText().toString());
+
+                    BitmapDrawable drawable = (BitmapDrawable) ivMiniatura.getDrawable();
+                    Bitmap bitmap = drawable.getBitmap();
+                    ByteArrayOutputStream stream=new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 90, stream);
+                    byte[] image=stream.toByteArray();
+                    String imgBase64 = Base64.encodeToString(image, 0);
+
+                    event.setImagenMiniatura(imgBase64);
+
+                    //DateTime startDate = new DateTime(etStartDate.getText().toString());
+                    String time = etStartTime.getText().toString();
+                    String[] values =time.split(":");
+                    int startHour = 0;
+                    int startMinute = 0;
+
+                    if(values.length >0){
+                        startHour = Integer.parseInt( values[0]);
+                    }
+                    if(values.length >1){
+                        startMinute = Integer.parseInt( values[0]);
+                    }
+
+                    dtStart.plusHours(startHour);
+                    dtStart.plusMinutes(startMinute);
+
+                    int hours = Integer.parseInt( etDuration.getText().toString());
+                    DateTime endDate = dtStart.plusHours(hours);
+
+
+                    event.setFechaInicio(dtStart);
+                    event.setFechaFin(endDate);
+
+                    event.setLocalizacion(localizationList);
+                    String category = acCategory.getText().toString();
+                    int idCategory = 0;
+
+                    if(category != ""){
+                        idCategory = GetValue(category);
+                    }
+
+                    event.setIdTipo(idCategory);
+                    event.setIdLogin(vc.getUserToken().getIdLogin());
+
+                    IAuthentication service = RetrofitClientInstance.getRetrofitInstance().create(IAuthentication.class);
+                    Call<ResponseDTO> call = service.crearEvento("application/json","Bearer " + vc.getUserToken().getToken(), event);
+
+                    call.enqueue(new Callback<ResponseDTO>() {
+
+                        @Override
+                        public void onResponse(Call<ResponseDTO> call, Response<ResponseDTO> response) {
+
+                            if(response.body()!= null && response.body().getResponse()!= null && response.body().getType().equals("error")){
+                                Toast.makeText(getApplicationContext(), response.body().getResponse().toString(), Toast.LENGTH_LONG).show();
+                            }else{
+                                Toast.makeText(getApplicationContext(), "Evento creado satisfactoriamente " , Toast.LENGTH_LONG).show();
+                            }
+                            vc.progressBarProcess(R.id.loading,false);
+                        }
+                        @Override
+                        public void onFailure(Call<ResponseDTO> call, Throwable t) {
+                            Toast.makeText(getApplicationContext(), "Error en el servicio", Toast.LENGTH_LONG).show();
+                            vc.progressBarProcess(R.id.loading,false);
+                        }
+                    });
+
+
+/*
+   eventObject.setTitle( etTitle.getText().toString() );
                     eventObject.setDescription( etDescription.getText().toString() );
                     eventObject.setThumbnail( targetImage.getBaseline() ); //TO CHECK
+
+
+                    Intent intent = new Intent( v.getContext(), Home.class );
                     intent.putExtra("evento", eventObject);
                     intent.putExtras(vc.getUserBuble());
-                    startActivity( intent );
+                    startActivity( intent );*/
                 }
             });
         }
+
+    private int GetValue(String name){
+        String[] keys = getResources().getStringArray(R.array.categories);
+        String[] values = getResources().getStringArray(R.array.categoriesId);
+        int index = 0;
+
+        for (String key: keys) {
+
+            if(key.equals(name)){
+                break;
+            }
+            index++;
+        }
+        return Integer.parseInt(values[index]);
+    }
 }

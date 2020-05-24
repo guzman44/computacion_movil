@@ -71,7 +71,16 @@
         <item>Fiestas temáticas</item>
         <item>Otro</item>
     </string-array>
-
+    <string-array name="categoriesId">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>0</item>
+    </string-array>
     <string-array name="events">
         <item>Planeta</item>
         <item>Fiesta Javeriana</item>
