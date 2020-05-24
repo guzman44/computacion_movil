@@ -8,6 +8,7 @@ public class GaleriaDTO implements Serializable {
 
     public Integer id;
     public String image;
+    public Integer idLogin;
     public Integer idEvento;
     public DateTime fechaRegistro;
 
@@ -44,5 +45,13 @@ public class GaleriaDTO implements Serializable {
 
     public void setFechaRegistro(DateTime fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
+    }
+
+    public Integer getIdLogin() {
+        return idLogin;
+    }
+
+    public void setIdLogin(Integer idLogin) {
+        this.idLogin = idLogin;
     }
 }
