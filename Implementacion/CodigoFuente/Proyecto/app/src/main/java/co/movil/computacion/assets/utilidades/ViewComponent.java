@@ -33,7 +33,8 @@ public class ViewComponent extends AppCompatActivity implements NavigationView.O
     }
 
 
-    public ViewComponent(){
+    public ViewComponent(Activity _activity){
+        this.activity = _activity;
     }
 
     public ViewComponent(Activity _activity, String _activityString, UserTokenViewModel _userToken) {

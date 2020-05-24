@@ -9,9 +9,10 @@ import retrofit2.http.POST;
 
 public interface IAuthentication {
 
+    /**Componente Authentication**/
 
     @POST("api/Authentication/login")
-   Call<UserTokenViewModel> getUserProfile(
+   Call<UserTokenViewModel> login(
            @Header("Content-Type") String content_type,
            @Body RequestAuthentication body
     );

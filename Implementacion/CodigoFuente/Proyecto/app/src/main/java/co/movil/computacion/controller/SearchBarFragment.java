@@ -24,7 +24,7 @@ public class SearchBarFragment extends Fragment {
 
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        vc = new ViewComponent();
+        vc = new ViewComponent(this.getActivity());
         vc.setDatosLogin();
     }
 

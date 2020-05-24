@@ -85,7 +85,7 @@ public class LoginActivity extends AppCompatActivity {
                 authentication.setPassword(passwordEditText.getText().toString());
 
                 IAuthentication service = RetrofitClientInstance.getRetrofitInstance().create(IAuthentication.class);
-                Call<UserTokenViewModel> call = service.getUserProfile("application/json",authentication);
+                Call<UserTokenViewModel> call = service.login("application/json",authentication);
 
                 call.enqueue(new Callback<UserTokenViewModel>() {
 

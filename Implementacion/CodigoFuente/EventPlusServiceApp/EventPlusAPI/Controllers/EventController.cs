@@ -57,7 +57,7 @@ namespace EventPlusAPI.Controllers
         /// <summary>
         /// Listado de todas los eventos que trae las imagenes de la galeria, publicaciones, localizacion
         /// </summary>
-        [HttpGet("list/{idEvento}")]
+        [HttpGet("list/all/{idEvento}")]
         public AllEventoViewModel GetAllEvento([Required] long idEvento)
         {
             var evento = _eventoService.GetAllEvento(idEvento);

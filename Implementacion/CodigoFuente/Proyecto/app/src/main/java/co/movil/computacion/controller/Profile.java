@@ -100,7 +100,10 @@ public class Profile extends AppCompatActivity {
     private void loadData()
     {
         SharedPreferences sharedPreferences = getSharedPreferences( SHARED_PREFS, MODE_PRIVATE );
-        etName.setText( sharedPreferences.getString( "username", "undefined" ) );
+        etName.setText( vc.getUserToken().getFirstName() );
+        etLastName.setText( vc.getUserToken().getLastName() );
+        etUsername.setText( vc.getUserToken().getUsername() );
+        etEmail.setText( vc.getUserToken().getEmail() );
         Log.i("username: ", etName.getText().toString());
         //TODO: Load from DB
     }

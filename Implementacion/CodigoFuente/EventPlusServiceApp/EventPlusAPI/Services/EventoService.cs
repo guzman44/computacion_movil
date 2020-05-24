@@ -347,12 +347,19 @@ namespace EventPlusAPI.Services
                 FechaRegistro = s.FechaRegistro
             }).FirstOrDefault();
 
-            var usuario = _eventPlusContext.Usuario.Where(w => w.IdLogin == evento.IdLogin).FirstOrDefault();
-            var nombre = (usuario.Nombres + " " + usuario.Apellidos).Trim();
-            
-            evento.NombreUsuario = (nombre!= null && !nombre.Equals(""))? usuario.IdLoginNavigation.UserName: nombre;
-            var categoriaLike = _eventPlusContext.ParametrizacionObjetos.Where(s => s.Nombre == "CAT_HISTORICO" && s.Valor == "Like").FirstOrDefault();
-            evento.Likes = _eventPlusContext.Categoria.Where(w => w.IdCategoria == categoriaLike.Id && w.IdEvento==idEvento).Count();
+            if(evento!= null)
+            {
+                var usuario = _eventPlusContext.Usuario.Where(w => w.IdLogin == evento.IdLogin).FirstOrDefault();
+                var nombre = (usuario.Nombres + " " + usuario.Apellidos).Trim();
+
+                evento.NombreUsuario = (nombre != null && !nombre.Equals("")) ? usuario.IdLoginNavigation.UserName : nombre;
+                var categoriaLike = _eventPlusContext.ParametrizacionObjetos.Where(s => s.Nombre == "CAT_HISTORICO" && s.Valor == "Like").FirstOrDefault();
+                evento.Likes = _eventPlusContext.Categoria.Where(w => w.IdCategoria == categoriaLike.Id && w.IdEvento == idEvento).Count();
+            }
+            else
+            {
+                evento = new AllEventoViewModel();  
+            }  
 
             return evento;
         }
@@ -374,12 +381,20 @@ namespace EventPlusAPI.Services
                 FechaRegistro = s.FechaRegistro
             }).FirstOrDefault();
 
-            var usuario = _eventPlusContext.Usuario.Where(w => w.IdLogin == evento.IdLogin).FirstOrDefault();
-            var nombre = (usuario.Nombres + " " + usuario.Apellidos).Trim();
+            if(evento!= null)
+            {
+                var usuario = _eventPlusContext.Usuario.Where(w => w.IdLogin == evento.IdLogin).FirstOrDefault();
+                var nombre = (usuario.Nombres + " " + usuario.Apellidos).Trim();
 
-            evento.NombreUsuario = (nombre != null && !nombre.Equals("")) ? usuario.IdLoginNavigation.UserName : nombre;
-            var categoriaLike = _eventPlusContext.ParametrizacionObjetos.Where(s => s.Nombre == "CAT_HISTORICO" && s.Valor == "Like").FirstOrDefault();
-            evento.Likes = _eventPlusContext.Categoria.Where(w => w.IdCategoria == categoriaLike.Id && w.IdEvento == idEvento).Count();
+                evento.NombreUsuario = (nombre != null && !nombre.Equals("")) ? usuario.IdLoginNavigation.UserName : nombre;
+                var categoriaLike = _eventPlusContext.ParametrizacionObjetos.Where(s => s.Nombre == "CAT_HISTORICO" && s.Valor == "Like").FirstOrDefault();
+                evento.Likes = _eventPlusContext.Categoria.Where(w => w.IdCategoria == categoriaLike.Id && w.IdEvento == idEvento).Count();
+            }
+            else
+            {
+                evento = new GalleryEventoViewModel();
+            }
+
 
             return evento;
         }
@@ -401,13 +416,21 @@ namespace EventPlusAPI.Services
                 FechaRegistro = s.FechaRegistro
             }).FirstOrDefault();
 
-            var usuario = _eventPlusContext.Usuario.Where(w => w.IdLogin == evento.IdLogin).FirstOrDefault();
-            var nombre = (usuario.Nombres + " " + usuario.Apellidos).Trim();
+            if (evento!= null)
+            {
+                var usuario = _eventPlusContext.Usuario.Where(w => w.IdLogin == evento.IdLogin).FirstOrDefault();
+                var nombre = (usuario.Nombres + " " + usuario.Apellidos).Trim();
 
-            evento.NombreUsuario = (nombre != null && !nombre.Equals("")) ? usuario.IdLoginNavigation.UserName : nombre;
-            var categoriaLike = _eventPlusContext.ParametrizacionObjetos.Where(s => s.Nombre == "CAT_HISTORICO" && s.Valor == "Like").FirstOrDefault();
-            evento.Likes = _eventPlusContext.Categoria.Where(w => w.IdCategoria == categoriaLike.Id && w.IdEvento == idEvento).Count();
+                evento.NombreUsuario = (nombre != null && !nombre.Equals("")) ? usuario.IdLoginNavigation.UserName : nombre;
+                var categoriaLike = _eventPlusContext.ParametrizacionObjetos.Where(s => s.Nombre == "CAT_HISTORICO" && s.Valor == "Like").FirstOrDefault();
+                evento.Likes = _eventPlusContext.Categoria.Where(w => w.IdCategoria == categoriaLike.Id && w.IdEvento == idEvento).Count();
 
+            }
+            else
+            {
+                evento = new LocationEventoViewModel();
+            }
+            
             return evento;
         }
 
@@ -428,12 +451,19 @@ namespace EventPlusAPI.Services
                 FechaRegistro = s.FechaRegistro
             }).FirstOrDefault();
 
-            var usuario = _eventPlusContext.Usuario.Where(w => w.IdLogin == evento.IdLogin).FirstOrDefault();
-            var nombre = (usuario.Nombres + " " + usuario.Apellidos).Trim();
+            if (evento != null)
+            {
+                var usuario = _eventPlusContext.Usuario.Where(w => w.IdLogin == evento.IdLogin).FirstOrDefault();
+                var nombre = (usuario.Nombres + " " + usuario.Apellidos).Trim();
 
-            evento.NombreUsuario = (nombre != null && !nombre.Equals("")) ? usuario.IdLoginNavigation.UserName : nombre;
-            var categoriaLike = _eventPlusContext.ParametrizacionObjetos.Where(s => s.Nombre == "CAT_HISTORICO" && s.Valor == "Like").FirstOrDefault();
-            evento.Likes = _eventPlusContext.Categoria.Where(w => w.IdCategoria == categoriaLike.Id && w.IdEvento == idEvento).Count();
+                evento.NombreUsuario = (nombre != null && !nombre.Equals("")) ? usuario.IdLoginNavigation.UserName : nombre;
+                var categoriaLike = _eventPlusContext.ParametrizacionObjetos.Where(s => s.Nombre == "CAT_HISTORICO" && s.Valor == "Like").FirstOrDefault();
+                evento.Likes = _eventPlusContext.Categoria.Where(w => w.IdCategoria == categoriaLike.Id && w.IdEvento == idEvento).Count();
+            }
+            else
+            {
+                evento = new PublicationEventoViewModel();
+            }
 
             return evento;
         }
