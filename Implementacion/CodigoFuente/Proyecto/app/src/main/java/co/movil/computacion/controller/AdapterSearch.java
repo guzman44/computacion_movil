@@ -2,6 +2,9 @@ package co.movil.computacion.controller;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,18 +24,19 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import co.movil.computacion.R;
 import co.movil.computacion.assets.utilidades.ViewComponent;
-import co.movil.computacion.model.ModelEvent;
+import co.movil.computacion.dtos.Evento.EventDTO;
+
 
 public class AdapterSearch  extends RecyclerView.Adapter<AdapterSearch.ViewHolderSearch>  implements Filterable  {
 
     Context context;
-    List<ModelEvent> eventList;
-    List<ModelEvent> allList;
+    List<EventDTO> eventList;
+    List<EventDTO> allList;
     RequestManager glide;
     ViewComponent vc;
 
 
-    public AdapterSearch(Context context, List<ModelEvent> eventList ) {
+    public AdapterSearch(Context context, List<EventDTO> eventList ) {
         this.context = context;
         this.eventList = eventList;
         glide = Glide.with(context);
@@ -52,20 +56,23 @@ public class AdapterSearch  extends RecyclerView.Adapter<AdapterSearch.ViewHolde
     @Override
     public void onBindViewHolder(@NonNull ViewHolderSearch holder, int position) {
 
-        final ModelEvent event = eventList.get(position);
+        final EventDTO event = eventList.get(position);
 
-        holder.tv_book_title.setText(event.getTitle());
-        holder.img_book_thumbnail.setImageResource(event.getThumbnail());
+        holder.tv_book_title.setText(event.getNombre());
+        byte[] decodedString = Base64.decode(event.getImagenMiniatura(), Base64.DEFAULT);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        holder.img_book_thumbnail.setImageBitmap(bitmap);
+        //holder.img_book_thumbnail.setImageResource(event.getImagenMiniatura());
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Intent intent = new Intent(context,DetailEvent.class);
 
-                intent.putExtra("Title",event.getTitle());
-                intent.putExtra("Description",event.getDescription());
-                intent.putExtra("Thumbnail",event.getThumbnail());
-                intent.putExtras(vc.getUserBuble());
+                intent.putExtra("Title",event.getNombre());
+                intent.putExtra("Description",event.getDescripcion());
+                intent.putExtra("Thumbnail", decodedString);
+                //intent.putExtras(vc.getUserBuble());
                 // start the activity
                 context.startActivity(intent);
 
@@ -84,13 +91,13 @@ public class AdapterSearch  extends RecyclerView.Adapter<AdapterSearch.ViewHolde
         @Override
         protected FilterResults performFiltering(CharSequence charSequence) {
 
-            List<ModelEvent> filteredList = new ArrayList<>();
+            List<EventDTO> filteredList = new ArrayList<>();
 
             if (charSequence == null || charSequence.length() == 0) {
                 filteredList.addAll(allList);
             } else {
-                for (ModelEvent event: allList) {
-                    if (event.getTitle().toLowerCase().contains(charSequence.toString().toLowerCase())) {
+                for (EventDTO event: allList) {
+                    if (event.getNombre().toLowerCase().contains(charSequence.toString().toLowerCase())) {
                         filteredList.add(event);
                     }
                 }
@@ -105,7 +112,7 @@ public class AdapterSearch  extends RecyclerView.Adapter<AdapterSearch.ViewHolde
         @Override
         protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
             eventList.clear();
-            eventList.addAll((List<ModelEvent>)filterResults.values);
+            eventList.addAll((List<EventDTO>)filterResults.values);
             notifyDataSetChanged();
         }
     };

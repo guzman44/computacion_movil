@@ -324,8 +324,8 @@ public class Event extends AppCompatActivity implements DatePickerDialog.OnDateS
                         startMinute = Integer.parseInt( values[0]);
                     }
 
-                    dtStart.plusHours(startHour);
-                    dtStart.plusMinutes(startMinute);
+                    dtStart = dtStart.plusHours(startHour);
+                    dtStart = dtStart.plusMinutes(startMinute);
 
                     int hours = Integer.parseInt( etDuration.getText().toString());
                     DateTime endDate = dtStart.plusHours(hours);

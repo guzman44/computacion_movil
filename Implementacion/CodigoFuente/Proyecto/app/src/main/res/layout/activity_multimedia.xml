@@ -69,6 +69,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lyCalendar" />
 
+            <EditText
+                android:id="@+id/etComments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:inputType="textPersonName"
+                android:hint="Comentarios"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/acEvent"
+                 />
 
             <ImageView
                 android:id="@+id/ivPhoto1"
@@ -91,7 +103,10 @@
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/acEvent" />
+                app:layout_constraintTop_toBottomOf="@+id/etComments" />
+
+
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

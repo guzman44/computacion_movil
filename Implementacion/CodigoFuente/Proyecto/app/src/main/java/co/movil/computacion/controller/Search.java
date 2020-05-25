@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -15,9 +16,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import co.movil.Helper.RetrofitClientInstance;
 import co.movil.computacion.R;
 import co.movil.computacion.assets.utilidades.ViewComponent;
+import co.movil.computacion.dtos.Evento.EventDTO;
+
+import co.movil.computacion.interfaces.IAuthentication;
 import co.movil.computacion.model.ModelEvent;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Search extends AppCompatActivity {
 
@@ -41,7 +50,8 @@ public class Search extends AppCompatActivity {
                     getSupportFragmentManager().findFragmentById(R.id.menuFromSearch);
             fragmentDemo.activity(optionMenu);
         }
-        SetEventGallery();
+        GetEventList();
+       // SetEventGallery();
         SearchView searchView =  (SearchView)findViewById(R.id.svSearch);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -68,11 +78,13 @@ public class Search extends AppCompatActivity {
 
     }
 
-    private void SetEventGallery(){
-        eventList = new ArrayList<>();
+    private void SetEventGallery(List<EventDTO> eventList ){
+       // eventList = new ArrayList<>();
+/*
         eventList.add(new ModelEvent("The Vegitarian","Categorie Book","Description for The Vegitarian",R.drawable.thevigitarian, new GregorianCalendar(2020, 4, 4), new LatLng(4.55, -74.05)));
         eventList.add(new ModelEvent("The Wild Robot","Categorie Book","Description for The Wild Robot ",R.drawable.thewildrobot, new GregorianCalendar(2020, 4 ,10), new LatLng(4.65, -74.15)));
         eventList.add(new ModelEvent("Maria Semples","Categorie Book","Description for Maria Semples",R.drawable.mariasemples, new GregorianCalendar(2020, 4, 25), new LatLng(4.50, -74.05)));
+*/
      /*   eventList.add(new ModelEvent("The Martian","Categorie Book","Description book",R.drawable.themartian));
         eventList.add(new ModelEvent("He Died with...","Categorie Book","Description book",R.drawable.hediedwith));
         eventList.add(new ModelEvent("The Vegitarian","Categorie Book","Description book",R.drawable.thevigitarian));
@@ -86,6 +98,9 @@ public class Search extends AppCompatActivity {
         eventList.add(new ModelEvent("The Martian","Categorie Book","Description book",R.drawable.themartian));
         eventList.add(new ModelEvent("He Died with...","Categorie Book","Description book",R.drawable.hediedwith));*/
 
+
+
+
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerviewGallery);
         recyclerView.setLayoutManager(new GridLayoutManager(this,2));
         adapterSearch = new AdapterSearch(this,eventList);
@@ -94,5 +109,47 @@ public class Search extends AppCompatActivity {
         adapterSearch.notifyDataSetChanged();
 
     }
+
+
+
+    private void GetEventList(){
+        IAuthentication service = RetrofitClientInstance.getRetrofitInstance().create(IAuthentication.class);
+
+        Call<List<EventDTO>> call = service.listaTodosEventos("application/json","Bearer " + vc.getUserToken().getToken(), vc.getUserToken().getIdLogin());
+        call.enqueue(new Callback<List<EventDTO>>() {
+            @Override
+            public void onResponse(Call<List<EventDTO>> call, Response<List<EventDTO>> response) {
+                if(response.body()!= null) {
+                    SetEventGallery(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<EventDTO>> call, Throwable t) {
+
+            }
+        });
+
+       /* call.enqueue(new Callback<List<EventDTO>>() {
+
+            @Override
+            public void onResponse(Call<EventDTO> call, Response<List<EventDTO>> response) {
+
+                if(response.body()!= null){
+                    //SetEventGallery
+                }else{
+                    Toast.makeText(getApplicationContext(), "Evento creado satisfactoriamente " , Toast.LENGTH_LONG).show();
+                }
+                vc.progressBarProcess(R.id.loading,false);
+            }
+            @Override
+            public void onFailure(Call<EventDTO> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Error en el servicio", Toast.LENGTH_LONG).show();
+                vc.progressBarProcess(R.id.loading,false);
+            }
+        });*/
+
+    }
+
 
 }

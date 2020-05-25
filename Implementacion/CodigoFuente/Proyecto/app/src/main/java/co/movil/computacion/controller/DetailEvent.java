@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
@@ -44,20 +45,20 @@ public class DetailEvent extends AppCompatActivity {
 
         tvtitle = (TextView) findViewById(R.id.txttitle);
         tvdescription = (TextView) findViewById(R.id.txtDesc);
-        tvcategory = (TextView) findViewById(R.id.txtCat);
+//        tvcategory = (TextView) findViewById(R.id.txtCat);
         img = (ImageView) findViewById(R.id.bookthumbnail);
 
         // Recieve data
         Intent intent = getIntent();
         String Title = intent.getExtras().getString("Title");
         String Description = intent.getExtras().getString("Description");
-        int image = intent.getExtras().getInt("Thumbnail") ;
+       // int image = intent.getExtras().getInt("Thumbnail") ;
 
-
-
+        byte[] decodedString = intent.getExtras().getByteArray("Thumbnail");
+        Bitmap bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
         tvtitle.setText(Title);
         tvdescription.setText(Description);
-        img.setImageResource(image);
+        img.setImageBitmap(bitmap);
 
 
         ivShare = (ImageView) findViewById(R.id.ivShare);

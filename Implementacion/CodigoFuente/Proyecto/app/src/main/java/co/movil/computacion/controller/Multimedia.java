@@ -186,5 +186,10 @@ public class Multimedia extends AppCompatActivity {
         });
     }
 
+    private void GetEvents(){
+
+
+    }
+
 
 }
