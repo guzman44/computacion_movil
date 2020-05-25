@@ -36,9 +36,8 @@ public interface IAuthentication {
 
 
     @POST("api/Authentication/create/acount")
-    Call<ResponseDTO> crarCuenta(
+    Call<ResponseDTO> crearCuenta(
             @Header("Content-Type") String content_type,
-            @Header("Authorization") String token,
             @Body AcountDTO body
     );
 
