@@ -104,7 +104,8 @@ public class NotificationService extends Service {
                     if(response.errorBody()!= null){
                     }else{
                         for(NotificacionesDTO list: response.body()){
-                            createNotification(list.getTitulo(),list.getMensaje());
+                            if(list.getEntregado().equals("0"))
+                                createNotification(list.getTitulo(),list.getMensaje());
                         }
                     }
                 }
