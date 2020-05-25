@@ -11,6 +11,7 @@ namespace EventPlusAPI.ViewModel
         public int IdLogin { get; set; }
         public string UserName { get; set; }
         public string NombreUsuario { get; set; }
+        public string Titulo { get; set; }
         public string Mensaje { get; set; }
         public string Entregado { get; set; }
         public string Activo { get; set; }

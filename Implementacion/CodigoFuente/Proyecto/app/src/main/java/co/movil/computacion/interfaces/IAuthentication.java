@@ -250,7 +250,7 @@ public interface IAuthentication {
    Call<List<NotificacionesDTO>> listadoTodasNotificaconesxIdLogin(
            @Header("Content-Type") String content_type,
            @Header("Authorization") String token,
-           @Path("idLogin") String idLogin
+           @Path("idLogin") Integer idLogin
    );
 
 

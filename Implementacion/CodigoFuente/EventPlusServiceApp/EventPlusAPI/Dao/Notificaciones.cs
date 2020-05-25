@@ -7,6 +7,7 @@ namespace EventPlusAPI.Dao
     {
         public int Id { get; set; }
         public int IdLogin { get; set; }
+        public string Titulo { get; set; }
         public string Mensaje { get; set; }
         public string Entregado { get; set; }
         public string Activo { get; set; }

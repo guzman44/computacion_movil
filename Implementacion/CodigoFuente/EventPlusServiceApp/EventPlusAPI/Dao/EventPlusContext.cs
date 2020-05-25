@@ -319,6 +319,11 @@ Longitud de la georeferenciación de googlemaps");
                     .HasMaxLength(250)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Titulo)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
                 entity.HasOne(d => d.IdLoginNavigation)
                     .WithMany(p => p.Notificaciones)
                     .HasForeignKey(d => d.IdLogin)

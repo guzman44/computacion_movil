@@ -48,6 +48,7 @@ namespace EventPlusAPI.Services
                 Mensaje = s.Mensaje,
                 FechaRegistroMostrar = CreateDBDateTime(s.FechaRegistro.ToString()),
                 Entregado = s.Entregado,
+                Titulo = s.Titulo,
                 FechaRegistro = s.FechaRegistro,
                 Activo = s.Activo
             }).ToList();
@@ -65,6 +66,7 @@ namespace EventPlusAPI.Services
                 {
                     Entregado = "0",
                     Mensaje = model.Mensaje,
+                    Titulo = model.Titulo,
                     IdLogin = model.IdLogin,
                     Activo = "1",
                     FechaRegistro = DateTime.Now

@@ -6,89 +6,89 @@ import java.io.Serializable;
 
 public class NotificacionesDTO implements Serializable {
 
-    private Integer Id;
-    private Integer IdLogin;
-    private String UserName;
-    private String NombreUsuario;
-    private String Mensaje;
-    private String Entregado;
-    private String Activo;
-    private DateTime FechaRegistro;
-    private String FechaRegistroMostrar;
+    private Integer id;
+    private Integer idLogin;
+    private String userName;
+    private String nombreUsuario;
+    private String titulo;
+    private String mensaje;
+    private String entregado;
+    private String activo;
+    private String fechaRegistroMostrar;
 
     public NotificacionesDTO() {
     }
 
     public Integer getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Integer id) {
-        Id = id;
+        this.id = id;
     }
 
     public Integer getIdLogin() {
-        return IdLogin;
+        return idLogin;
     }
 
     public void setIdLogin(Integer idLogin) {
-        IdLogin = idLogin;
+        this.idLogin = idLogin;
     }
 
     public String getUserName() {
-        return UserName;
+        return userName;
     }
 
     public void setUserName(String userName) {
-        UserName = userName;
+        this.userName = userName;
     }
 
     public String getNombreUsuario() {
-        return NombreUsuario;
+        return nombreUsuario;
     }
 
     public void setNombreUsuario(String nombreUsuario) {
-        NombreUsuario = nombreUsuario;
+        this.nombreUsuario = nombreUsuario;
     }
 
     public String getMensaje() {
-        return Mensaje;
+        return mensaje;
     }
 
     public void setMensaje(String mensaje) {
-        Mensaje = mensaje;
+        this.mensaje = mensaje;
     }
 
     public String getEntregado() {
-        return Entregado;
+        return entregado;
     }
 
     public void setEntregado(String entregado) {
-        Entregado = entregado;
+        this.entregado = entregado;
     }
 
     public String getActivo() {
-        return Activo;
+        return activo;
     }
 
     public void setActivo(String activo) {
-        Activo = activo;
-    }
-
-    public DateTime getFechaRegistro() {
-        return FechaRegistro;
-    }
-
-    public void setFechaRegistro(DateTime fechaRegistro) {
-        FechaRegistro = fechaRegistro;
+        this.activo = activo;
     }
 
     public String getFechaRegistroMostrar() {
-        return FechaRegistroMostrar;
+        return fechaRegistroMostrar;
     }
 
     public void setFechaRegistroMostrar(String fechaRegistroMostrar) {
-        FechaRegistroMostrar = fechaRegistroMostrar;
+        this.fechaRegistroMostrar = fechaRegistroMostrar;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 }
 
