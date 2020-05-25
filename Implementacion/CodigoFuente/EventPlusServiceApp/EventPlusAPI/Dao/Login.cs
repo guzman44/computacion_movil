@@ -9,6 +9,7 @@ namespace EventPlusAPI.Dao
         {
             Categoria = new HashSet<Categoria>();
             EventoUsuario = new HashSet<EventoUsuario>();
+            Notificaciones = new HashSet<Notificaciones>();
             Publicaciones = new HashSet<Publicaciones>();
             Usuario = new HashSet<Usuario>();
         }
@@ -22,6 +23,7 @@ namespace EventPlusAPI.Dao
 
         public virtual ICollection<Categoria> Categoria { get; set; }
         public virtual ICollection<EventoUsuario> EventoUsuario { get; set; }
+        public virtual ICollection<Notificaciones> Notificaciones { get; set; }
         public virtual ICollection<Publicaciones> Publicaciones { get; set; }
         public virtual ICollection<Usuario> Usuario { get; set; }
     }

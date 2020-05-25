@@ -93,7 +93,8 @@ namespace EventPlusAPI.Services
                                 Email = model.Email,
                                 Activo = "1",
                                 Password = model.Password,
-                                UserName = model.Username
+                                UserName = model.Username,
+                                FechaRegistro = DateTime.Now                               
                             };
 
                             eventPlusContext.Login.Add(account);
