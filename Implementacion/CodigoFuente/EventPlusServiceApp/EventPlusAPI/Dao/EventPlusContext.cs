@@ -230,11 +230,13 @@ namespace EventPlusAPI.Dao
                     .HasComment("Llave Foránea");
 
                 entity.Property(e => e.Latitud)
-                    .HasColumnType("decimal(20, 0)")
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
                     .HasComment("Latitud de la georeferenciación de googlemaps");
 
                 entity.Property(e => e.Longitud)
-                    .HasColumnType("decimal(20, 0)")
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
                     .HasComment(@"Longitud de la georeferenciación de googlemaps
 Longitud de la georeferenciación de googlemaps");
 
