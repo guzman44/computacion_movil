@@ -10,8 +10,88 @@ public class PublicacionesDTO implements Serializable {
     public Integer idLogin;
     public Integer idEvento;
     public String comentario;
-    public DateTime fechaIngreso;
+    //public DateTime fechaIngreso;
+
+
     public String imagen;
+    public int likes;
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getFechaIngresoMostrar() {
+        return fechaIngresoMostrar;
+    }
+
+    public void setFechaIngresoMostrar(String fechaIngresoMostrar) {
+        this.fechaIngresoMostrar = fechaIngresoMostrar;
+    }
+
+    public Boolean getClicked() {
+        return clicked;
+    }
+
+    public void setClicked(Boolean clicked) {
+        this.clicked = clicked;
+    }
+
+    public String avatar;
+    public String userName;
+    public String nombre;
+    public String fechaIngresoMostrar;
+
+
+    Boolean clicked = false;
+    public boolean isClicked()
+    {
+        return this.clicked;
+    }
+
+    public void setClicked( boolean clicked )
+    {
+        this.clicked = clicked;
+    }
+
+    public void addLike()
+    {
+        this.likes+=1;
+    }
+
+    public void removeLike()
+    {
+        this.likes-=1;
+    }
+
+    public int getLikes() {
+        return likes;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
+    }
+
+
 
     public PublicacionesDTO() {
     }
@@ -48,14 +128,14 @@ public class PublicacionesDTO implements Serializable {
         this.comentario = comentario;
     }
 
-    public DateTime getFechaIngreso() {
+  /*  public DateTime getFechaIngreso() {
         return fechaIngreso;
     }
 
     public void setFechaIngreso(DateTime fechaIngreso) {
         this.fechaIngreso = fechaIngreso;
     }
-
+*/
     public String getImagen() {
         return imagen;
     }

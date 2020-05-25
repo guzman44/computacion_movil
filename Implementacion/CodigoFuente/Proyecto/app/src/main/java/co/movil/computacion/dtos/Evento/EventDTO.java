@@ -36,6 +36,11 @@ public class EventDTO  implements Serializable {
     private List<LocalizacionDTO> localizacion;
     private List<PublicacionesDTO> publicaciones;
 
+    @Override
+    public String toString() {
+        return nombre;
+    }
+
     public EventDTO() {
     }
 

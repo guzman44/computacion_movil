@@ -130,24 +130,7 @@ public class Search extends AppCompatActivity {
             }
         });
 
-       /* call.enqueue(new Callback<List<EventDTO>>() {
 
-            @Override
-            public void onResponse(Call<EventDTO> call, Response<List<EventDTO>> response) {
-
-                if(response.body()!= null){
-                    //SetEventGallery
-                }else{
-                    Toast.makeText(getApplicationContext(), "Evento creado satisfactoriamente " , Toast.LENGTH_LONG).show();
-                }
-                vc.progressBarProcess(R.id.loading,false);
-            }
-            @Override
-            public void onFailure(Call<EventDTO> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "Error en el servicio", Toast.LENGTH_LONG).show();
-                vc.progressBarProcess(R.id.loading,false);
-            }
-        });*/
 
     }
 

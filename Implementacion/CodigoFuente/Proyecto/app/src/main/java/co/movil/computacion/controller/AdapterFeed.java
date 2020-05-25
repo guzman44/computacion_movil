@@ -13,24 +13,26 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import co.movil.computacion.R;
 import co.movil.computacion.assets.utilidades.ViewComponent;
-import co.movil.computacion.model.ModelFeed;
+import co.movil.computacion.dtos.PublicacionesDTO;
+
 
 public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.ViewHolderFeed> {
 
     Context context;
-    ArrayList<ModelFeed> feedList = new ArrayList<>();
+    List<PublicacionesDTO> feedList = new ArrayList<>();
     RequestManager glide;
     ViewComponent vc;
 
     public AdapterFeed() {
     }
 
-    public AdapterFeed(Context context,ArrayList<ModelFeed> feedList ) {
+    public AdapterFeed(Context context, List<PublicacionesDTO> feedList ) {
         this.context = context;
         this.feedList = feedList;
         glide = Glide.with(context);
@@ -46,22 +48,22 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.ViewHolderFeed
 
     @Override
     public void onBindViewHolder(@NonNull final AdapterFeed.ViewHolderFeed holder, int position) {
-        final ModelFeed feed = feedList.get(position);
-        holder.tvNameFeed.setText(feed.getName());
-        holder.tvTimeFeed.setText(feed.getTime());
-        holder.tvLikesFeed.setText(String.valueOf(feed.getLikes()));
-       // holder.tvCommentsFeed.setText(String.valueOf(feed.getComments()));
-        holder.tvStatusFeed.setText(feed.getStatus());
+        final PublicacionesDTO feed = feedList.get(position);
+        holder.tvNameFeed.setText(feed.getNombre().toString());
+        holder.tvTimeFeed.setText(feed.getFechaIngresoMostrar().toString());
+        holder.tvLikesFeed.setText(String.valueOf(1));
+
+     //   holder.tvStatusFeed.setText(feed.getStatus());
 
 
-        glide.load(feed.getPropic()).into(holder.ivProfileFeed);
+       // glide.load(feed.getPropic()).into(holder.ivProfileFeed);
 
 
-        if(feed.getPostpic() == 0){
+        if(feed.getImagen() == ""){
             holder.ivPostFeed.setVisibility(View.GONE);
         }else{
             holder.ivPostFeed.setVisibility(View.VISIBLE);
-            glide.load(feed.getPostpic()).into(holder.ivPostFeed);
+            glide.load(feed.getImagen()).into(holder.ivPostFeed);
         }
 
         holder.rlLikeAction.setOnClickListener(new View.OnClickListener() {
