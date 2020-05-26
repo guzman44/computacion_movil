@@ -71,11 +71,13 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.ViewHolderFeed
         if(feed.getImagen()!= null && feed.getImagen().equals("")){
             holder.ivPostFeed.setVisibility(View.GONE);
         }else{
-            byte[] decodedString = Base64.decode(feed.getImagen(), Base64.DEFAULT);
-            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-            holder.ivPostFeed.setVisibility(View.VISIBLE);
-            holder.ivPostFeed.setImageBitmap(decodedByte);
-            //glide.load(feed.getImagen()).into(holder.ivPostFeed);
+            if(feed.getImagen()!=null){
+                byte[] decodedString = Base64.decode(feed.getImagen(), Base64.DEFAULT);
+                Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                holder.ivPostFeed.setVisibility(View.VISIBLE);
+                holder.ivPostFeed.setImageBitmap(decodedByte);
+                //glide.load(feed.getImagen()).into(holder.ivPostFeed);
+            }
         }
 
         holder.rlLikeAction.setOnClickListener(new View.OnClickListener() {
