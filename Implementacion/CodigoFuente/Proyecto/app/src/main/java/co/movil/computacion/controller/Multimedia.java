@@ -65,6 +65,7 @@ public class Multimedia extends AppCompatActivity {
     ViewComponent vc;
     List<EventDTO> list;
     EventDTO current;
+    Boolean seleccionoImagen = false;
 
     private enum Option {
         PICK_IMAGE(1),
@@ -141,11 +142,13 @@ public class Multimedia extends AppCompatActivity {
                 Uri Selected_Image_Uri = data.getData();
                 ivMiniatura.setImageURI(Selected_Image_Uri);
                 Hide();
+                seleccionoImagen = true;
             }
 
             if (requestCode == Option.TAKE_PHOTO.value) {
                 Bitmap bitmap = (Bitmap) data.getExtras().get("data");
                 ivMiniatura.setImageBitmap(bitmap);
+                seleccionoImagen = true;
                 Hide();
             }
 
@@ -160,6 +163,7 @@ public class Multimedia extends AppCompatActivity {
         ctx = this.getApplicationContext();
         vc = new ViewComponent(this, "MULTIMEDIA", null);
         vc.setDatosLogin();
+        seleccionoImagen = false;
 
         GetEventList();
 
@@ -196,8 +200,11 @@ public class Multimedia extends AppCompatActivity {
                 bitmap.compress(Bitmap.CompressFormat.PNG, 90, stream);
                 byte[] image=stream.toByteArray();
                 String imgBase64 = Base64.encodeToString(image, 0);
-
-                publicacionesDTO.imagen =  imgBase64;
+                if(!seleccionoImagen){
+                    publicacionesDTO.imagen =  null;
+                }else{
+                    publicacionesDTO.imagen =  imgBase64;
+                }
 
 /*                DateTimeFormatter timeFormatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.SSS");
                 String actual = DateTime.now().toString(timeFormatter);
