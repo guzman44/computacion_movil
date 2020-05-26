@@ -1,5 +1,6 @@
 package co.movil.computacion.controller;
 
+import com.google.android.gms.maps.model.LatLng;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,7 +30,10 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.location.Address;
+import android.location.Geocoder;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
@@ -64,6 +68,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
+
 
 
 public class Event extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
@@ -290,10 +295,17 @@ public class Event extends AppCompatActivity implements DatePickerDialog.OnDateS
                 public void onClick(View v) {
 
                     LocalizacionDTO localization = new LocalizacionDTO();
+
+                    LatLng latLng = getLocationFromAddress(etLocation.getText().toString());
+                    if(latLng != null){
+                        localization.setLatitud(latLng.latitude);
+                        localization.setLongitud(latLng.longitude);
+                    }
+
                     localization.setDireccion(etLocation.getText().toString());
 
                     List<LocalizacionDTO> localizationList = new ArrayList<>();
-                    localizationList.add(localization);
+                        localizationList.add(localization);
 
                     CategoriaDTO categoriaDTO = new CategoriaDTO();
                     List<CategoriaDTO> categoryList = new ArrayList<>();
@@ -374,20 +386,41 @@ public class Event extends AppCompatActivity implements DatePickerDialog.OnDateS
                     });
 
 
-/*
-   eventObject.setTitle( etTitle.getText().toString() );
-                    eventObject.setDescription( etDescription.getText().toString() );
-                    eventObject.setThumbnail( targetImage.getBaseline() ); //TO CHECK
 
-
-                    Intent intent = new Intent( v.getContext(), Home.class );
-                    intent.putExtra("evento", eventObject);
-                    intent.putExtras(vc.getUserBuble());
-                    startActivity( intent );*/
                 }
             });
         }
 
+    public LatLng getLocationFromAddress(String strAddress){
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            int a =1;
+
+        }
+
+
+        Geocoder mGeocoder = new Geocoder(getApplicationContext()); // getBaseContext()
+        LatLng position = null;
+
+        if(mGeocoder.isPresent()){
+            if(!strAddress.isEmpty())
+                try{
+                    List<Address> addresses = mGeocoder.getFromLocationName(strAddress + ",Bogota, Colombia", 2 );
+
+                    if(addresses.size() > 0){
+                        Address addressResult = addresses.get( 0);
+                        position = new LatLng (addressResult.getLatitude(), addressResult.getLongitude());
+                    }
+
+                }
+                catch (Exception e) {
+int a = 1;
+                }
+        }
+
+
+        return position;
+    }
     private int GetValue(String name){
         String[] keys = getResources().getStringArray(R.array.categories);
         String[] values = getResources().getStringArray(R.array.categoriesId);

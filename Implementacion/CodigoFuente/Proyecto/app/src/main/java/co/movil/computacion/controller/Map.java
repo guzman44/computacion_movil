@@ -33,6 +33,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.gson.Gson;
 
 import java.io.BufferedWriter;
@@ -50,10 +52,12 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import co.movil.computacion.R;
 import co.movil.computacion.assets.utilidades.ViewComponent;
+import co.movil.computacion.controller.directionhelpers.FetchURL;
+import co.movil.computacion.controller.directionhelpers.TaskLoadedCallback;
 import co.movil.computacion.model.Position;
 
 
-public class Map extends FragmentActivity implements  OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, LocationListener, GoogleApiClient.OnConnectionFailedListener,GoogleMap.OnInfoWindowClickListener {
+public class Map extends FragmentActivity implements  OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, LocationListener, GoogleApiClient.OnConnectionFailedListener,GoogleMap.OnInfoWindowClickListener, GoogleMap.OnMarkerClickListener, TaskLoadedCallback {
 
 
     FusedLocationProviderClient fusedLocationProviderClient;
@@ -79,6 +83,54 @@ public class Map extends FragmentActivity implements  OnMapReadyCallback, Google
     Circle c1;
     double radio = 1000;
     int light = 5000;
+    private Polyline currentPolyline;
+    LatLng current;
+
+    private String getUrl(LatLng origin, LatLng dest, String directionMode) {
+        // Origin of route
+        String str_origin = "origin=" + origin.latitude + "," + origin.longitude;
+        // Destination of route
+        String str_dest = "destination=" + dest.latitude + "," + dest.longitude;
+        // Mode
+        String mode = "mode=" + directionMode;
+        // Building the parameters to the web service
+        String parameters = str_origin + "&" + str_dest + "&" + mode;
+        // Output format
+        String output = "json";
+        // Building the url to the web service
+        String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&key=" + getString(R.string.google_maps_key);
+        return url;
+    }
+
+    @Override
+    public void onTaskDone(Object... values) {
+        if (currentPolyline != null)
+            currentPolyline.remove();
+        currentPolyline = mMap.addPolyline((PolylineOptions) values[0]);
+    }
+
+    @Override
+    public boolean onMarkerClick(final Marker marker) {
+
+
+        LatLng p1 = new LatLng(4.6855083, -74.0493967);
+        LatLng p2 = new LatLng(4.6888999,-74.05680084);
+//current , marker.getPosition()
+        new FetchURL(Map.this).execute(getUrl(p1,p2, "driving"), "drivingx");
+
+        String name= marker.getTitle();
+
+        if (name.equalsIgnoreCase("My Spot"))
+        {
+            //write your code here
+        }
+
+       /* if (marker.equals(myMarker))
+        {
+            //handle click here
+        }*/
+       return true;
+    }
 
     @Override
     public void onInfoWindowClick(Marker marker) {
@@ -212,21 +264,22 @@ public class Map extends FragmentActivity implements  OnMapReadyCallback, Google
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMap.setOnInfoWindowClickListener(this);
+        mMap.setOnMarkerClickListener(this);
       /*  CustomInfoWindow customInfoWindow = new CustomInfoWindow(getLayoutInflater());
         mMap.setInfoWindowAdapter(customInfoWindow);*/
     }
 
     private void ShowMarker(Location location, Boolean last){
 
-        LatLng current = new LatLng(location.getLatitude(), location.getLongitude());
+        current = new LatLng(location.getLatitude(), location.getLongitude());
 
         if(last || marker == null   ){
 
             markerOptions = new MarkerOptions();
             markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.current));
-            markerOptions.title("Posición");
+            markerOptions.title("Ubicación actual");
             marker =  mMap.addMarker(markerOptions.position(current));
-            marker.setSnippet("Hola mundo");
+            //marker.setSnippet("Hola mundo");
             marker.showInfoWindow();
         }
         else{
@@ -279,6 +332,8 @@ public class Map extends FragmentActivity implements  OnMapReadyCallback, Google
 
         c1 = mMap.addCircle(circleOptions);
     }
+
+
 
     private List<Location> GetEventsLocation(){
 
