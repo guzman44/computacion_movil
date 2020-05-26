@@ -52,7 +52,7 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.ViewHolderFeed
     @Override
     public void onBindViewHolder(@NonNull final AdapterFeed.ViewHolderFeed holder, int position) {
         final PublicacionesDTO feed = feedList.get(position);
-        if(feed.getNombre()!= null){
+        if(feed.getNombre()!= null && !feed.getNombre().equals((" ")) ){
             holder.tvNameFeed.setText(feed.getNombre().toString());
         }else{
             holder.tvNameFeed.setText(feed.getUserName().toString());

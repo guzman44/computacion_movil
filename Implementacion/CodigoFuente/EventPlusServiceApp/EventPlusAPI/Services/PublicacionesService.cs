@@ -24,12 +24,12 @@ namespace EventPlusAPI.Services
             {
                 Id = s.Id,
                 IdLogin = s.IdLoginNavigation.Id,
-                Nombre = _eventPlusContext.Usuario.Where(s => s.IdLogin == s.IdLoginNavigation.Id).Select(s => s.Nombres +  " " + s.Apellidos).FirstOrDefault(),
+                Nombre = _eventPlusContext.Usuario.Where(w => w.IdLogin == s.IdLoginNavigation.Id).Select(w => w.Nombres +  " " + w.Apellidos).FirstOrDefault(),
                 UserName = s.IdLoginNavigation.UserName,
                 Comentario = s.Comentario,
                 FechaIngresoMostrar  = CreateDBDateTime(s.FechaIngreso.ToString()),
                 Imagen = s.Imagen,
-                Avatar = _eventPlusContext.Usuario.Where(s => s.IdLogin == s.IdLoginNavigation.Id).Select(s => s.Imagen).FirstOrDefault(),
+                Avatar = _eventPlusContext.Usuario.Where(w => w.IdLogin == s.IdLoginNavigation.Id).Select(w => w.Imagen).FirstOrDefault(),
                 IdEvento = s.IdEvento,
                 Evento = s.IdEventoNavigation.Nombre                
             }).ToList();
