@@ -45,20 +45,24 @@ public class DetailEvent extends AppCompatActivity {
 
         tvtitle = (TextView) findViewById(R.id.txttitle);
         tvdescription = (TextView) findViewById(R.id.txtDesc);
-//        tvcategory = (TextView) findViewById(R.id.txtCat);
         img = (ImageView) findViewById(R.id.bookthumbnail);
 
-        // Recieve data
         Intent intent = getIntent();
         String Title = intent.getExtras().getString("Title");
         String Description = intent.getExtras().getString("Description");
-       // int image = intent.getExtras().getInt("Thumbnail") ;
 
         byte[] decodedString = intent.getExtras().getByteArray("Thumbnail");
-        Bitmap bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+
+        if(decodedString != null){
+            Bitmap bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            img.setImageBitmap(bitmap);
+        }else{
+
+
+        }
+
         tvtitle.setText(Title);
         tvdescription.setText(Description);
-        img.setImageBitmap(bitmap);
 
 
         ivShare = (ImageView) findViewById(R.id.ivShare);
