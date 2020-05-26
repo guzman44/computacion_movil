@@ -11,6 +11,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 
@@ -50,11 +51,19 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
+
+import co.movil.Helper.RetrofitClientInstance;
 import co.movil.computacion.R;
 import co.movil.computacion.assets.utilidades.ViewComponent;
 import co.movil.computacion.controller.directionhelpers.FetchURL;
 import co.movil.computacion.controller.directionhelpers.TaskLoadedCallback;
+import co.movil.computacion.dtos.Evento.EventDTO;
+import co.movil.computacion.dtos.LocalizacionDTO;
+import co.movil.computacion.interfaces.IAuthentication;
 import co.movil.computacion.model.Position;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class Map extends FragmentActivity implements  OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, LocationListener, GoogleApiClient.OnConnectionFailedListener,GoogleMap.OnInfoWindowClickListener, GoogleMap.OnMarkerClickListener, TaskLoadedCallback {
@@ -85,6 +94,7 @@ public class Map extends FragmentActivity implements  OnMapReadyCallback, Google
     int light = 5000;
     private Polyline currentPolyline;
     LatLng current;
+    List<EventDTO> list;
 
     private String getUrl(LatLng origin, LatLng dest, String directionMode) {
         // Origin of route
@@ -113,9 +123,13 @@ public class Map extends FragmentActivity implements  OnMapReadyCallback, Google
     public boolean onMarkerClick(final Marker marker) {
 
 
-        LatLng p1 = new LatLng(4.6855083, -74.0493967);
-        LatLng p2 = new LatLng(4.6888999,-74.05680084);
+        //LatLng p1 = new LatLng(4.6855083, -74.0493967);
+        //LatLng p2 = new LatLng(4.6888999,-74.05680084);
 //current , marker.getPosition()
+
+        LatLng p1 = current;
+        LatLng p2 = marker.getPosition();
+
         new FetchURL(Map.this).execute(getUrl(p1,p2, "driving"), "drivingx");
 
         String name= marker.getTitle();
@@ -134,8 +148,15 @@ public class Map extends FragmentActivity implements  OnMapReadyCallback, Google
 
     @Override
     public void onInfoWindowClick(Marker marker) {
+
+        EventDTO eventDTO = findEvent( marker.getTitle());
+
         Intent intent = new Intent(this, DetailEvent.class);
         intent.putExtra("Title", marker.getTitle());
+        intent.putExtra("Description", eventDTO.getDescripcion());
+        byte[] decodedString = Base64.decode(eventDTO.getImagenMiniatura(), Base64.DEFAULT);
+        intent.putExtra("Thumbnail", decodedString);
+
         intent.putExtras(vc.getUserBuble());
         startActivity(intent);
     }
@@ -153,8 +174,8 @@ public class Map extends FragmentActivity implements  OnMapReadyCallback, Google
         requestPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION,  ACCESS_FINE_LOCATION );
 
         Sensor();
-        locations = GetEventsLocation();
 
+        GetEventList();
 
 
     }
@@ -333,9 +354,53 @@ public class Map extends FragmentActivity implements  OnMapReadyCallback, Google
         c1 = mMap.addCircle(circleOptions);
     }
 
+private EventDTO findEvent(String name){
+    for (EventDTO evt: list) {
+        if(evt.getNombre().equals(name)){
+            return evt;
+        }
+    }
+    return null;
+}
+    private void GetEventList(){
+        IAuthentication service = RetrofitClientInstance.getRetrofitInstance().create(IAuthentication.class);
+
+        Call<List<EventDTO>> call = service.listaTodosEventos("application/json","Bearer " + vc.getUserToken().getToken(), vc.getUserToken().getIdLogin());
+        call.enqueue(new Callback<List<EventDTO>>() {
+            @Override
+            public void onResponse(Call<List<EventDTO>> call, Response<List<EventDTO>> response) {
+                if(response.body()!= null) {
+                    list = response.body();
+                    List<Location> lista = new ArrayList<>();
+
+                    for (EventDTO evt: list) {
+                        List<LocalizacionDTO> localizations = evt.getLocalizacion();
+                        if (localizations.size() > 0){
+
+                            Location location = new Location(evt.getNombre());
+                            location.setLatitude(localizations.get(0).latitud);
+                            location.setLongitude(localizations.get(0).longitud);
+
+                            lista.add(location);
+                        }
+                    }
+
+                    locations = lista;
 
 
-    private List<Location> GetEventsLocation(){
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<EventDTO>> call, Throwable t) {
+
+            }
+        });
+
+
+
+    }
+    private List<Location> GetEventsLocation1(){
 
         String [] Events =  {"Test 01","Test 02", "Maria Semples", "The Vegitarian", "The Wild Robot"};
         float [] latitude =  {4.6889f,4.6915f,4.6981f,4.7047f,4.7069f};
@@ -355,14 +420,16 @@ public class Map extends FragmentActivity implements  OnMapReadyCallback, Google
         float value = 0;
         List<Location> locationsFilter = new ArrayList<>();
 
+        if(locations!= null){
+            for (Location location: locations) {
+                value =  current.distanceTo(location);
 
-        for (Location location: locations) {
-            value =  current.distanceTo(location);
-
-            if(value < distance ){
-                locationsFilter.add(location);
+                if(value < distance ){
+                    locationsFilter.add(location);
+                }
             }
         }
+
         return locationsFilter;
     }
 
