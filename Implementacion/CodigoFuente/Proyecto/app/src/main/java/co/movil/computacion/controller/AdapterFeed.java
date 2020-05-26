@@ -1,6 +1,9 @@
 package co.movil.computacion.controller;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,21 +52,29 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.ViewHolderFeed
     @Override
     public void onBindViewHolder(@NonNull final AdapterFeed.ViewHolderFeed holder, int position) {
         final PublicacionesDTO feed = feedList.get(position);
-        holder.tvNameFeed.setText(feed.getNombre().toString());
+        if(feed.getNombre()!= null){
+            holder.tvNameFeed.setText(feed.getNombre().toString());
+        }else{
+            holder.tvNameFeed.setText(feed.getUserName().toString());
+        }
+        if(feed.getAvatar()!=null){
+            byte[] decodedString = Base64.decode(feed.getAvatar(), Base64.DEFAULT);
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            holder.ivProfileFeed.setImageBitmap(decodedByte);
+        }
+
         holder.tvTimeFeed.setText(feed.getFechaIngresoMostrar().toString());
         holder.tvLikesFeed.setText(String.valueOf(1));
-
-     //   holder.tvStatusFeed.setText(feed.getStatus());
-
-
-       // glide.load(feed.getPropic()).into(holder.ivProfileFeed);
-
+        holder.tvStatusFeed.setText(feed.getComentario());
 
         if(feed.getImagen() == ""){
             holder.ivPostFeed.setVisibility(View.GONE);
         }else{
+            byte[] decodedString = Base64.decode(feed.getImagen(), Base64.DEFAULT);
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
             holder.ivPostFeed.setVisibility(View.VISIBLE);
-            glide.load(feed.getImagen()).into(holder.ivPostFeed);
+            holder.ivPostFeed.setImageBitmap(decodedByte);
+            //glide.load(feed.getImagen()).into(holder.ivPostFeed);
         }
 
         holder.rlLikeAction.setOnClickListener(new View.OnClickListener() {
