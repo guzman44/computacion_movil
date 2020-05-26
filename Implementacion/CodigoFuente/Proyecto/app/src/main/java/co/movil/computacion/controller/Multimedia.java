@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat;
 import co.movil.Helper.RetrofitClientInstance;
 import co.movil.computacion.R;
 import co.movil.computacion.assets.utilidades.ViewComponent;
+import co.movil.computacion.controller.login.LoginActivity;
 import co.movil.computacion.dtos.Evento.EventDTO;
 import co.movil.computacion.dtos.PublicacionesDTO;
 import co.movil.computacion.dtos.ResponseDTO;
@@ -215,6 +216,9 @@ public class Multimedia extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), response.body().getResponse().toString(), Toast.LENGTH_LONG).show();
                         }else{
                             Toast.makeText(getApplicationContext(), "Publicación creada satisfactoriamente " , Toast.LENGTH_LONG).show();
+                            Multimedia.this.startActivity(new Intent(Multimedia.this,Home.class).putExtras(vc.getUserBuble()));
+                            vc.progressBarProcess(R.id.loading,false);
+                            Multimedia.this.finish();
                         }
                         vc.progressBarProcess(R.id.loading,false);
                     }

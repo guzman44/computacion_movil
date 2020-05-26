@@ -375,6 +375,9 @@ public class Event extends AppCompatActivity implements DatePickerDialog.OnDateS
                                 Toast.makeText(getApplicationContext(), response.body().getResponse().toString(), Toast.LENGTH_LONG).show();
                             }else{
                                 Toast.makeText(getApplicationContext(), "Evento creado satisfactoriamente " , Toast.LENGTH_LONG).show();
+                                Event.this.startActivity(new Intent(Event.this,Search.class).putExtras(vc.getUserBuble()));
+                                vc.progressBarProcess(R.id.loading,false);
+                                Event.this.finish();
                             }
                             vc.progressBarProcess(R.id.loading,false);
                         }
