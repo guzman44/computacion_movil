@@ -103,7 +103,7 @@ public class Search extends AppCompatActivity {
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerviewGallery);
         recyclerView.setLayoutManager(new GridLayoutManager(this,2));
-        adapterSearch = new AdapterSearch(this,eventList);
+        adapterSearch = new AdapterSearch(this,eventList, vc);
 
         recyclerView.setAdapter(adapterSearch);
         adapterSearch.notifyDataSetChanged();

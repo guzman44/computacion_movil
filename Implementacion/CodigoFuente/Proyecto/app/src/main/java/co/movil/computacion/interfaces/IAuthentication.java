@@ -8,6 +8,7 @@ import co.movil.computacion.dtos.Account.PerfilUserDTO;
 import co.movil.computacion.dtos.Evento.EventDTO;
 import co.movil.computacion.dtos.GaleriaDTO;
 import co.movil.computacion.dtos.LocalizacionDTO;
+import co.movil.computacion.dtos.NotificacionesDTO;
 import co.movil.computacion.dtos.PublicacionesDTO;
 import co.movil.computacion.dtos.ResponseDTO;
 import co.movil.computacion.dtos.SearchEventDTO;
@@ -244,8 +245,35 @@ public interface IAuthentication {
     );
 
 
+   /**Listado de todos las notificaciones por usuario**/
+   @GET("api/Publication/notificacion/list/{idLogin}")
+   Call<List<NotificacionesDTO>> listadoTodasNotificaconesxIdLogin(
+           @Header("Content-Type") String content_type,
+           @Header("Authorization") String token,
+           @Path("idLogin") Integer idLogin
+   );
 
-    /**Componente User**/
+
+   /**Crea una notificacion asociada a un IdLogin**/
+   @POST("api/Publication/notificacion/create")
+   Call<ResponseDTO> crearNotificacion(
+           @Header("Content-Type") String content_type,
+           @Header("Authorization") String token,
+           @Body NotificacionesDTO body
+   );
+
+   /** **/
+   @PUT("api/Publication/notificacion/update")
+   Call<ResponseDTO> actualizarNotificacion(
+           @Header("Content-Type") String content_type,
+           @Header("Authorization") String token,
+           @Body NotificacionesDTO body
+   );
+
+
+
+
+ /**Componente User**/
     /**Listado de todos los usuarios**/
     @GET("api/User/All")
     Call<List<UserDTO>> listadoTodosUsusarios(

@@ -23,6 +23,7 @@ namespace EventPlusAPI.Dao
         public virtual DbSet<Galeria> Galeria { get; set; }
         public virtual DbSet<Localizacion> Localizacion { get; set; }
         public virtual DbSet<Login> Login { get; set; }
+        public virtual DbSet<Notificaciones> Notificaciones { get; set; }
         public virtual DbSet<ParametrizacionObjetos> ParametrizacionObjetos { get; set; }
         public virtual DbSet<Publicaciones> Publicaciones { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
@@ -229,11 +230,13 @@ namespace EventPlusAPI.Dao
                     .HasComment("Llave Foránea");
 
                 entity.Property(e => e.Latitud)
-                    .HasColumnType("decimal(20, 0)")
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
                     .HasComment("Latitud de la georeferenciación de googlemaps");
 
                 entity.Property(e => e.Longitud)
-                    .HasColumnType("decimal(20, 0)")
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
                     .HasComment(@"Longitud de la georeferenciación de googlemaps
 Longitud de la georeferenciación de googlemaps");
 
@@ -287,6 +290,47 @@ Longitud de la georeferenciación de googlemaps");
                     .HasMaxLength(20)
                     .IsUnicode(false)
                     .HasComment("Username de la persona");
+            });
+
+            modelBuilder.Entity<Notificaciones>(entity =>
+            {
+                entity.HasIndex(e => e.Id)
+                    .HasName("UQ_Notificaciones_Id")
+                    .IsUnique();
+
+                entity.Property(e => e.Activo)
+                    .IsRequired()
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .IsFixedLength()
+                    .HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.Entregado)
+                    .IsRequired()
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .IsFixedLength()
+                    .HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.FechaRegistro).HasColumnType("datetime");
+
+                entity.Property(e => e.IdLogin).HasColumnName("Id_Login");
+
+                entity.Property(e => e.Mensaje)
+                    .IsRequired()
+                    .HasMaxLength(250)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Titulo)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.IdLoginNavigation)
+                    .WithMany(p => p.Notificaciones)
+                    .HasForeignKey(d => d.IdLogin)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Notificaciones_Login");
             });
 
             modelBuilder.Entity<ParametrizacionObjetos>(entity =>

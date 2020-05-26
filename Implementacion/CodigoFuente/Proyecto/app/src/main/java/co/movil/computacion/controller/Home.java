@@ -1,6 +1,8 @@
 package co.movil.computacion.controller;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,6 +18,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,6 +33,7 @@ public class Home extends AppCompatActivity {
     RecyclerView recyclerView;
     List<PublicacionesDTO> feedList = new ArrayList<>();
     AdapterFeed adapterFeed;
+
 
 
     @Override
@@ -47,34 +52,20 @@ public class Home extends AppCompatActivity {
         }
 
         GetPublicationList();
-      //  SetRecyclerView();
 
         Bundle extras = getIntent().getExtras();
         Intent instenService = new Intent(this, NotificationService.class);
         instenService.putExtras(vc.getUserBuble());
+        instenService.putExtra("userToken",vc.userToken);
         instenService.putExtra("token",vc.userToken.getToken());
+        instenService.putExtra("idLogin",vc.userToken.getIdLogin());
         instenService.putExtra("username",(String) extras.get("userName"));
         instenService.putExtra("password",(String) extras.get("password"));
         startService(instenService);
 
+
     }
 
-/*    public void SetRecyclerView( List<PublicacionesDTO> list){
-*//*        ModelFeed modelFeed = new ModelFeed(1,7,3,R.drawable.ic_propic1,R.drawable.img_post1,"Carlos Rodriguez","1 hora","Feria del automovil" );
-        feedList.add(modelFeed);
-        modelFeed = new ModelFeed(2,5,1,R.drawable.ic_propic2,0,"Carolina Gomez","2 horas","Microsoft Dynamics CRM / Módulo de ventas" );
-        feedList.add(modelFeed);
-        modelFeed = new ModelFeed(3,1,2,R.drawable.ic_propic3,R.drawable.img_post2,"Alejandro Rodriguez","3 horas","Clásicos" );
-        feedList.add(modelFeed);
-
-        modelFeed = new ModelFeed(4,2,0,R.drawable.ic_propic2,0,"marco","2 horas","Infraestructura Azure" );
-        feedList.add(modelFeed);
-        modelFeed = new ModelFeed(5,3,1,R.drawable.ic_propic3,R.drawable.img_post2,"JJ","3 horas","Clásicos" );
-        feedList.add(modelFeed);*//*
-
-        feedList
-        adapterFeed.notifyDataSetChanged();
-    }*/
 
     private void GetPublicationList(){
         IAuthentication service = RetrofitClientInstance.getRetrofitInstance().create(IAuthentication.class);
@@ -93,16 +84,11 @@ public class Home extends AppCompatActivity {
                     feedList = (List<PublicacionesDTO>)response.body();
                     adapterFeed = new AdapterFeed(ctx, feedList);
                     recyclerView.setAdapter(adapterFeed);
-
-
-                    //adapterFeed.notifyDataSetChanged();
-
                 }
             }
 
             @Override
             public void onFailure(Call<List<PublicacionesDTO>> call, Throwable t) {
-int a = 1;
             }
         });
 

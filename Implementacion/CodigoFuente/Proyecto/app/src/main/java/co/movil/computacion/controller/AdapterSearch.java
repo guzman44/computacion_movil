@@ -36,12 +36,13 @@ public class AdapterSearch  extends RecyclerView.Adapter<AdapterSearch.ViewHolde
     ViewComponent vc;
 
 
-    public AdapterSearch(Context context, List<EventDTO> eventList ) {
+    public AdapterSearch(Context context, List<EventDTO> eventList , ViewComponent viewComponent) {
         this.context = context;
         this.eventList = eventList;
         glide = Glide.with(context);
         allList = new ArrayList<>();
         allList.addAll(eventList);
+        this.vc = viewComponent;
 
     }
 
@@ -72,6 +73,7 @@ public class AdapterSearch  extends RecyclerView.Adapter<AdapterSearch.ViewHolde
                 intent.putExtra("Title",event.getNombre());
                 intent.putExtra("Description",event.getDescripcion());
                 intent.putExtra("Thumbnail", decodedString);
+                intent.putExtras(vc.getUserBuble());
                 //intent.putExtras(vc.getUserBuble());
                 // start the activity
                 context.startActivity(intent);

@@ -49,6 +49,25 @@ namespace EventPlusAPI.Services
                 _eventPlusContext.EventoUsuario.Add(evUs);
                 _eventPlusContext.SaveChanges();
 
+                if(model.Localizacion!= null)
+                {
+                    foreach (var lista in model.Localizacion)
+                    {
+                        Localizacion local = new Localizacion
+                        {
+                            IdEvento = ev.Id,
+                            Activo = "1",
+                            Comentario = lista.Comentario,
+                            Direccion = lista.Direccion,
+                            FechaRegistro = DateTime.Now,
+                            Latitud = lista.Latitud,
+                            Longitud = lista.Longitud
+                        };
+                        _eventPlusContext.Localizacion.Add(local);
+                        _eventPlusContext.SaveChanges();
+                    }
+                }
+
                 reponse.Type = "success";
                 reponse.Response = "El regitsro se creo exitosamente.";
 
@@ -325,9 +344,11 @@ namespace EventPlusAPI.Services
                 FechaFin = s.IdEventoNavigation.FechaFin,
                 FechaInicio = s.IdEventoNavigation.FechaInicio,
                 IdTipo = s.IdEventoNavigation.IdTipo,
-                Tipo = s.IdEventoNavigation.IdTipoNavigation.Nombre,
+                Tipo = s.IdEventoNavigation.IdTipoNavigation.Valor,
                 ImagenMiniatura = s.IdEventoNavigation.Imagen,
-                FechaRegistro = s.IdEventoNavigation.FechaRegistro
+                FechaRegistro = s.IdEventoNavigation.FechaRegistro,
+                FechaRegistroMostrar = CreateDBDateTime(s.IdEventoNavigation.FechaRegistro.ToString()),                
+                Localizacion = _eventPlusContext.Localizacion.Where(m => m.IdEvento == s.IdEvento).ToList()
             }).ToList();
 
             return listEvent;
@@ -548,8 +569,17 @@ namespace EventPlusAPI.Services
                 return reponse;
             }
         }
-    
-    
-    
+
+        public static string CreateDBDateTime(string date)
+        {
+            DateTime result;
+            if (DateTime.TryParse(date, out result))
+            {
+                return result.ToString("dd/MM/yyyy - HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+            }
+            return "";
+        }
+
+
     }
 }

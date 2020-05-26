@@ -99,6 +99,7 @@ public class LoginActivity extends AppCompatActivity {
                             UserTokenViewModel result =  response.body();
                             final Bundle bundle = new Bundle();
                             bundle.putSerializable("USER",result);
+                            bundle.putSerializable("event", "Home");
                             bundle.putString("userName",usernameEditText.getText().toString());
                             bundle.putString("password",passwordEditText.getText().toString());
 
