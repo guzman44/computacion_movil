@@ -344,9 +344,10 @@ namespace EventPlusAPI.Services
                 FechaFin = s.IdEventoNavigation.FechaFin,
                 FechaInicio = s.IdEventoNavigation.FechaInicio,
                 IdTipo = s.IdEventoNavigation.IdTipo,
-                Tipo = s.IdEventoNavigation.IdTipoNavigation.Nombre,
+                Tipo = s.IdEventoNavigation.IdTipoNavigation.Valor,
                 ImagenMiniatura = s.IdEventoNavigation.Imagen,
                 FechaRegistro = s.IdEventoNavigation.FechaRegistro,
+                FechaRegistroMostrar = CreateDBDateTime(s.IdEventoNavigation.FechaRegistro.ToString()),                
                 Localizacion = _eventPlusContext.Localizacion.Where(m => m.IdEvento == s.IdEvento).ToList()
             }).ToList();
 
@@ -568,8 +569,17 @@ namespace EventPlusAPI.Services
                 return reponse;
             }
         }
-    
-    
-    
+
+        public static string CreateDBDateTime(string date)
+        {
+            DateTime result;
+            if (DateTime.TryParse(date, out result))
+            {
+                return result.ToString("dd/MM/yyyy - HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+            }
+            return "";
+        }
+
+
     }
 }

@@ -74,6 +74,7 @@ namespace EventPlusAPI.ViewModel
         public Boolean Like { get; set; }
         public int Likes { get; set; }
         public DateTime FechaRegistro { get; set; }
+        public string FechaRegistroMostrar { get; set; }
         public List<Localizacion> Localizacion { get; set; }
     }
 
