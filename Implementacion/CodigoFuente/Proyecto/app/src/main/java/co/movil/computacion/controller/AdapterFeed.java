@@ -66,8 +66,9 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.ViewHolderFeed
         holder.tvTimeFeed.setText(feed.getFechaIngresoMostrar().toString());
         holder.tvLikesFeed.setText(String.valueOf(1));
         holder.tvStatusFeed.setText(feed.getComentario());
+        holder.ivPostFeed.setVisibility(View.GONE);
 
-        if(feed.getImagen() == ""){
+        if(feed.getImagen().equals("")){
             holder.ivPostFeed.setVisibility(View.GONE);
         }else{
             byte[] decodedString = Base64.decode(feed.getImagen(), Base64.DEFAULT);
