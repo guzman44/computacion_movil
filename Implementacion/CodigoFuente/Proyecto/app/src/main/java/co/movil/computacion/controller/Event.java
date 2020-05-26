@@ -35,6 +35,7 @@ import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.view.MotionEvent;
@@ -375,9 +376,16 @@ public class Event extends AppCompatActivity implements DatePickerDialog.OnDateS
                                 Toast.makeText(getApplicationContext(), response.body().getResponse().toString(), Toast.LENGTH_LONG).show();
                             }else{
                                 Toast.makeText(getApplicationContext(), "Evento creado satisfactoriamente " , Toast.LENGTH_LONG).show();
-                                Event.this.startActivity(new Intent(Event.this,Search.class).putExtras(vc.getUserBuble()));
-                                vc.progressBarProcess(R.id.loading,false);
-                                Event.this.finish();
+
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Event.this.startActivity(new Intent(Event.this,Search.class).putExtras(vc.getUserBuble()));
+                                        vc.progressBarProcess(R.id.loading,false);
+                                        Event.this.finish();
+                                    }
+                                },2000);
+
                             }
                             vc.progressBarProcess(R.id.loading,false);
                         }

@@ -27,6 +27,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.view.MotionEvent;
@@ -223,9 +224,17 @@ public class Multimedia extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), response.body().getResponse().toString(), Toast.LENGTH_LONG).show();
                         }else{
                             Toast.makeText(getApplicationContext(), "Publicación creada satisfactoriamente " , Toast.LENGTH_LONG).show();
-                            Multimedia.this.startActivity(new Intent(Multimedia.this,Home.class).putExtras(vc.getUserBuble()));
-                            vc.progressBarProcess(R.id.loading,false);
-                            Multimedia.this.finish();
+
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Multimedia.this.startActivity(new Intent(Multimedia.this,Home.class).putExtras(vc.getUserBuble()));
+                                    vc.progressBarProcess(R.id.loading,false);
+                                    Multimedia.this.finish();
+                                }
+                            },2000);
+
+
                         }
                         vc.progressBarProcess(R.id.loading,false);
                     }
